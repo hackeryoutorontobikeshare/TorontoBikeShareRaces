@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import './RacePoints.css'
+import Select from 'react-select';
 
 class RacePoints extends Component {
     render() {
@@ -9,32 +10,43 @@ class RacePoints extends Component {
             <h2>Pace Points Section</h2>
             <div className="addPoints">
                 <h2>Add check points</h2>
+                   
                 <form className="createRaceForm">
                     <ul>
                         <li>
                             <label htmlFor="startingPoint">Enter starting Point</label>
-                            <select id="startingPoint" type="text">
+                            <select id="startingPoint">
                                 {
-                                    this.props.OnRender
-                                }
-                            </select>                            
+                                    // this.props.printOptions()
+                                }   
+                            </select>
+                              <Select
+                                  options={this.props.printOptions()}
+                              /> 
                         </li>
                         <li>
                             <label htmlFor="finishPoint">Enter finish point</label>
                             <select id="startingPoint" type="text">
                                 {
-                                    this.props.OnRender
+                                    // this.props.printOptions()
                                 }
-                            </select>                            
+                            </select>
+                              <Select
+                                  options={this.props.printOptions()}
+                              /> 
                         </li>
                         <li>
                             <label htmlFor="checkPoint">Add checkpoint point</label>
                             <select id="startingPoint" type="text">
                                 {
-                                    this.props.OnRender
+                                    // this.props.printOptions()
                                 }
-                            </select>                            
+                            </select> 
+                              <Select
+                                  options={this.props.printOptions()}
+                              /> 
                         </li>
+
                     </ul>
 
 

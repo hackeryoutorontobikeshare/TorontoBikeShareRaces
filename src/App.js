@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import axios from 'axios';
-<<<<<<< HEAD
-// import NameDesc from './NameDesc.js';
-import RacePoints from './RacePoints.js';
-||||||| merged common ancestors
 import NameDesc from './NameDesc.js';
 import RacePoints from './RacePoints.js';
-=======
-import NameDesc from './NameDesc.js';
-// import RacePoints from './RacePoints.js';
->>>>>>> e8baf251df0217fb2ce4d742c8855a708c0e9f71
 import Result from './Result.js';
 import './styles/Setup.css';
 
@@ -19,43 +11,77 @@ class App extends Component {
     super();
     this.state = {
       stations:[],
-      name: 'Maeesha',
-      description: "Maeesha's Race",
+      name: '',
+      description: "",
       race: {
-        startPoint:'Yonge st.',
-        endPoint:'Spadina st.',
+        startPoint:'',
+        endPoint:'',
         checkPoint:[]
       },
-
+      test:[1,2,3,4,5]
     }
   }
 
-  componentDidMount(){
-    axios({
+  // componentDidMount(){
+  //   axios({
+  //     method: 'GET',
+  //     url: 'http://api.citybik.es/v2/networks/toronto',
+  //     dataResponse: 'json'
+  //   })
+  //     .then((response) => {
+  //       const stations = response.data.network.stations;
+  //       const stationArr = [];
+  //       stations.forEach((item) => {
+  //         stationArr.push(item);
+  //       })
+
+  //       this.setState({
+  //         stations: stationArr
+  //       })
+  //       // return stationArr;
+  //     })
+  // }
+
+  getStations = () => {
+    console.log("called")
+    return axios({
       method: 'GET',
       url: 'http://api.citybik.es/v2/networks/toronto',
       dataResponse: 'json'
     })
     .then((response) => {
+      console.log(response)
       const stations = response.data.network.stations;
       const stationArr = [];
       stations.forEach((item)=>{
         stationArr.push(item);
       })
+      console.log("first then")
       this.setState({
         stations:stationArr
-      });
+      })
+      return stationArr;
     })
   }
 
-  handleRender = (array) => {
-    array.forEach((item)=>{
-      return <option value={item.name}></option>
-    })
+
+  printSelect = () => {
+    this.getStations()
+      .then((result) => {
+        console.log("second then")
+        const newArray = result.map((item)=>{
+          // return <option value="item.name">item.name</option>
+          return ({value: item.name, label: item.name})
+      })
+        return newArray;
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+    
   }
 
   render(){
-
     return (
       <div className="App">
         <header>
@@ -63,17 +89,8 @@ class App extends Component {
           <button>Creat Race</button>
         </header>
 
-<<<<<<< HEAD
-        {/* <NameDesc /> */}
-        <RacePoints />
-        <Result />
-||||||| merged common ancestors
         <NameDesc />
-        <RacePoints />
-        <Result />
-=======
-        <NameDesc />
-        {/* <RacePoints OnRender={this.handleRender}/> */}
+        <RacePoints printOptions={this.printSelect}/>
         <Result 
         name={this.state.name} 
         description={this.state.description} 
@@ -82,7 +99,6 @@ class App extends Component {
         // checkP={this.state.checkPoint}
         />
 
->>>>>>> e8baf251df0217fb2ce4d742c8855a708c0e9f71
       </div>
     );
   }
