@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import axios from 'axios';
-// import NameDesc from './NameDesc.js';
+import NameDesc from './NameDesc.js';
 // import RacePoints from './RacePoints.js';
 import Result from './Result.js';
 import './styles/Setup.css';
@@ -11,11 +11,11 @@ class App extends Component {
     super();
     this.state = {
       stations:[],
-      name: '',
-      description: '',
+      name: 'Maeesha',
+      description: "Maeesha's Race",
       race: {
-        startPoint:'',
-        endPoint:'',
+        startPoint:'Yonge st.',
+        endPoint:'Spadina st.',
         checkPoint:[]
       },
 
@@ -49,9 +49,15 @@ class App extends Component {
           <button>Creat Race</button>
         </header>
 
-        {/* <NameDesc />
-        <RacePoints />
-        <Result /> */}
+        <NameDesc />
+        {/* <RacePoints /> */}
+        <Result 
+        name={this.state.name} 
+        description={this.state.description} 
+        stratP={this.state.startPoint} 
+        endP={this.state.endPoint}
+        // checkP={this.state.checkPoint}
+        />
 
       </div>
     );
