@@ -26,7 +26,7 @@ class RaceInfo extends Component {
                         <h2>Your Race Information</h2>
                         {
                             <div className="raceInfo">
-                            <h3>Name & Description</h3>
+                                <h3>Name & Description</h3>
                                 <div className="racePoints">
                                     <p>Display race points here...</p>
                                     <button className="save">Save Race</button>
