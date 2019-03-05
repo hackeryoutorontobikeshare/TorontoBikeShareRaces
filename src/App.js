@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import axios from 'axios';
-<<<<<<< HEAD
-// import NameDesc from './NameDesc.js';
-import RacePoints from './RacePoints.js';
-||||||| merged common ancestors
-import NameDesc from './NameDesc.js';
-import RacePoints from './RacePoints.js';
-=======
 import NameDesc from './NameDesc.js';
 // import RacePoints from './RacePoints.js';
->>>>>>> e8baf251df0217fb2ce4d742c8855a708c0e9f71
 import Result from './Result.js';
 import './styles/Setup.css';
 
@@ -57,15 +49,6 @@ class App extends Component {
           <button>Create Race</button>
         </header>
 
-<<<<<<< HEAD
-        {/* <NameDesc /> */}
-        <RacePoints />
-        <Result />
-||||||| merged common ancestors
-        <NameDesc />
-        <RacePoints />
-        <Result />
-=======
         <NameDesc />
         {/* <RacePoints /> */}
         <Result 
@@ -76,7 +59,6 @@ class App extends Component {
         checkP={this.state.checkPoint}
         />
 
->>>>>>> e8baf251df0217fb2ce4d742c8855a708c0e9f71
       </div>
     );
   }
