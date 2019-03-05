@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import firebase from './firebase.js';
 import './styles/Result.css';
 
-<<<<<<< HEAD
-class Result extends Component {}
-
-export default Result;
-=======
 class RaceInfo extends Component {
     constructor() {
         super()
@@ -48,4 +43,3 @@ class RaceInfo extends Component {
 }
 
 export default RaceInfo
->>>>>>> faf6ac5f23937d00883f66b35a60547d1536a7f3
