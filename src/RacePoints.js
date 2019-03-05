@@ -13,3 +13,6 @@ class RacePoints extends Component {
   }
 
 export default RacePoints;
+import firebase from './firebase.js';
+
+export default RacePoints;
