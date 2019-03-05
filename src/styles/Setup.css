@@ -4,3 +4,39 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:600|Lato");
+
+.visuallyHidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+html {
+    font-size: 125%;
+}
+
+body {
+  font-size: 1rem;
+  font-family: 'Lato', sans-serif;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+img {
+    display: block;
+}

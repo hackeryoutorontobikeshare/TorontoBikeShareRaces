@@ -16,8 +16,8 @@ class RaceInfo extends Component {
             <header>
                 <nav className="clearfix">
                     <ul>
-                        <li className="home"><a href="">Home</a></li>
-                        <li className="prevRaces"><a href="">Previous Races</a></li>
+                        <li className="home"><a href="#">Home</a></li>
+                        <li className="prevRaces"><a href="#">Previous Races</a></li>
                     </ul>
                 </nav>
             </header>
@@ -29,6 +29,7 @@ class RaceInfo extends Component {
                             <h3>Name & Description</h3>
                                 <div className="racePoints">
                                     <p>Display race points here...</p>
+                                    <button className="save">Save Race</button>
                                 </div>
                                 <p className="laws">Please obey all traffic laws!</p>
                             </div>
