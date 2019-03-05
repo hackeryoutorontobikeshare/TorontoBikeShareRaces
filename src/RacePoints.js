@@ -14,6 +14,12 @@ class RacePoints extends Component {
                         <li>
                             <label htmlFor="startingPoint">Enter starting Point</label>
                             <select id="startingPoint" type="text">
+                                {/* Placeholder */}
+                                <option value="Queen St">Queen St</option>
+                                <option value="Dufferin St">Dufferin St</option>
+                                <option value="King St">King St</option>
+                                <option value="College St">College St</option>
+                                {/* Placeholder */}
                                 {
                                     this.props.OnRender
                                 }
@@ -21,7 +27,13 @@ class RacePoints extends Component {
                         </li>
                         <li>
                             <label htmlFor="finishPoint">Enter finish point</label>
-                            <select id="startingPoint" type="text">
+                            <select id="finishPoint" type="text">
+                                {/* Placeholder */}
+                                <option value="Queen St">Queen St</option>
+                                <option value="Dufferin St">Dufferin St</option>
+                                <option value="King St">King St</option>
+                                <option value="College St">College St</option>
+                                {/* Placeholder */}
                                 {
                                     this.props.OnRender
                                 }
@@ -29,7 +41,13 @@ class RacePoints extends Component {
                         </li>
                         <li>
                             <label htmlFor="checkPoint">Add checkpoint point</label>
-                            <select id="startingPoint" type="text">
+                            <select id="checkPoint" type="text">
+                                {/* Placeholder */}
+                                <option value="Queen St">Queen St</option>
+                                <option value="Dufferin St">Dufferin St</option>
+                                <option value="King St">King St</option>
+                                <option value="College St">College St</option>
+                                {/* Placeholder */}
                                 {
                                     this.props.OnRender
                                 }
