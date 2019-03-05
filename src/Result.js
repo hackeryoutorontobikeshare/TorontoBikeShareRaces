@@ -23,6 +23,7 @@ class RaceInfo extends Component {
                                 <p className="laws">Please obey all traffic laws!</p>
                             </div>
                         }
+                        <button className="prevRaces"></button>
                     </div>
                 }
             </section>
@@ -30,4 +31,4 @@ class RaceInfo extends Component {
     }
 }
 
-export default Result
+export default RaceInfo
