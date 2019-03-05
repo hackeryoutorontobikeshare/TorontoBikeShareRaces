@@ -40,6 +40,12 @@ class App extends Component {
     })
   }
 
+  handleRender = (array) => {
+    array.forEach((item)=>{
+      return <option value={item.name}></option>
+    })
+  }
+
   render(){
 
     return (
@@ -50,12 +56,12 @@ class App extends Component {
         </header>
 
         <NameDesc />
-        {/* <RacePoints /> */}
+        {/* <RacePoints OnRender={this.handleRender}/> */}
         <Result 
         name={this.state.name} 
         description={this.state.description} 
-        stratP={this.state.startPoint} 
-        endP={this.state.endPoint}
+        startP={this.state.race.startPoint} 
+        endP={this.state.race.endPoint}
         // checkP={this.state.checkPoint}
         />
 
