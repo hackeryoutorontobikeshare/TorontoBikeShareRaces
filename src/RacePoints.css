@@ -9,10 +9,14 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 
 .RacePoints {
     /* background: #efefef; */
-    height: 80vh;
-    margin: 10vh auto;
+    height: 100vh;
+    padding: 10vh 5%;
+    max-width: 1600px;
     font-family: 'Lato', sans-serif;
+    /* background: #ccffff; */
+    color: default;
 }
+
 
 h2 {
     font-family: 'Josefin Sans', sans-serif;
@@ -36,19 +40,29 @@ ul {
 
 .addPoints, .viewPoints {
     float: left;
-    width: 50%;
+    width: 40%;
+    margin: 0 5%;
+    border: 1px solid black;
+    border-radius: 10px;
+    /* height: 50vh; */
+    background: #efefef;
+    padding: 0 10px;
 }
 
-.createRaceForm input, .createRaceForm label {
+.creatStartEnd input, 
+.creatStartEnd label,
+.createCheckPoints input,
+.createCheckPoints label {
     display: block;
 }
 
-.viewPoints li .edit {
-    padding: 0 10px;
+.viewPoints li .delete {
+    padding-left: 10px;
     display: inline-block;
 }
 
-.viewPoints li:first-of-type, .viewPoints li:last-of-type {
+.viewPoints li:first-of-type, 
+.viewPoints li:last-of-type {
     font-size: 2rem;
 }
 
