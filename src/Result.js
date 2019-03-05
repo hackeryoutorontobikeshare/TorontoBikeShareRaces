@@ -30,4 +30,4 @@ class RaceInfo extends Component {
     }
 }
 
-export default Result
+export default RaceInfo
