@@ -45,23 +45,19 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1>Welcome to Torotno Bike Race</h1>
-          <button>Creat Race</button>
+          <h1>Welcome to Toronto Bike Share Races</h1>
+          <button>Create Race</button>
         </header>
 
         <NameDesc />
         {/* <RacePoints /> */}
-<<<<<<< HEAD
-        <Result />
-=======
         <Result 
         name={this.state.name} 
         description={this.state.description} 
-        stratP={this.state.startPoint} 
-        endP={this.state.endPoint}
-        // checkP={this.state.checkPoint}
+        startP={this.state.race.startPoint} 
+        endP={this.state.race.endPoint}
+        checkP={this.state.checkPoint}
         />
->>>>>>> e8baf251df0217fb2ce4d742c8855a708c0e9f71
 
       </div>
     );
