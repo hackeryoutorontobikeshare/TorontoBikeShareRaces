@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import axios from 'axios';
-// import NameDesc from './NameDesc.js';
 import RacePoints from './RacePoints.js';
 import NameDesc from './NameDesc.js';
-// import RacePoints from './RacePoints.js';
 import Result from './Result.js';
 import './styles/Setup.css';
+import './styles/Header.css';
 
 class App extends Component {
   constructor(){
@@ -40,13 +39,22 @@ class App extends Component {
         stations:stationArr
       });
     })
+    .catch(error => {
+      console.log('error');
+    });
   }
 
   render(){
 
     return (
       <div className="App">
-        <header>
+        <header className="headerContent">
+          <nav className="clearfix">
+            <ul>
+              <li className="home"><a href="#">Home</a></li>
+              <li className="prevRaces"><a href="#">Previous Races</a></li>
+            </ul>
+          </nav>
           <h1>Welcome to Toronto Bike Share Races</h1>
           <button>Create Race</button>
         </header>
