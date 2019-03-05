@@ -11,11 +11,11 @@ class App extends Component {
     super();
     this.state = {
       stations:[],
-      name: '',
-      description: '',
+      name: 'Maeesha',
+      description: "Maeesha's Race",
       race: {
-        startPoint:'',
-        endPoint:'',
+        startPoint:'Yonge st.',
+        endPoint:'Spadina st.',
         checkPoint:[]
       },
 
@@ -51,7 +51,17 @@ class App extends Component {
 
         <NameDesc />
         {/* <RacePoints /> */}
+<<<<<<< HEAD
         <Result />
+=======
+        <Result 
+        name={this.state.name} 
+        description={this.state.description} 
+        stratP={this.state.startPoint} 
+        endP={this.state.endPoint}
+        // checkP={this.state.checkPoint}
+        />
+>>>>>>> e8baf251df0217fb2ce4d742c8855a708c0e9f71
 
       </div>
     );
