@@ -6,67 +6,42 @@ green: #33cc99
 
 blue: #336699 */
 
+
+.nameDesc {
+    height: 100vh;
+    background:  #ccffff;
+    padding-top: 60px;
+}
+
 .ndTitle {
     text-align: center;
     text-transform: capitalize;
     color: #336699; 
-    /* color: #33cc99; */
 }
 
-.noCaps {
-    text-transform: none;
-}
 
-.nameDesc {
-    height: 100vh;
-    /* background: #336699; */
-    background:  #ccffff;
-    /* background: #33cc99; */
-    padding-top: 60px;
-}
 
 .ndWrapper {
     width: 80%;
     height: 60%;
     border: 10px solid #336699;
-    /* border: 10px solid #33cc99; */
     margin: 0 auto;
     background: white;
-    /* background: #ccffff; */
-    /* vertical-align: middle; */
-    /* margin-top: 12.5%; */
-    /* padding-top: 10%; */
 }
 
 .ndForm {
     margin: 100px 80px;
-    /* border: 2px solid red; */
 }
+
+/* BUTTONS AND INPUTS AND LABELS */
 
 .ndForm label {
     min-width: 400px;
     color: #336699;
-    /* font-family: 'Lato', sans-serif; */
-    /* border: 1px solid blue; */
-}
-
-
-.ndSpan {
-    display: block;
-    /* border: 2px solid pink; */
-    margin: 10px 0;
 }
 
 input {
     width: 500px;
-    /* border: 2px solid rgba(53, 75, 243); */
-}
-
-input:focus {
-    background: rgba(51, 204, 153, .2);
-    /* background: rgba(204, 255, 255, 0.2); */
-    border: 2px solid #33cc99;
-    color: #336699;
 }
 
 .ndButton {
@@ -81,9 +56,19 @@ input:focus {
     transition: 0.5s;
 }
 
+.noCaps {
+    text-transform: none;
+}
+.ndSpan {
+    display: block;
+    margin: 10px 0;
+}
+
+/* END OF BUTTONS AND INPUTS */
+
+/* HOVER AND ACTIVE STATES */
+
 .ndButton:focus{
-    /* background: #33cc99;
-    background: rgba(51, 204, 153, 0.2); */
     color:#33cc99; 
     border: 5px solid #33cc99;
 }
@@ -97,3 +82,70 @@ input:focus {
     transform:scale(1);
     box-shadow: none;
 }
+
+input:focus {
+    background: rgba(51, 204, 153, .2);
+    border: 2px solid #33cc99;
+    color: #336699;
+}
+
+/* END OF HOVER AND ACTIVE STATES */
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 850px) {
+    .ndSpan input {
+        width: 400px;
+    }
+
+ }
+
+ @media screen and (max-width: 700px) {
+    .ndForm {
+        margin: 80px 40px;
+    }
+
+ }
+
+ @media screen and (max-width: 620px) {
+
+    .ndWrapper {
+        height: 50%;
+    }
+
+    .ndSpan input {
+        width: 300px;
+    }
+
+    .noCaps {
+        display: block;
+    }
+
+ }
+
+ @media screen and (max-width: 500px) {
+    .ndWrapper {
+        width: 90%;
+    }
+    .ndForm {
+        margin: 60px 20px;
+    }
+ }
+
+ @media screen and (max-width: 420px) {
+    .ndSpan input {
+        width: 260px;
+    }
+ }
+
+
+
+
+
+
+
+
+
+
+
+
