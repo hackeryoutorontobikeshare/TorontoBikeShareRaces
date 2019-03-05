@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from './firebase.js';
 import axios from 'axios';
 import NameDesc from './NameDesc.js';
-// import RacePoints from './RacePoints.js';
+import RacePoints from './RacePoints.js';
 import Result from './Result.js';
 import './styles/Setup.css';
 
@@ -50,7 +50,7 @@ class App extends Component {
         </header>
 
         <NameDesc />
-        {/* <RacePoints /> */}
+        <RacePoints />
         <Result 
         name={this.state.name} 
         description={this.state.description} 

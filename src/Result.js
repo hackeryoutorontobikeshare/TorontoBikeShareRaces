@@ -35,12 +35,12 @@ class RaceInfo extends Component {
                         <h2>Your Race Information</h2>
                         {
                             <div className="raceInfo">
-                                <h3>{this.props.name}</h3>
-                                <p>{this.props.description}</p>
+                                <h3>Race Name: {this.props.name}</h3>
+                                <p>Description: {this.props.description}</p>
                                 <div className="racePoints">
-                                    <p className="startP">{this.props.startP}</p>
-                                    <p className="checkP">{this.props.checkP}</p>
-                                    <p className="endP">{this.props.endP}</p>
+                                    <p className="startP">Starting Point: {this.props.startP}</p>
+                                    <p className="checkP">Check Point: {this.props.checkP}</p>
+                                    <p className="endP">Ending Point: {this.props.endP}</p>
                                     <button onClick={this.handleSaveRace} className="save">Save Race</button>
                                 </div>
                                 <p className="laws">Please obey all traffic laws while participating in a race!</p>
