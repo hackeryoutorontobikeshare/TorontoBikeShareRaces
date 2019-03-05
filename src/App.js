@@ -6,14 +6,50 @@ import RacePoints from './RacePoints.js';
 import Result from './Result.js';
 
 class App extends Component {
-  render() {
+  constructor(){
+    super();
+    this.state = {
+      stations:[],
+      name: '',
+      description: '',
+      race: {
+        startPoint:'',
+        endPoint:'',
+        checkPoint:[]
+      },
+
+    }
+  }
+
+  componentDidMount(){
+    axios({
+      method: 'GET',
+      url: 'http://api.citybik.es/v2/networks/toronto',
+      dataResponse: 'json'
+    })
+    .then((response) => {
+      const stations = response.data.network.stations;
+      const stationArr = [];
+      stations.forEach((item)=>{
+        stationArr.push(item);
+      })
+      this.setState({
+        stations:stationArr
+      });
+    })
+  }
+
+  render(){
     return (
       <div className="App">
-        <header></header>
+        <header>
+          <h1>Welcome to Torotno Bike Race</h1>
+          <button>Creat Race</button>
+        </header>
 
-        <NameDesc />
+        {/* <NameDesc />
         <RacePoints />
-        <Result />
+        <Result /> */}
       </div>
     );
   }
