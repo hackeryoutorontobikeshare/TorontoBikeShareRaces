@@ -35,7 +35,7 @@ class NameDesc extends Component {
     render() {
         return (
             <section className="nameDesc">
-                <h2 className="ndTitle">create race name <span className="noCaps">and</span> description W</h2>
+                <h2 className="ndTitle">create race name <span className="noCaps">and</span> description</h2>
                 <div className="ndWrapper">
                     <form className="ndForm">
                         <span className="ndSpan">
