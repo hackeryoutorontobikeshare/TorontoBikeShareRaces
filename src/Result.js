@@ -3,6 +3,15 @@ import firebase from './firebase.js';
 import './styles/Result.css';
 
 class RaceInfo extends Component {
+    
+    handlePrevRaces = () => {
+        console.log('clicked prev race btn');
+    }
+
+    handleSaveRace = () => {
+        console.log('clicked save race btn');
+    }
+
     constructor() {
         super()
         this.state = {
@@ -26,15 +35,18 @@ class RaceInfo extends Component {
                         <h2>Your Race Information</h2>
                         {
                             <div className="raceInfo">
-                                <h3>Name & Description</h3>
+                                <h3>Race Name: {this.props.name}</h3>
+                                <p>Description: {this.props.description}</p>
                                 <div className="racePoints">
-                                    <p>Display race points here...</p>
-                                    <button className="save">Save Race</button>
+                                    <p className="startP">Starting Point: {this.props.startP}</p>
+                                    <p className="checkP">Check Point: {this.props.checkP}</p>
+                                    <p className="endP">Ending Point: {this.props.endP}</p>
+                                    <button onClick={this.handleSaveRace} className="save">Save Race</button>
                                 </div>
-                                <p className="laws">Please obey all traffic laws!</p>
+                                <p className="laws">Please obey all traffic laws while participating in a race!</p>
                             </div>
                         }
-                        <button className="prevRaces">Previous Races</button>
+                        <button onClick={this.handlePrevRaces} className="prevRaces">Previous Races</button>
                     </div>
                 }
             </section>
