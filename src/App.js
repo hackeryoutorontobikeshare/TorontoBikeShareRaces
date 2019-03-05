@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import axios from 'axios';
-import NameDesc from './NameDesc.js';
 import RacePoints from './RacePoints.js';
+import NameDesc from './NameDesc.js';
 import Result from './Result.js';
 import './styles/Setup.css';
 
@@ -43,7 +43,7 @@ class App extends Component {
   // }
 
   getStations = () => {
-    console.log("called")
+    console.log('called');
     return axios({
       method: 'GET',
       url: 'http://api.citybik.es/v2/networks/toronto',
@@ -61,6 +61,9 @@ class App extends Component {
         stations:stationArr
       })
       return stationArr;
+    })
+    .catch((error)=>{
+      console.log(error);
     })
   }
 
@@ -85,12 +88,13 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1>Welcome to Torotno Bike Race</h1>
-          <button>Creat Race</button>
+          <h1>Welcome to Toronto Bike Share Races</h1>
+          <button>Create Race</button>
         </header>
 
         <NameDesc />
         <RacePoints printOptions={this.printSelect}/>
+       
         <Result 
         name={this.state.name} 
         description={this.state.description} 

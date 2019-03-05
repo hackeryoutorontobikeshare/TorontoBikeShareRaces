@@ -15,6 +15,38 @@ nav li {
     list-style-type: none;
 }
 
+nav a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #29d1b0;
+    color: #000;
+}
+
 .resultComponent {
     text-align: center;
+    background-color: #d4faf0;
+    color: #000;
+    padding: 50px 0;
+}
+
+h2, h3 {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.resultComponent button {
+    border: none;
+    padding: 10px 20px;
+    background-color: #29d1b0;
+}
+
+.raceInfo .container {
+    max-width: 800px;
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px 0;
+}
+
+.raceInfo img {
+    display: inline-block;
+    width: 3%;
 }
