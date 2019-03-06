@@ -26,20 +26,20 @@ class RacePoints extends Component {
         }
     }
 
-    handleStartChange = (event) => {
-        console.log("start change");
-        this.setState({
-            startPoint: event.target.value
-        });
-    }
+    // handleStartChange = (event) => {
+    //     console.log("start change");
+    //     this.setState({
+    //         startPoint: event.target.value
+    //     });
+    // }
 
 
-    handleEndChange = (event) => {
-        console.log("End Change");
-        this.setState({
-            endPoint: event.target.value
-        });
-    }
+    // handleEndChange = (event) => {
+    //     console.log("End Change");
+    //     this.setState({
+    //         endPoint: event.target.value
+    //     });
+    // }
 
     handleCheckPointChange = (event) => {
         console.log("Check Point Change");
@@ -73,15 +73,16 @@ class RacePoints extends Component {
                     <li>
                         <form className="creatStartEnd">
                             <label htmlFor="startingPoint">Enter starting Point</label>
-                            <select name="startingPoint" onChange={this.handleStartChange} value={this.state.startPoint}>
-                                {
+                            <select name="startingPoint" onChange={this.props.handleUserStart} value={this.props.userStart}>
+                                {/* {
                                     this.state.stationArray.map((station, i) =>{
                                         return <option key={i} value={station}>{station}</option>
                                     })
-                                }
+                                } */}
+                                {this.props.printOptions()}
                             </select>
                             <label htmlFor="endPoint">Enter Finish Line</label>
-                            <select name="endPoint" onChange={this.handleEndChange} value={this.state.endPoint}>
+                              <select name="endPoint" onChange={this.props.handleUserEnd} value={this.props.userEnd}>
                                 {
                                     this.state.stationArray.map((station, i) =>{
                                         return <option key={i} value={station}>{station}</option>
@@ -109,7 +110,7 @@ class RacePoints extends Component {
             <div className="viewPoints">
                 <h2>View race points</h2>
                 <ul>
-                    <li>Start: {this.state.startPoint}</li>
+                    <li>Start: {this.props.userStart}</li>
                     {
                         this.state.raceArray.map((checkpoint, i)=>{
                             return (
@@ -119,7 +120,7 @@ class RacePoints extends Component {
                             )
                         })
                     }
-                    <li>Finish: {this.state.endPoint}</li>
+                      <li>Finish: {this.props.userEnd}</li>
                 </ul>
             </div>
         </section>

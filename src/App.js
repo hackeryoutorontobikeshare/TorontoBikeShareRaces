@@ -15,31 +15,11 @@ class App extends Component {
       race: {
         startPoint:'',
         endPoint:'',
-        checkPoint:[]
+        selectedCheckpoint:[]
       },
       test:[1,2,3,4,5]
     }
   }
-
-  // componentDidMount(){
-  //   axios({
-  //     method: 'GET',
-  //     url: 'http://api.citybik.es/v2/networks/toronto',
-  //     dataResponse: 'json'
-  //   })
-  //     .then((response) => {
-  //       const stations = response.data.network.stations;
-  //       const stationArr = [];
-  //       stations.forEach((item) => {
-  //         stationArr.push(item);
-  //       })
-
-  //       this.setState({
-  //         stations: stationArr
-  //       })
-  //       // return stationArr;
-  //     })
-  // }
 
   getStations = () => {
     console.log('called');
@@ -69,9 +49,10 @@ class App extends Component {
       .then((result) => {
         console.log("second then")
         const newArray = result.map((item)=>{
-          return <option value="item.name">item.name</option>
+          return <option value={item.name}>{item.name}</option>
           // return ({value: item.name, label: item.name})
       })
+        console.log(newArray);
         return newArray;
       })
       .catch((error)=>{
@@ -99,6 +80,36 @@ class App extends Component {
     })
   }
 
+  handleStartChange = (event) => {
+    console.log("start change");
+    this.setState({
+      race:
+      {
+        ...this.state.race,
+        startPoint: event.target.value
+      }
+    });
+  }
+
+
+  handleEndChange = (event) => {
+    console.log("End Change");
+    this.setState({
+      race:
+      {
+        ...this.state.race,
+        endPoint: event.target.value
+      }
+    });
+  }
+
+  handleCheckPointChange = (event) => {
+    console.log("Check Point Change");
+    this.setState({
+      race:{selectedCheckpoint: event.target.value}
+    });
+  }
+
   render(){
     return (
       <div className="App">
@@ -108,7 +119,14 @@ class App extends Component {
         </header>
 
         <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
-        <RacePoints printOptions={this.printSelect} handleOptionChange={this.handleOptionChange}/>
+        <RacePoints 
+        printOptions={this.printSelect} 
+        handleOptionChange={this.handleOptionChange}
+        handleUserStart={this.handleStartChange}
+        handleUserEnd={this.handleEndChange}
+        userStart={this.state.race.startPoint}
+        userEnd={this.state.race.endPoint}
+        />
        
         <Result 
         name={this.state.name} 
