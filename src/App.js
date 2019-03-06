@@ -4,6 +4,7 @@ import RacePoints from './RacePoints.js';
 import NameDesc from './NameDesc.js';
 import Result from './Result.js';
 import './styles/Setup.css';
+import './styles/Header.css';
 
 class App extends Component {
   constructor(){
@@ -41,6 +42,9 @@ class App extends Component {
       })
       return stationArr;
     })
+    .catch(error => {
+      console.log('error');
+    });
   }
 
 
@@ -114,7 +118,13 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <header>
+        <header className="headerContent">
+          <nav className="clearfix">
+            <ul>
+              <li className="home"><a href="#">Home</a></li>
+              <li className="prevRaces"><a href="#">Previous Races</a></li>
+            </ul>
+          </nav>
           <h1>Welcome to Toronto Bike Share Races</h1>
           <button>Create Race</button>
         </header>
