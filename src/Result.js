@@ -39,9 +39,9 @@ class RaceInfo extends Component {
                                 <h3>Race Name: {this.props.name}</h3>
                                 <p>Description: {this.props.description}</p>
                                 <div className="racePoints">
-                                    <p>Display race points here...</p>
+                                    {/* <p>Display race points here...</p>
                                     <p>{this.props.startP}</p>
-                                    <button className="save">Save Race</button>
+                                    <button className="save">Save Race</button> */}
                                     <p className="startP"><i class="fas fa-flag-checkered"></i> Starting Point: {this.props.startP}</p>
                                     <p className="checkP">Check Point: {this.props.checkP}</p>
                                     <p className="endP">

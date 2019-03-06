@@ -93,12 +93,12 @@ class RacePoints extends Component {
                         <form className="creatStartEnd">
                             <label htmlFor="startingPoint">Enter starting Point</label>
                             <select name="startingPoint" onChange={this.props.handleUserStart} value={this.props.userStart}>
-                                {/* {
+                                {
                                     this.state.stationArray.map((station, i) =>{
                                         return <option key={i} value={station}>{station}</option>
                                     })
-                                } */}
-                                {this.props.printOptions()}
+                                }
+                                {/* {this.props.printOptions()} */}
                             </select>
                             <label htmlFor="endPoint">Enter Finish Line</label>
                               <select name="endPoint" onChange={this.props.handleUserEnd} value={this.props.userEnd}>
