@@ -47,7 +47,8 @@ class App extends Component {
   printSelect = () => {
     this.getStations()
       .then((result) => {
-        console.log("second then")
+        console.log("second then");
+        console.log(result);
         const newArray = result.map((item)=>{
           return <option value={item.name}>{item.name}</option>
           // return ({value: item.name, label: item.name})
