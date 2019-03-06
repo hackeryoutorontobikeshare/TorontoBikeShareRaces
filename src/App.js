@@ -3,6 +3,7 @@ import axios from 'axios';
 import RacePoints from './RacePoints.js';
 import NameDesc from './NameDesc.js';
 import Result from './Result.js';
+import PrevRaces from './PrevRaces.js';
 import './styles/Setup.css';
 import './styles/Header.css';
 
@@ -145,6 +146,8 @@ class App extends Component {
         endP={this.state.race.endPoint}
         // checkP={this.state.checkPoint}
         />
+
+        <PrevRaces />
 
       </div>
     );
