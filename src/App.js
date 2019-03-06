@@ -19,27 +19,19 @@ class App extends Component {
         endPoint:'',
         selectedCheckpoint:[]
       },
-      firebeseData:{
-        name: 'Maeesha',
-        description: "Maeeshs'Race",
-        race: {
-          startPoint: 'Yonge st.',
-          endPoint: 'Spadina st.',
-          selectedCheckpoint: ['Queen st.', 'Bloor st.', 'Bathurst st.']
-        } 
+      firebaseTest:{
+        name:'Maeesha',
+        description:'Maeesha Race',
+        startPoint: 'Yonge st.',
+        endPoint: 'Bloor st.',
+        selectedCheckpoint: ['Bathurst', 'Spadina', 'Queen']
       }
     }
   }
 
   componentDidMount(){
-    // this.getStations()
-    // .then((array)=>{
-    //   const dbRef = firebase.database().ref();
-    //   dbRef.push(array);
-    // })
-
     // const dbRef = firebase.database().ref();
-    // dbRef.push(this.state.firebeseData);
+    // dbRef.push(this.state.firebaseTest);
   }
 
   getStations = () => {
@@ -66,8 +58,6 @@ class App extends Component {
       console.log('error');
     });
   }
-
-  
   
   printSelect = () => {
     this.getStations()
@@ -108,11 +98,6 @@ class App extends Component {
     })
   }
 
-  handleOptionChange = (selectedValue) => {
-    // this.setState({ selectedOption });
-    // console.log(`Option selected:`, selectedOption);
-  }
-
   upDateName = (e) => {
     const userName = e.target.value
     this.setState({
@@ -151,11 +136,26 @@ class App extends Component {
   }
 
   handleCheckPointChange = (event) => {
-    console.log("Check Point Change");
     this.setState({
       race:{selectedCheckpoint: event.target.value}
     });
   }
+
+  handleSaveRace = (event) => {
+    event.preventDefault();
+
+    const dbRef = firebase.database().ref();
+    const savedRace = {
+      name: this.state.name,
+      description: this.state.description,
+      startPoint: this.state.race.startPoint,
+      endPoint: this.state.race.endPoint,
+      selectedCheckpoint: this.state.race.selectedCheckpoint
+      }
+    
+      dbRef.push(savedRace);
+    }
+
 
   render(){
     return (
@@ -186,6 +186,7 @@ class App extends Component {
         startP={this.state.race.startPoint} 
         endP={this.state.race.endPoint}
         // checkP={this.state.checkPoint}
+        // handleSave={this.handleSaveRace}
         />
 
       </div>

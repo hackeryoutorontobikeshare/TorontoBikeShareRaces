@@ -4,21 +4,6 @@ import './styles/Result.css';
 import raceEnd from './raceEnd.png'
 
 class RaceInfo extends Component {
-    
-    handlePrevRaces = () => {
-        console.log('clicked prev race btn');
-    }
-
-    handleSaveRace = () => {
-        console.log('clicked save race btn');
-    }
-
-    constructor() {
-        super()
-        this.state = {
-            Info: []
-        }
-    }
     render() {
 
         return (
@@ -44,7 +29,7 @@ class RaceInfo extends Component {
                                     <p className="endP">
                                     <img src={raceEnd} alt="Race Finish Banner"/>
                                      Ending Point: {this.props.endP}</p>
-                                    <button onClick={this.handleSaveRace} className="save">Save Race</button>
+                                    <button onClick={this.props.handleSave} className="save">Save Race</button>
                                 </div>
                                 <p className="laws"><i class="fas fa-exclamation-triangle"></i> Please obey all traffic laws while participating in a race! <i class="fas fa-exclamation-triangle"></i></p>
                             </div>

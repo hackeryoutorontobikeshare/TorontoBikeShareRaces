@@ -31,7 +31,6 @@ class RacePoints extends Component {
     componentDidMount(){
         const dbRef = firebase.database().ref();
         dbRef.on('value', res => {
-            console.log(res.val());
             const data = res.val();
             const temArr = [];
 
@@ -45,7 +44,6 @@ class RacePoints extends Component {
                 return station.name
             })
 
-            console.log(stationsOptions);
             this.setState({
                 stations: stationsOptions
             })
