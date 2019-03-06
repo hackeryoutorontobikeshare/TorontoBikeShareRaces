@@ -1,31 +1,16 @@
 import React, { Component } from 'react';
 import './styles/NameDesc.css';
 import './styles/Setup.css';
-import firebase from './firebase.js';
+// import firebase from './firebase.js';
 
 class NameDesc extends Component {
     constructor() {
         super();
         this.state = {
-            name: "",
-            description: ""
         }
 
     }
 
-    upDateName = (e) => {
-        const userName = e.target.value
-        this.setState({
-            name: userName
-        })
-    }
-
-    upDateDesc = (e) => {
-        const userDesc = e.target.value
-        this.setState({
-            description: userDesc
-        })
-    }
 
     upDateState = () => {
         console.log(this.state);
@@ -42,13 +27,13 @@ class NameDesc extends Component {
                             <label htmlFor="name">Name</label>
                         </span>
                         <span className="ndSpan">
-                            <input type="text" id="name" placeholder="Enter name" onChange={this.upDateName} />
+                            <input type="text" id="name" placeholder="Enter name" onChange={this.props.takeName} />
                         </span>
                         <span className="ndSpan">
                             <label htmlFor="desc">Description</label>
                         </span>
                         <span className="ndSpan">
-                            <input type="text" id="desc" placeholder="Enter description" onChange={this.upDateDesc} />
+                            <input type="text" id="desc" placeholder="Enter description" onChange={this.props.takeDesc} />
                         </span>
                     </form>
                 </div>

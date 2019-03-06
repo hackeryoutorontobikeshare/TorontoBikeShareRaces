@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from './firebase.js';
+// import firebase from './firebase.js';
 import './RacePoints.css'
 import Select from 'react-select';
 
@@ -29,25 +29,16 @@ class RacePoints extends Component {
                             </select>
                               <Select
                                   options={this.props.printOptions()}
+                                handleChange={this.props.handleOptionChange} 
                               /> 
                         </li>
                         <li>
                             <label htmlFor="finishPoint">Enter finish point</label>
                             <select id="finishPoint" type="text">
-                                {/* Placeholder */}
-                                <option value="Queen St">Queen St</option>
-                                <option value="Dufferin St">Dufferin St</option>
-                                <option value="King St">King St</option>
-                                <option value="College St">College St</option>
-                                {/* Placeholder */}
                                 {
-                                    // this.props.printOptions()
+                                    this.props.printOptions()
                                 }
                             </select>
-                              <Select
-                                  options={this.props.printOptions()}
-                              /> 
-                        </li>
                         <li>
                             <label htmlFor="checkPoint">Add checkpoint point</label>
                             <select id="checkPoint" type="text">
@@ -61,9 +52,6 @@ class RacePoints extends Component {
                                     // this.props.printOptions()
                                 }
                             </select> 
-                              <Select
-                                  options={this.props.printOptions()}
-                              /> 
                         </li>
 
                     </ul>

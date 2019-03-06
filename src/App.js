@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import firebase from './firebase.js';
 import axios from 'axios';
 import RacePoints from './RacePoints.js';
 import NameDesc from './NameDesc.js';
@@ -62,9 +61,6 @@ class App extends Component {
       })
       return stationArr;
     })
-    .catch((error)=>{
-      console.log(error);
-    })
   }
 
 
@@ -73,8 +69,8 @@ class App extends Component {
       .then((result) => {
         console.log("second then")
         const newArray = result.map((item)=>{
-          // return <option value="item.name">item.name</option>
-          return ({value: item.name, label: item.name})
+          return <option value="item.name">item.name</option>
+          // return ({value: item.name, label: item.name})
       })
         return newArray;
       })
@@ -82,6 +78,25 @@ class App extends Component {
         console.log(error);
       })
     
+  }
+
+  handleOptionChange = (selectedValue) => {
+    // this.setState({ selectedOption });
+    // console.log(`Option selected:`, selectedOption);
+  }
+
+  upDateName = (e) => {
+    const userName = e.target.value
+    this.setState({
+      name: userName
+    })
+  }
+
+  upDateDesc = (e) => {
+    const userDesc = e.target.value
+    this.setState({
+      description: userDesc
+    })
   }
 
   render(){
@@ -92,8 +107,8 @@ class App extends Component {
           <button>Create Race</button>
         </header>
 
-        <NameDesc />
-        <RacePoints printOptions={this.printSelect}/>
+        <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
+        <RacePoints printOptions={this.printSelect} handleOptionChange={this.handleOptionChange}/>
        
         <Result 
         name={this.state.name} 
