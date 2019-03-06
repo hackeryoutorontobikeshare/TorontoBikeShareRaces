@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import firebase from './firebase.js';
 import './RacePoints.css'
-import Select from 'react-select';
+// import Select from 'react-select';
 
 class RacePoints extends Component {
     constructor (){
@@ -22,7 +22,8 @@ class RacePoints extends Component {
                 "Station9",
                 "Station10",
             ],   
-            raceArray: []
+            raceArray: [],
+            userRace: {}
         }
     }
 
@@ -51,24 +52,42 @@ class RacePoints extends Component {
     addCheckPoint = (event) => {
         event.preventDefault();
         console.log("check Point added!");
+        console.log(this.state.stationArray);
         let changeArray = this.state.raceArray;
         if (this.state.selectedCheckpoint == ""){
             changeArray.push(this.state.stationArray[0]);
+            this.state.stationArray.splice(0, 1);
         } else {
             changeArray.push(this.state.selectedCheckpoint);
+            let index = this.state.stationArray.indexOf(this.state.selectedCheckpoint);
+            this.state.stationArray.splice(index, 1);
         }
         this.setState({
             raceArray: changeArray
         });
+        console.log(this.state.stationArray);
     }
 
+    submitRace = (event) => {
+        event.preventDefault();
+        let userRace = {
+            start: this.state.startPoint,
+            end: this.state.endPoint,
+            checkpoints: this.state.raceArray
+        };
+        this.setState({
+            userRace: userRace
+        });
+        console.log(userRace);
+        console.log("Race submitted");
+    }
 
     render() {
       return (
         <section className="RacePoints clearfix">
-            <h2>Pace Points Section</h2>
+            {/* <h2>Pace Points Section</h2> */}
             <div className="addPoints">
-                <h2>Add check points</h2>
+                <h2>Create route</h2>
                 <ul>
                     <li>
                         <form className="creatStartEnd">
@@ -95,6 +114,7 @@ class RacePoints extends Component {
                         <form className="createCheckPoints" onSubmit={this.addCheckPoint}>
                         <label htmlFor="checkPoint">Add Check Point</label>
                             <select name="checkPoint" onChange={this.handleCheckPointChange} value={this.state.selectedCheckpoint}>
+                                <option value="" disabled selected>Select check point</option>
                                 {
                                     this.state.stationArray.map((station, i) =>{
                                         return <option key={i} value={station}>{station}</option>
@@ -108,7 +128,7 @@ class RacePoints extends Component {
             </div> {/*  END OF ADD POINTS */}
 
             <div className="viewPoints">
-                <h2>View race points</h2>
+                <h2>Race route</h2>
                 <ul>
                     <li>Start: {this.props.userStart}</li>
                     {
@@ -123,6 +143,9 @@ class RacePoints extends Component {
                       <li>Finish: {this.props.userEnd}</li>
                 </ul>
             </div>
+            <form className="submitRace" onSubmit={this.submitRace}>
+                <button type="submit">Create race</button>
+            </form>
         </section>
       );
     }
