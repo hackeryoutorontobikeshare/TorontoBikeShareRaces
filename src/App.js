@@ -4,6 +4,7 @@ import firebase from './firebase.js';
 import RacePoints from './RacePoints.js';
 import NameDesc from './NameDesc.js';
 import Result from './Result.js';
+import PrevRaces from './PrevRaces.js';
 import './styles/Setup.css';
 import './styles/Header.css';
 
@@ -188,6 +189,8 @@ class App extends Component {
         // checkP={this.state.checkPoint}
         // handleSave={this.handleSaveRace}
         />
+
+        <PrevRaces />
 
       </div>
     );
