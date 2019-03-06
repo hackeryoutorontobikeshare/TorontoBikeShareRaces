@@ -7,8 +7,8 @@ class RacePoints extends Component {
     constructor (){
         super()
         this.state = {    
-            startPoint: "Select a starting point",
-            endPoint: "Select a finish line",
+            startPoint: "Start point",
+            endPoint: "End point",
             selectedCheckpoint: "",
             stationArray: [
                 "Station1",
@@ -52,20 +52,30 @@ class RacePoints extends Component {
     addCheckPoint = (event) => {
         event.preventDefault();
         console.log("check Point added!");
-        console.log(this.state.stationArray);
+        // console.log(this.state.stationArray);
         let changeArray = this.state.raceArray;
         if (this.state.selectedCheckpoint == ""){
-            changeArray.push(this.state.stationArray[0]);
-            this.state.stationArray.splice(0, 1);
+            // changeArray.push(this.state.stationArray[0]);
+            // this.state.stationArray.splice(0, 1);
         } else {
             changeArray.push(this.state.selectedCheckpoint);
-            let index = this.state.stationArray.indexOf(this.state.selectedCheckpoint);
-            this.state.stationArray.splice(index, 1);
+            // let index = this.state.stationArray.indexOf(this.state.selectedCheckpoint);
+            // this.state.stationArray.splice(index, 1);
         }
         this.setState({
             raceArray: changeArray
         });
-        console.log(this.state.stationArray);
+        // console.log(this.state.stationArray);
+    }
+
+    deleteCheckpoint = (index) => {
+        console.log(index);
+        console.log("CLICKED!!!");
+        let changeArray = this.state.raceArray;
+        changeArray.splice(index, 1);
+        this.setState({
+            raceArray: changeArray
+        });
     }
 
     submitRace = (event) => {
@@ -91,8 +101,9 @@ class RacePoints extends Component {
                 <ul>
                     <li>
                         <form className="creatStartEnd">
-                            <label htmlFor="startingPoint">Enter starting Point</label>
+                            <label className="visuallyhidden" htmlFor="startingPoint">Enter starting Point</label>
                             <select name="startingPoint" onChange={this.props.handleUserStart} value={this.props.userStart}>
+                                <option value="" disabled defaultValue>Select starting point</option>
                                 {
                                     this.state.stationArray.map((station, i) =>{
                                         return <option key={i} value={station}>{station}</option>
@@ -100,8 +111,9 @@ class RacePoints extends Component {
                                 }
                                 {/* {this.props.printOptions()} */}
                             </select>
-                            <label htmlFor="endPoint">Enter Finish Line</label>
+                            <label className="visuallyhidden" htmlFor="endPoint">Enter Finish Line</label>
                               <select name="endPoint" onChange={this.props.handleUserEnd} value={this.props.userEnd}>
+                              <option value="" disabled defaultValue>Select Finish Line</option>
                                 {
                                     this.state.stationArray.map((station, i) =>{
                                         return <option key={i} value={station}>{station}</option>
@@ -112,9 +124,9 @@ class RacePoints extends Component {
                     </li>
                     <li>
                         <form className="createCheckPoints" onSubmit={this.addCheckPoint}>
-                        <label htmlFor="checkPoint">Add Check Point</label>
+                        <label className="visuallyhidden" htmlFor="checkPoint">Add Check Point</label>
                             <select name="checkPoint" onChange={this.handleCheckPointChange} value={this.state.selectedCheckpoint}>
-                                <option value="" disabled selected>Select check point</option>
+                                <option value="" disabled defaultValue>Add check point</option>
                                 {
                                     this.state.stationArray.map((station, i) =>{
                                         return <option key={i} value={station}>{station}</option>
@@ -135,7 +147,7 @@ class RacePoints extends Component {
                         this.state.raceArray.map((checkpoint, i)=>{
                             return (
                                 <li key={i}>{checkpoint}
-                                <span className="delete"><i className="far fa-trash-alt"></i></span>
+                                <span className="delete" onClick={() =>this.deleteCheckpoint(i)}><i className="far fa-trash-alt"></i></span>
                                 </li>
                             )
                         })
