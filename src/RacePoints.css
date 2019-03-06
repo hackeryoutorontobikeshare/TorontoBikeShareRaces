@@ -9,15 +9,22 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 
 .RacePoints {
     /* background: #efefef; */
-    height: 80vh;
-    margin: 10vh auto;
+    height: 100vh;
+    padding: 10vh 5%;
+    max-width: 1600px;
     font-family: 'Lato', sans-serif;
+    background: #fdfdfd;
+    background: #336699;
+    color: default;
 }
+
 
 h2 {
     font-family: 'Josefin Sans', sans-serif;
     text-align: center;
-    text-transform: uppercase;
+    text-transform: capitalize;
+    color: #336699;
+    /* color: white; */
 }
 
 ul {
@@ -36,20 +43,36 @@ ul {
 
 .addPoints, .viewPoints {
     float: left;
-    width: 50%;
+    width: 40%;
+    margin: 0 5%;
+    border: 1px solid black;
+    /* border-radius: 10px; */
+    /* height: 50vh; */
+    background: white;
+    padding: 0 10px;
 }
 
-.createRaceForm input, .createRaceForm label {
+.creatStartEnd select, 
+.creatStartEnd label,
+.createCheckPoints select,
+.createCheckPoints label {
     display: block;
 }
 
-.viewPoints li .edit {
-    padding: 0 10px;
+.viewPoints li {
+    width: 90%;
+    margin: 10px auto;
+
+}
+.viewPoints li .delete {
+    padding-left: 10px;
     display: inline-block;
 }
 
-.viewPoints li:first-of-type, .viewPoints li:last-of-type {
-    font-size: 2rem;
+.viewPoints li:first-of-type, 
+.viewPoints li:last-of-type {
+    font-size: 1.2rem;
+    width: 100%;
 }
 
 .viewPoints li:first-of-type {
@@ -58,4 +81,18 @@ ul {
 
 .viewPoints li:last-of-type {
     margin-top: 20px;
+}
+
+.submitRace {
+    float: left;
+    width: 100%;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.submitRace button {
+    background: #fdfdfd;
+    width: 200px;
+    padding: 10px;
+    border: solid #33cc99 5px;
 }

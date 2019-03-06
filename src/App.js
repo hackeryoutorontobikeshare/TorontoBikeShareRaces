@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import firebase from './firebase.js';
 import axios from 'axios';
 import RacePoints from './RacePoints.js';
 import NameDesc from './NameDesc.js';
@@ -12,40 +11,110 @@ class App extends Component {
     super();
     this.state = {
       stations:[],
-      name: 'Maeesha',
-      description: "Maeesha's Race",
+      name: '',
+      description: "",
       race: {
-        startPoint:'Yonge st.',
-        endPoint:'Spadina st.',
-        checkPoint:[]
+        startPoint:'',
+        endPoint:'',
+        selectedCheckpoint:[]
       },
-
+      test:[1,2,3,4,5]
     }
   }
 
-  componentDidMount(){
-    axios({
+  getStations = () => {
+    console.log('called');
+    return axios({
       method: 'GET',
       url: 'http://api.citybik.es/v2/networks/toronto',
       dataResponse: 'json'
     })
     .then((response) => {
+      console.log(response)
       const stations = response.data.network.stations;
       const stationArr = [];
       stations.forEach((item)=>{
         stationArr.push(item);
       })
+      console.log("first then")
       this.setState({
         stations:stationArr
-      });
+      })
+      return stationArr;
     })
     .catch(error => {
       console.log('error');
     });
   }
 
-  render(){
 
+  printSelect = () => {
+    this.getStations()
+      .then((result) => {
+        console.log("second then")
+        const newArray = result.map((item)=>{
+          return <option value={item.name}>{item.name}</option>
+          // return ({value: item.name, label: item.name})
+      })
+        console.log(newArray);
+        return newArray;
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+    
+  }
+
+  handleOptionChange = (selectedValue) => {
+    // this.setState({ selectedOption });
+    // console.log(`Option selected:`, selectedOption);
+  }
+
+  upDateName = (e) => {
+    const userName = e.target.value
+    this.setState({
+      name: userName
+    })
+  }
+
+  upDateDesc = (e) => {
+    const userDesc = e.target.value
+    this.setState({
+      description: userDesc
+    })
+  }
+
+  handleStartChange = (event) => {
+    console.log("start change");
+    this.setState({
+      race:
+      {
+        ...this.state.race,
+        startPoint: event.target.value
+      }
+    });
+  }
+
+
+  handleEndChange = (event) => {
+    console.log("End Change");
+    this.setState({
+      race:
+      {
+        ...this.state.race,
+        endPoint: event.target.value
+      }
+    });
+  }
+
+  handleCheckPointChange = (event) => {
+    console.log("Check Point Change");
+    this.setState({
+      race:{selectedCheckpoint: event.target.value}
+    });
+  }
+
+  render(){
     return (
       <div className="App">
         <header className="headerContent">
@@ -59,14 +128,22 @@ class App extends Component {
           <button>Create Race</button>
         </header>
 
-        <NameDesc />
-        <RacePoints />
+        <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
+        <RacePoints 
+        printOptions={this.printSelect} 
+        handleOptionChange={this.handleOptionChange}
+        handleUserStart={this.handleStartChange}
+        handleUserEnd={this.handleEndChange}
+        userStart={this.state.race.startPoint}
+        userEnd={this.state.race.endPoint}
+        />
+       
         <Result 
         name={this.state.name} 
         description={this.state.description} 
         startP={this.state.race.startPoint} 
         endP={this.state.race.endPoint}
-        checkP={this.state.checkPoint}
+        // checkP={this.state.checkPoint}
         />
 
       </div>
