@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import firebase from './firebase.js';
+import firebase from './firebase.js';
 import './RacePoints.css'
 // import Select from 'react-select';
 
@@ -23,24 +23,34 @@ class RacePoints extends Component {
                 "Station10",
             ],   
             raceArray: [],
-            userRace: {}
+            userRace: {},
+            stations:[]
         }
     }
 
-    // handleStartChange = (event) => {
-    //     console.log("start change");
-    //     this.setState({
-    //         startPoint: event.target.value
-    //     });
-    // }
+    componentDidMount(){
+        const dbRef = firebase.database().ref();
+        dbRef.on('value', res => {
+            console.log(res.val());
+            const data = res.val();
+            const temArr = [];
 
+            for (let key in data) {
+                temArr.push(data[key])
+            }
 
-    // handleEndChange = (event) => {
-    //     console.log("End Change");
-    //     this.setState({
-    //         endPoint: event.target.value
-    //     });
-    // }
+            const stationsObj = temArr[0];
+
+            let stationsOptions = stationsObj.map((station) => {
+                return station.name
+            })
+
+            console.log(stationsOptions);
+            this.setState({
+                stations: stationsOptions
+            })
+        })
+    }
 
     handleCheckPointChange = (event) => {
         console.log("Check Point Change");
@@ -94,11 +104,12 @@ class RacePoints extends Component {
                             <label htmlFor="startingPoint">Enter starting Point</label>
                             <select name="startingPoint" onChange={this.props.handleUserStart} value={this.props.userStart}>
                                 {
-                                    this.state.stationArray.map((station, i) =>{
-                                        return <option key={i} value={station}>{station}</option>
-                                    })
+                                    this.state.stations?
+                                          this.state.stations.map((station, i) => {
+                                              return <option key={i} value={station}>{station}</option>
+                                          })
+                                    : null
                                 }
-                                {/* {this.props.printOptions()} */}
                             </select>
                             <label htmlFor="endPoint">Enter Finish Line</label>
                               <select name="endPoint" onChange={this.props.handleUserEnd} value={this.props.userEnd}>

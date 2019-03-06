@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import firebase from './firebase.js';
 import RacePoints from './RacePoints.js';
 import NameDesc from './NameDesc.js';
 import Result from './Result.js';
@@ -19,8 +20,27 @@ class App extends Component {
         endPoint:'',
         selectedCheckpoint:[]
       },
-      test:[1,2,3,4,5]
+      firebeseData:{
+        name: 'Maeesha',
+        description: "Maeeshs'Race",
+        race: {
+          startPoint: 'Yonge st.',
+          endPoint: 'Spadina st.',
+          selectedCheckpoint: ['Queen st.', 'Bloor st.', 'Bathurst st.']
+        } 
+      }
     }
+  }
+
+  componentDidMount(){
+    // this.getStations()
+    // .then((array)=>{
+    //   const dbRef = firebase.database().ref();
+    //   dbRef.push(array);
+    // })
+
+    // const dbRef = firebase.database().ref();
+    // dbRef.push(this.state.firebeseData);
   }
 
   getStations = () => {
@@ -48,22 +68,45 @@ class App extends Component {
     });
   }
 
-
+  
+  
   printSelect = () => {
     this.getStations()
-      .then((result) => {
-        console.log("second then")
-        const newArray = result.map((item)=>{
-          return <option value={item.name}>{item.name}</option>
-          // return ({value: item.name, label: item.name})
+    .then((result) => {
+      console.log("second then");
+      const newArray = result.map((item)=>{
+        return <option value={item.name}>{item.name}</option>
+        // return ({value: item.name, label: item.name})
       })
-        console.log(newArray);
-        return newArray;
-      })
-      .catch((error)=>{
-        console.log(error);
-      })
+      console.log(newArray);
+      return newArray;
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
     
+  }
+  
+  getStationsFromFirbase = () => {
+    const dbRef = firebase.database().ref();
+    dbRef.on('value', res => {
+      console.log(res.val());
+      const data = res.val();
+      const temArr = [];
+
+      for (let key in data) {
+        temArr.push(data[key])
+      }
+
+      const stationsObj = temArr[0];
+
+      let stationsOptions = stationsObj.map((station) => {
+        return station.name
+      })
+
+      console.log(stationsOptions);
+      return stationsOptions;
+    })
   }
 
   handleOptionChange = (selectedValue) => {
@@ -131,7 +174,6 @@ class App extends Component {
 
         <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
         <RacePoints 
-        printOptions={this.printSelect} 
         handleOptionChange={this.handleOptionChange}
         handleUserStart={this.handleStartChange}
         handleUserEnd={this.handleEndChange}
