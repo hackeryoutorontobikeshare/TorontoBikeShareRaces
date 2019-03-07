@@ -23,10 +23,12 @@ class NameDesc extends Component {
                         </span>
                     </form>
                 </div>
-                <button className="ndButton" onClick={this.upDateState}>Next</button>
+                <button className="ndButton" onClick={this.props.scrollRacePoints}>Next</button>
             </section>
         );
     }
 }
 
 export default NameDesc;
+
+

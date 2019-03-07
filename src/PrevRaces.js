@@ -20,7 +20,7 @@ class PrevRaces extends Component {
         const itemsRef = firebase.database().ref();
         itemsRef.on('value', (saved) => {
             console.log(saved.val());
-           
+
             let newState = [];
 
             const data = saved.val();
@@ -46,10 +46,10 @@ class PrevRaces extends Component {
     };
 
     render() {
-        
+
         return (
             <div className="wrapper">
-                    <section className="prevRacesComponent">
+                <section className="prevRacesComponent">
                     <nav className="clearfix">
                         <ul>
                             <li className="home"><a href="#">Home</a></li>
@@ -59,17 +59,17 @@ class PrevRaces extends Component {
                     <h2>Previous Races</h2>
                     {
                         this.state.saved.map((races) => {
-                        return (
+                            return (
                                 <div>
                                     <h3>{races.name}</h3>
                                     <p>{races.description}</p>
                                     <p>{races.startPoint}</p>
                                     <ul>
-                                    {races.selectedCheckpoint?
-                                        races.selectedCheckpoint.map((checkpoint) => {
-                                        return <li>{checkpoint}</li>
-                                        })
-                                    : null}
+                                        {races.selectedCheckpoint ?
+                                            races.selectedCheckpoint.map((checkpoint) => {
+                                                return <li>{checkpoint}</li>
+                                            })
+                                            : null}
                                     </ul>
                                     <p>{races.endPoint}</p>
                                 </div>
@@ -77,8 +77,8 @@ class PrevRaces extends Component {
                         })
 
                     }
-                    </section>
-                    <button onClick={this.props.handleBack}>Back to Home</button>
+                </section>
+                <button onClick={this.props.handleBack}>Back to Home</button>
             </div>
         )
     }

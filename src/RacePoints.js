@@ -5,19 +5,19 @@ import Select from 'react-select';
 import axios from 'axios';
 
 class RacePoints extends Component {
-    constructor (){
+    constructor() {
         super()
-        this.state = {    
+        this.state = {
             stations: [],
             options: []
         }
     }
     
-    componentDidMount(){
+    componentDidMount() {
         this.getStations()
-        .catch(() => {
-            this.getStationsFromFirebase();
-        })
+            .catch(() => {
+                this.getStationsFromFirebase();
+            })
     }
 
     //API call
@@ -78,8 +78,10 @@ class RacePoints extends Component {
             });
         })
     }
-    
-    
+
+
+
+
     render() {
     const {startPoint, endPoint, selectedCheckpoint } = this.state;
       return (
@@ -98,12 +100,12 @@ class RacePoints extends Component {
                                 onChange={this.props.handleUserStart}
                                 options={this.state.options}
                                 />
-                            <label className="" htmlFor="endPoint">Enter Finish Line</label>
-                            <Select 
-                                name="endPoint"
-                                value={this.props.value}
-                                onChange={this.props.handleUserEnd}
-                                options={this.state.options}
+                                <label className="" htmlFor="endPoint">Enter Finish Line</label>
+                                <Select
+                                    name="endPoint"
+                                    value={this.props.value}
+                                    onChange={this.props.handleUserEnd}
+                                    options={this.state.options}
                                 />
                         </form>
                     </li>
@@ -118,34 +120,35 @@ class RacePoints extends Component {
                                 onChange={this.props.handleUserCheckPoint}
                                 options={this.state.options}
                                 />
-                            <button type="submit">Add check Point</button>
-                        </form>
-                    </li>
-                </ul>
-            </div> {/*  END OF ADD POINTS */}
+                                <button type="submit">Add check Point</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div> {/*  END OF ADD POINTS */}
 
-            <div className="viewPoints">
-                <h2>Race route</h2>
-                <ul>
-                    <li>Start: <span>{this.props.userStart}</span></li>
-                    {
-                        this.props.raceArray.map((checkpoint, i)=>{
-                            return (
-                                <li key={i}>{checkpoint}
-                                    <span className="delete" onClick={() => this.props.handleDeleteCheckpoint(i)}><i className="far fa-trash-alt"></i></span>
-                                </li>
-                            )
-                        })
-                    }
-                      <li>Finish: <span>{this.props.userEnd}</span></li>
-                </ul>
-            </div>
-            <form className="submitRace" onSubmit={this.submitRace}>
-                <button type="submit">Create race</button>
-            </form>
-        </section>
-      );
+                <div className="viewPoints">
+                    <h2>Race route</h2>
+                    <ul>
+                        <li>Start: {this.props.userStart}</li>
+                        {
+                            this.props.raceArray.map((checkpoint, i) => {
+                                return (
+                                    <li key={i}>{checkpoint}
+                                        <span className="delete" onClick={() => this.props.handleDeleteCheckpoint(i)}><i className="far fa-trash-alt"></i></span>
+                                    </li>
+                                )
+                            })
+                        }
+                        <li>Finish: {this.props.userEnd}</li>
+                    </ul>
+                </div>
+                <div className="submitRace">
+                    <button onClick={this.props.scrollResults}>Next</button>
+                </div>
+            </section>
+        );
+
     }
 }
-
+// onSubmit={this.submitRace}
 export default RacePoints;

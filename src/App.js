@@ -6,26 +6,28 @@ import Result from './Result.js';
 import PrevRaces from './PrevRaces.js';
 import './styles/Setup.css';
 import './styles/Header.css';
+import scrollToComponent from 'react-scroll-to-component';
 import swal from '@sweetalert/with-react';
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
+      stations: [],
       name: '',
       description: "",
       race: {
-        startPoint:'',
-        endPoint:'',
-        selectedCheckpoint:[],
+        startPoint: '',
+        endPoint: '',
+        selectedCheckpoint: [],
         raceArray: []
       },
-      
+
       view: true
     }
   }
 
-//updatestate from user input
+  //updatestate from user input
   upDateName = (e) => {
     const userName = e.target.value
     this.setState({
@@ -40,7 +42,7 @@ class App extends Component {
     })
   }
 
-//update state from user select
+  //update state from user select
   handleStartChange = (event) => {
     this.setState({
       race:
@@ -122,43 +124,56 @@ class App extends Component {
       startPoint: this.state.race.startPoint,
       endPoint: this.state.race.endPoint,
       selectedCheckpoint: this.state.race.raceArray
-      }
-    
-      if(savedRace.name&&savedRace.description&&savedRace.startPoint&&savedRace.endPoint){
-        dbRef.push(savedRace);
-        this.setState({
-          name: '',
-          description: "",
-          race: {
-            startPoint: '',
-            endPoint: '',
-            selectedCheckpoint: [],
-            raceArray: []
-          }
-        })
-      }else{
-        swal('Please make sure you have entered a race name and description, and have selected a station for your "start" and "finish" locations.')
-      }
-    
     }
-// handle previous button clicked
-  handlePrevRace = (event) =>{
+
+    if (savedRace.name && savedRace.description && savedRace.startPoint && savedRace.endPoint) {
+      dbRef.push(savedRace);
+      this.setState({
+        name: '',
+        description: "",
+        race: {
+          startPoint: '',
+          endPoint: '',
+          selectedCheckpoint: [],
+          raceArray: []
+        }
+      })
+    } else {
+      swal('Please make sure you have entered a race name and description, and have selected a station for your "start" and "finish" locations.')
+    }
+
+  }
+
+
+  // handle previous button clicked
+  handlePrevRace = (event) => {
     event.preventDefault();
     this.setState({
       view: null
     })
   }
 
-// handle home button clicked
-handleHome = (event) => {
-  event.preventDefault();
-  this.setState({
-    view: true
-  })
-}
+  // handle home button clicked
+  handleHome = (event) => {
+    event.preventDefault();
+    this.setState({
+      view: true
+    })
+  }
 
-  render(){
-    if(this.state.view){
+  scrollND = () => {
+    scrollToComponent(this.NameDesc)
+  }
+  scrollRP = () => {
+    scrollToComponent(this.RacePoints)
+  }
+  scrollRes = () => {
+    scrollToComponent(this.Result)
+  }
+
+
+  render() {
+    if (this.state.view) {
       return (
         <div className="App">
           <header className="headerContent">
@@ -169,40 +184,53 @@ handleHome = (event) => {
               </ul>
             </nav>
             <h1>Welcome to Toronto Bike Share Races</h1>
-            <button>Create Race</button>
+            <button onClick={this.scrollND}>Create Race</button>
           </header>
-  
-          <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
-          <RacePoints 
-          handleOptionChange={this.handleOptionChange}
-          handleUserStart={this.handleStartChange}
-          handleUserEnd={this.handleEndChange}
-          handleUserCheckPoint={this.handleCheckPointChange}
 
-          handleAddCheckPoint={this.addCheckPoint}
-          handleDeleteCheckpoint={this.deleteCheckpoint}
+          <NameDesc
+            takeName={this.upDateName}
+            takeDesc={this.upDateDesc}
+            ref={(component) => { this.NameDesc = component; }}
+            scrollRacePoints={this.scrollRP}
 
-          userStart={this.state.race.startPoint}
-          userEnd={this.state.race.endPoint}
-          userCheckPoint={this.state.race.selectedCheckpoint}
-          raceArray={this.state.race.raceArray}
           />
-         
-          <Result 
-          name={this.state.name} 
-          description={this.state.description} 
-          startP={this.state.race.startPoint} 
-          endP={this.state.race.endPoint}
-          checkP={this.state.race.raceArray}
-          handleSave={this.handleSaveRace}
-          handlePrev={this.handlePrevRace}
+          <RacePoints
+            handleOptionChange={this.handleOptionChange}
+            handleUserStart={this.handleStartChange}
+            handleUserEnd={this.handleEndChange}
+            handleUserCheckPoint={this.handleCheckPointChange}
+
+            handleAddCheckPoint={this.addCheckPoint}
+            handleDeleteCheckpoint={this.deleteCheckpoint}
+
+            userStart={this.state.race.startPoint}
+            userEnd={this.state.race.endPoint}
+            userCheckPoint={this.state.race.selectedCheckpoint}
+            raceArray={this.state.race.raceArray}
+
+            scrollResults={this.scrollRes}
+            ref={(component) => { this.RacePoints = component; }}
           />
-      </div>
-    );
-  }else{
-      return <PrevRaces handleBack={this.handleHome}/>
+
+          <Result
+            name={this.state.name}
+            description={this.state.description}
+            startP={this.state.race.startPoint}
+            endP={this.state.race.endPoint}
+            checkP={this.state.race.raceArray}
+            handleSave={this.handleSaveRace}
+            handlePrev={this.handlePrevRace}
+
+            ref={(component) => { this.Result = component; }}
+          />
+        </div>
+      );
+    } else {
+      return <PrevRaces handleBack={this.handleHome} />
     }
   }
 }
+
+
 
 export default App;
