@@ -36,8 +36,10 @@ class PrevRaces extends Component {
             }
             console.log(savedRaces);
 
+            const updateRaces = savedRaces.reverse();
+
             this.setState({
-                saved: savedRaces
+                saved: updateRaces
             })
         })
 
@@ -48,6 +50,12 @@ class PrevRaces extends Component {
         return (
             <div className="wrapper">
                     <section className="prevRacesComponent">
+                    <nav className="clearfix">
+                        <ul>
+                            <li className="home"><a href="#">Home</a></li>
+                            <li className="prevRaces"><a href="#">Previous Races</a></li>
+                        </ul>
+                    </nav>
                     <h2>Previous Races</h2>
                     {
                         this.state.saved.map((races) => {
@@ -57,9 +65,11 @@ class PrevRaces extends Component {
                                     <p>{races.description}</p>
                                     <p>{races.startPoint}</p>
                                     <ul>
-                                        {races.selectedCheckpoint.map((checkpoint) => {
-                                            return <li>{checkpoint}</li>
-                                        })}
+                                    {races.selectedCheckpoint?
+                                        races.selectedCheckpoint.map((checkpoint) => {
+                                        return <li>{checkpoint}</li>
+                                        })
+                                    : null}
                                     </ul>
                                     <p>{races.endPoint}</p>
                                 </div>
