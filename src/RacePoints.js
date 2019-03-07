@@ -69,7 +69,7 @@ class RacePoints extends Component {
                             <Select 
                                 name="selectedCheckpoint"
                                 value={this.state.value}
-                                onChange={this.handleCheckPointChange}
+                                onChange={this.props.handleUserCheckPoint}
                                 options={this.state.options}
                                 />
                             <button type="submit">Add check Point</button>
