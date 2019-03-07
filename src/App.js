@@ -7,30 +7,31 @@ import Result from './Result.js';
 import PrevRaces from './PrevRaces.js';
 import './styles/Setup.css';
 import './styles/Header.css';
+import scrollToComponent from 'react-scroll-to-component';
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      stations:[],
+      stations: [],
       name: '',
       description: "",
       race: {
-        startPoint:'',
-        endPoint:'',
-        selectedCheckpoint:[],
+        startPoint: '',
+        endPoint: '',
+        selectedCheckpoint: [],
         raceArray: []
       },
-      
+
       view: true
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     // const dbRef = firebase.database().ref();
     // dbRef.push(this.state.firebaseTest);
   }
-  
+
   //API call
   getStations = () => {
     console.log('called');
@@ -39,39 +40,39 @@ class App extends Component {
       url: 'http://api.citybik.es/v2/networks/toronto',
       dataResponse: 'json'
     })
-    .then((response) => {
-      console.log(response)
-      const stations = response.data.network.stations;
-      const stationArr = [];
-      stations.forEach((item)=>{
-        stationArr.push(item);
+      .then((response) => {
+        console.log(response)
+        const stations = response.data.network.stations;
+        const stationArr = [];
+        stations.forEach((item) => {
+          stationArr.push(item);
+        })
+        console.log("first then")
+        this.setState({
+          stations: stationArr
+        })
+        return stationArr;
       })
-      console.log("first then")
-      this.setState({
-        stations:stationArr
-      })
-      return stationArr;
-    })
-    .catch(error => {
-      console.log('error');
-    });
+      .catch(error => {
+        console.log('error');
+      });
   }
 
   printSelect = () => {
     this.getStations()
-    .then((result) => {
-      console.log("second then");
-      const newArray = result.map((item)=>{
-        return <option value={item.name}>{item.name}</option>
-        // return ({value: item.name, label: item.name})
+      .then((result) => {
+        console.log("second then");
+        const newArray = result.map((item) => {
+          return <option value={item.name}>{item.name}</option>
+          // return ({value: item.name, label: item.name})
+        })
+        console.log(newArray);
+        return newArray;
       })
-      console.log(newArray);
-      return newArray;
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
-    
+      .catch((error) => {
+        console.log(error);
+      })
+
   }
 
   // use firbase to get the data
@@ -97,7 +98,7 @@ class App extends Component {
     })
   }
 
-//updatestate from user input
+  //updatestate from user input
   upDateName = (e) => {
     const userName = e.target.value
     this.setState({
@@ -112,7 +113,7 @@ class App extends Component {
     })
   }
 
-//update state from user select
+  //update state from user select
   handleStartChange = (event) => {
     this.setState({
       race:
@@ -184,28 +185,39 @@ class App extends Component {
       startPoint: this.state.race.startPoint,
       endPoint: this.state.race.endPoint,
       selectedCheckpoint: this.state.race.raceArray
-      }
-    
-      dbRef.push(savedRace);
     }
-// handle previous button clicked
-  handlePrevRace = (event) =>{
+
+    dbRef.push(savedRace);
+  }
+  // handle previous button clicked
+  handlePrevRace = (event) => {
     event.preventDefault();
     this.setState({
       view: null
     })
   }
 
-// handle home button clicked
-handleHome = (event) => {
-  event.preventDefault();
-  this.setState({
-    view: true
-  })
-}
+  // handle home button clicked
+  handleHome = (event) => {
+    event.preventDefault();
+    this.setState({
+      view: true
+    })
+  }
 
-  render(){
-    if(this.state.view){
+  scrollND = () => {
+    scrollToComponent(this.NameDesc)
+  }
+  scrollRP = () => {
+    scrollToComponent(this.RacePoints)
+  }
+  scrollRes = () => {
+    scrollToComponent(this.Result)
+  }
+
+
+  render() {
+    if (this.state.view) {
       return (
         <div className="App">
           <header className="headerContent">
@@ -216,38 +228,49 @@ handleHome = (event) => {
               </ul>
             </nav>
             <h1>Welcome to Toronto Bike Share Races</h1>
-            <button>Create Race</button>
+            <button onClick={this.scrollND}>Create Race</button>
           </header>
-  
-          <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
-          <RacePoints 
-          handleOptionChange={this.handleOptionChange}
-          handleUserStart={this.handleStartChange}
-          handleUserEnd={this.handleEndChange}
-          handleUserCheckPoint={this.handleCheckPointChange}
 
-          handleAddCheckPoint={this.addCheckPoint}
-          handleDeleteCheckpoint={this.deleteCheckpoint}
+          <NameDesc
+            takeName={this.upDateName}
+            takeDesc={this.upDateDesc}
+            ref={(component) => { this.NameDesc = component; }}
+            scrollRacePoints={this.scrollRP}
 
-          userStart={this.state.race.startPoint}
-          userEnd={this.state.race.endPoint}
-          userCheckPoint={this.state.race.selectedCheckpoint}
-          raceArray={this.state.race.raceArray}
           />
-         
-          <Result 
-          name={this.state.name} 
-          description={this.state.description} 
-          startP={this.state.race.startPoint} 
-          endP={this.state.race.endPoint}
-          checkP={this.state.race.raceArray}
-          handleSave={this.handleSaveRace}
-          handlePrev={this.handlePrevRace}
+          <RacePoints
+            handleOptionChange={this.handleOptionChange}
+            handleUserStart={this.handleStartChange}
+            handleUserEnd={this.handleEndChange}
+            handleUserCheckPoint={this.handleCheckPointChange}
+
+            handleAddCheckPoint={this.addCheckPoint}
+            handleDeleteCheckpoint={this.deleteCheckpoint}
+
+            userStart={this.state.race.startPoint}
+            userEnd={this.state.race.endPoint}
+            userCheckPoint={this.state.race.selectedCheckpoint}
+            raceArray={this.state.race.raceArray}
+
+            scrollResults={this.scrollRes}
+            ref={(component) => { this.RacePoints = component; }}
           />
-      </div>
-    );
-  }else{
-      return <PrevRaces handleBack={this.handleHome}/>
+
+          <Result
+            name={this.state.name}
+            description={this.state.description}
+            startP={this.state.race.startPoint}
+            endP={this.state.race.endPoint}
+            checkP={this.state.race.raceArray}
+            handleSave={this.handleSaveRace}
+            handlePrev={this.handlePrevRace}
+
+            ref={(component) => { this.Result = component; }}
+          />
+        </div>
+      );
+    } else {
+      return <PrevRaces handleBack={this.handleHome} />
     }
   }
 }
