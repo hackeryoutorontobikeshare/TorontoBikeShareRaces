@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import firebase from './firebase.js';
 import './styles/Result.css';
 import raceEnd from './raceEnd.png'
 
