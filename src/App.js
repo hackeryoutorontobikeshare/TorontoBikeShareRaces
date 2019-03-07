@@ -26,7 +26,8 @@ class App extends Component {
         startPoint: 'Yonge st.',
         endPoint: 'Bloor st.',
         selectedCheckpoint: ['Bathurst', 'Spadina', 'Queen']
-      }
+      },
+      view: true
     }
   }
 
@@ -34,7 +35,8 @@ class App extends Component {
     // const dbRef = firebase.database().ref();
     // dbRef.push(this.state.firebaseTest);
   }
-
+  
+  //API call
   getStations = () => {
     console.log('called');
     return axios({
@@ -59,7 +61,7 @@ class App extends Component {
       console.log('error');
     });
   }
-  
+
   printSelect = () => {
     this.getStations()
     .then((result) => {
@@ -76,7 +78,8 @@ class App extends Component {
     })
     
   }
-  
+
+  // use firbase to get the data
   getStationsFromFirbase = () => {
     const dbRef = firebase.database().ref();
     dbRef.on('value', res => {
@@ -99,6 +102,7 @@ class App extends Component {
     })
   }
 
+//updatestate from user input
   upDateName = (e) => {
     const userName = e.target.value
     this.setState({
@@ -113,8 +117,8 @@ class App extends Component {
     })
   }
 
+//updatestate from user select
   handleStartChange = (event) => {
-    console.log("start change");
     this.setState({
       race:
       {
@@ -126,7 +130,6 @@ class App extends Component {
 
 
   handleEndChange = (event) => {
-    console.log("End Change");
     this.setState({
       race:
       {
@@ -142,6 +145,8 @@ class App extends Component {
     });
   }
 
+  // handel save button clicked
+
   handleSaveRace = (event) => {
     event.preventDefault();
 
@@ -156,44 +161,60 @@ class App extends Component {
     
       dbRef.push(savedRace);
     }
+// handle previous button clicked
+  handlePrevRace = (event) =>{
+    event.preventDefault();
+    this.setState({
+      view: null
+    })
+  }
 
+// handle home button clicked
+handleHome = (event) => {
+  event.preventDefault();
+  this.setState({
+    view: true
+  })
+}
 
   render(){
-    return (
-      <div className="App">
-        <header className="headerContent">
-          <nav className="clearfix">
-            <ul>
-              <li className="home"><a href="#">Home</a></li>
-              <li className="prevRaces"><a href="#">Previous Races</a></li>
-            </ul>
-          </nav>
-          <h1>Welcome to Toronto Bike Share Races</h1>
-          <button>Create Race</button>
-        </header>
-
-        <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
-        <RacePoints 
-        handleOptionChange={this.handleOptionChange}
-        handleUserStart={this.handleStartChange}
-        handleUserEnd={this.handleEndChange}
-        userStart={this.state.race.startPoint}
-        userEnd={this.state.race.endPoint}
-        />
-       
-        <Result 
-        name={this.state.name} 
-        description={this.state.description} 
-        startP={this.state.race.startPoint} 
-        endP={this.state.race.endPoint}
-        // checkP={this.state.checkPoint}
-        // handleSave={this.handleSaveRace}
-        />
-
-        <PrevRaces />
-
+    if(this.state.view){
+      return (
+        <div className="App">
+          <header className="headerContent">
+            <nav className="clearfix">
+              <ul>
+                <li className="home"><a href="#">Home</a></li>
+                <li className="prevRaces"><a href="#">Previous Races</a></li>
+              </ul>
+            </nav>
+            <h1>Welcome to Toronto Bike Share Races</h1>
+            <button>Create Race</button>
+          </header>
+  
+          <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
+          <RacePoints 
+          handleOptionChange={this.handleOptionChange}
+          handleUserStart={this.handleStartChange}
+          handleUserEnd={this.handleEndChange}
+          userStart={this.state.race.startPoint}
+          userEnd={this.state.race.endPoint}
+          />
+         
+          <Result 
+          name={this.state.name} 
+          description={this.state.description} 
+          startP={this.state.race.startPoint} 
+          endP={this.state.race.endPoint}
+          // checkP={this.state.checkPoint}
+          // handleSave={this.handleSaveRace}
+          handlePrev={this.handlePrevRace}
+          />
       </div>
     );
+  }else{
+      return <PrevRaces handleBack={this.handleHome}/>
+    }
   }
 }
 

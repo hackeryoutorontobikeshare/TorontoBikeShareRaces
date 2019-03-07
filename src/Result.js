@@ -34,7 +34,7 @@ class RaceInfo extends Component {
                                 <p className="laws"><i class="fas fa-exclamation-triangle"></i> Please obey all traffic laws while participating in a race! <i class="fas fa-exclamation-triangle"></i></p>
                             </div>
                         </div>
-                    <button onClick={this.handlePrevRaces} className="prevRaces">Previous Races</button>
+                    <button onClick={this.props.handlePrev} className="prevRaces">Previous Races</button>
                 </div>
                 }
             </section>

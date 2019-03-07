@@ -47,7 +47,6 @@ class PrevRaces extends Component {
         
         return (
             <div className="wrapper">
-                {
                     <section className="prevRacesComponent">
                     <h2>Previous Races</h2>
                     {
@@ -69,7 +68,7 @@ class PrevRaces extends Component {
 
                     }
                     </section>
-                }
+                    <button onClick={this.props.handleBack}>Back to Home</button>
             </div>
         )
     }
