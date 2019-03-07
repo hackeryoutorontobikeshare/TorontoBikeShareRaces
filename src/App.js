@@ -18,15 +18,11 @@ class App extends Component {
       race: {
         startPoint:'',
         endPoint:'',
-        selectedCheckpoint:[]
+        selectedCheckpoint:[],
+        raceArray: []
       },
-      firebaseTest:{
-        name:'Maeesha',
-        description:'Maeesha Race',
-        startPoint: 'Yonge st.',
-        endPoint: 'Bloor st.',
-        selectedCheckpoint: ['Bathurst', 'Spadina', 'Queen']
-      }
+      
+      view: true
     }
   }
 
@@ -34,7 +30,8 @@ class App extends Component {
     // const dbRef = firebase.database().ref();
     // dbRef.push(this.state.firebaseTest);
   }
-
+  
+  //API call
   getStations = () => {
     console.log('called');
     return axios({
@@ -59,7 +56,7 @@ class App extends Component {
       console.log('error');
     });
   }
-  
+
   printSelect = () => {
     this.getStations()
     .then((result) => {
@@ -76,7 +73,8 @@ class App extends Component {
     })
     
   }
-  
+
+  // use firbase to get the data
   getStationsFromFirbase = () => {
     const dbRef = firebase.database().ref();
     dbRef.on('value', res => {
@@ -99,6 +97,7 @@ class App extends Component {
     })
   }
 
+//updatestate from user input
   upDateName = (e) => {
     const userName = e.target.value
     this.setState({
@@ -113,8 +112,8 @@ class App extends Component {
     })
   }
 
+//update state from user select
   handleStartChange = (event) => {
-    console.log("start change");
     this.setState({
       race:
       {
@@ -126,7 +125,6 @@ class App extends Component {
 
 
   handleEndChange = (event) => {
-    console.log("End Change");
     this.setState({
       race:
       {
@@ -138,9 +136,43 @@ class App extends Component {
 
   handleCheckPointChange = (event) => {
     this.setState({
-      race:{selectedCheckpoint: event.target.value}
+      race:
+      {
+        ...this.state.race,
+        selectedCheckpoint: event.label
+      }
     });
   }
+
+  addCheckPoint = (event) => {
+    event.preventDefault();
+    let changeArray = this.state.race.raceArray;
+    changeArray.push(this.state.race.selectedCheckpoint);
+
+    this.setState({
+      race:
+      {
+        ...this.state.race,
+        raceArray: changeArray
+      }
+    });
+  }
+
+  deleteCheckpoint = (index) => {
+    console.log(index);
+    console.log("CLICKED!!!");
+    let changeArray = this.state.race.raceArray;
+    changeArray.splice(index, 1);
+    this.setState({
+      race:
+      {
+        ...this.state.race,
+        raceArray: changeArray
+      }
+    });
+  }
+
+  // handel save button clicked
 
   handleSaveRace = (event) => {
     event.preventDefault();
@@ -151,51 +183,72 @@ class App extends Component {
       description: this.state.description,
       startPoint: this.state.race.startPoint,
       endPoint: this.state.race.endPoint,
-      selectedCheckpoint: this.state.race.selectedCheckpoint
+      selectedCheckpoint: this.state.race.raceArray
       }
     
       dbRef.push(savedRace);
     }
+// handle previous button clicked
+  handlePrevRace = (event) =>{
+    event.preventDefault();
+    this.setState({
+      view: null
+    })
+  }
 
+// handle home button clicked
+handleHome = (event) => {
+  event.preventDefault();
+  this.setState({
+    view: true
+  })
+}
 
   render(){
-    return (
-      <div className="App">
-        <header className="headerContent">
-          <nav className="clearfix">
-            <ul>
-              <li className="home"><a href="#">Home</a></li>
-              <li className="prevRaces"><a href="#">Previous Races</a></li>
-            </ul>
-          </nav>
-          <h1>Welcome to Toronto Bike Share Races</h1>
-          <button>Create Race</button>
-        </header>
+    if(this.state.view){
+      return (
+        <div className="App">
+          <header className="headerContent">
+            <nav className="clearfix">
+              <ul>
+                <li className="home"><a href="#">Home</a></li>
+                <li className="prevRaces"><a href="#">Previous Races</a></li>
+              </ul>
+            </nav>
+            <h1>Welcome to Toronto Bike Share Races</h1>
+            <button>Create Race</button>
+          </header>
+  
+          <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
+          <RacePoints 
+          handleOptionChange={this.handleOptionChange}
+          handleUserStart={this.handleStartChange}
+          handleUserEnd={this.handleEndChange}
+          handleUserCheckPoint={this.handleCheckPointChange}
 
-        <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
-        <RacePoints 
-        handleOptionChange={this.handleOptionChange}
-        handleUserStart={this.handleStartChange}
-        handleUserEnd={this.handleEndChange}
-        userStart={this.state.race.startPoint}
-        userEnd={this.state.race.endPoint}
-        name={this.state.name} 
-        description={this.state.description} 
-        />
-       
-        <Result 
-        name={this.state.name} 
-        description={this.state.description} 
-        startP={this.state.race.startPoint} 
-        endP={this.state.race.endPoint}
-        // checkP={this.state.checkPoint}
-        // handleSave={this.handleSaveRace}
-        />
+          handleAddCheckPoint={this.addCheckPoint}
+          handleDeleteCheckpoint={this.deleteCheckpoint}
 
-        <PrevRaces />
-
+          userStart={this.state.race.startPoint}
+          userEnd={this.state.race.endPoint}
+          userCheckPoint={this.state.race.selectedCheckpoint}
+          raceArray={this.state.race.raceArray}
+          />
+         
+          <Result 
+          name={this.state.name} 
+          description={this.state.description} 
+          startP={this.state.race.startPoint} 
+          endP={this.state.race.endPoint}
+          checkP={this.state.race.raceArray}
+          handleSave={this.handleSaveRace}
+          handlePrev={this.handlePrevRace}
+          />
       </div>
     );
+  }else{
+      return <PrevRaces handleBack={this.handleHome}/>
+    }
   }
 }
 

@@ -4,19 +4,6 @@ import './styles/Setup.css';
 // import firebase from './firebase.js';
 
 class NameDesc extends Component {
-    constructor() {
-        super();
-        this.state = {
-        }
-
-    }
-
-
-    upDateState = () => {
-        console.log(this.state);
-    }
-
-
     render() {
         return (
             <section className="nameDesc">

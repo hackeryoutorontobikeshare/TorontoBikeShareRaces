@@ -25,7 +25,13 @@ class RaceInfo extends Component {
                                 <p>Description: {this.props.description}</p>
                                 <div className="racePoints">
                                     <p className="startP"><i class="fas fa-flag-checkered"></i> Starting Point: {this.props.startP}</p>
-                                    <p className="checkP">Check Point: {this.props.checkP}</p>
+                                    <p className="checkP">Check Point: 
+                                        {
+                                            this.props.checkP.map((item)=>{
+                                                return <li>{item}</li>;
+                                            })
+                                        }
+                                    </p>
                                     <p className="endP">
                                     <img src={raceEnd} alt="Race Finish Banner"/>
                                      Ending Point: {this.props.endP}</p>
@@ -34,7 +40,7 @@ class RaceInfo extends Component {
                                 <p className="laws"><i class="fas fa-exclamation-triangle"></i> Please obey all traffic laws while participating in a race! <i class="fas fa-exclamation-triangle"></i></p>
                             </div>
                         </div>
-                    <button onClick={this.handlePrevRaces} className="prevRaces">Previous Races</button>
+                    <button onClick={this.props.handlePrev} className="prevRaces">Previous Races</button>
                 </div>
                 }
             </section>
