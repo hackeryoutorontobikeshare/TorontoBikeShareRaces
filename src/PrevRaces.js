@@ -20,7 +20,7 @@ class PrevRaces extends Component {
         const itemsRef = firebase.database().ref();
         itemsRef.on('value', (saved) => {
             console.log(saved.val());
-           
+
             let newState = [];
 
             const data = saved.val();
@@ -36,30 +36,34 @@ class PrevRaces extends Component {
             }
             console.log(savedRaces);
 
+            const updateRaces = savedRaces.reverse();
+
             this.setState({
-                saved: savedRaces
+                saved: updateRaces
             })
         })
 
     };
 
     render() {
-        
+
         return (
             <div className="wrapper">
-                    <section className="prevRacesComponent">
+                <section className="prevRacesComponent">
                     <h2>Previous Races</h2>
                     {
                         this.state.saved.map((races) => {
-                        return (
+                            return (
                                 <div>
                                     <h3>{races.name}</h3>
                                     <p>{races.description}</p>
                                     <p>{races.startPoint}</p>
                                     <ul>
-                                        {races.selectedCheckpoint.map((checkpoint) => {
-                                            return <li>{checkpoint}</li>
-                                        })}
+                                        {races.selectedCheckpoint ?
+                                            races.selectedCheckpoint.map((checkpoint) => {
+                                                return <li>{checkpoint}</li>
+                                            })
+                                            : null}
                                     </ul>
                                     <p>{races.endPoint}</p>
                                 </div>
@@ -67,8 +71,8 @@ class PrevRaces extends Component {
                         })
 
                     }
-                    </section>
-                    <button onClick={this.props.handleBack}>Back to Home</button>
+                </section>
+                <button onClick={this.props.handleBack}>Back to Home</button>
             </div>
         )
     }

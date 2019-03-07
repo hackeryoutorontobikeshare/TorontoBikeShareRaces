@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import firebase from './firebase.js';
 import RacePoints from './RacePoints.js';
 import NameDesc from './NameDesc.js';
@@ -8,6 +7,7 @@ import PrevRaces from './PrevRaces.js';
 import './styles/Setup.css';
 import './styles/Header.css';
 import scrollToComponent from 'react-scroll-to-component';
+import swal from '@sweetalert/with-react';
 
 class App extends Component {
   constructor() {
@@ -25,77 +25,6 @@ class App extends Component {
 
       view: true
     }
-  }
-
-  componentDidMount() {
-    // const dbRef = firebase.database().ref();
-    // dbRef.push(this.state.firebaseTest);
-  }
-
-  //API call
-  getStations = () => {
-    console.log('called');
-    return axios({
-      method: 'GET',
-      url: 'http://api.citybik.es/v2/networks/toronto',
-      dataResponse: 'json'
-    })
-      .then((response) => {
-        console.log(response)
-        const stations = response.data.network.stations;
-        const stationArr = [];
-        stations.forEach((item) => {
-          stationArr.push(item);
-        })
-        console.log("first then")
-        this.setState({
-          stations: stationArr
-        })
-        return stationArr;
-      })
-      .catch(error => {
-        console.log('error');
-      });
-  }
-
-  printSelect = () => {
-    this.getStations()
-      .then((result) => {
-        console.log("second then");
-        const newArray = result.map((item) => {
-          return <option value={item.name}>{item.name}</option>
-          // return ({value: item.name, label: item.name})
-        })
-        console.log(newArray);
-        return newArray;
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-
-  }
-
-  // use firbase to get the data
-  getStationsFromFirbase = () => {
-    const dbRef = firebase.database().ref();
-    dbRef.on('value', res => {
-      console.log(res.val());
-      const data = res.val();
-      const temArr = [];
-
-      for (let key in data) {
-        temArr.push(data[key])
-      }
-
-      const stationsObj = temArr[0];
-
-      let stationsOptions = stationsObj.map((station) => {
-        return station.name
-      })
-
-      console.log(stationsOptions);
-      return stationsOptions;
-    })
   }
 
   //updatestate from user input
@@ -160,8 +89,6 @@ class App extends Component {
   }
 
   deleteCheckpoint = (index) => {
-    console.log(index);
-    console.log("CLICKED!!!");
     let changeArray = this.state.race.raceArray;
     changeArray.splice(index, 1);
     this.setState({
@@ -187,8 +114,25 @@ class App extends Component {
       selectedCheckpoint: this.state.race.raceArray
     }
 
-    dbRef.push(savedRace);
+    if (savedRace.name && savedRace.description && savedRace.startPoint && savedRace.endPoint) {
+      dbRef.push(savedRace);
+      this.setState({
+        name: '',
+        description: "",
+        race: {
+          startPoint: '',
+          endPoint: '',
+          selectedCheckpoint: [],
+          raceArray: []
+        }
+      })
+    } else {
+      swal('Please make sure you have entered a race name and description, and have selected a station for your "start" and "finish" locations.')
+    }
+
   }
+
+
   // handle previous button clicked
   handlePrevRace = (event) => {
     event.preventDefault();
@@ -224,7 +168,7 @@ class App extends Component {
             <nav className="clearfix">
               <ul>
                 <li className="home"><a href="#">Home</a></li>
-                <li className="prevRaces"><a href="#">Previous Races</a></li>
+                <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>
               </ul>
             </nav>
             <h1>Welcome to Toronto Bike Share Races</h1>
@@ -274,5 +218,7 @@ class App extends Component {
     }
   }
 }
+
+
 
 export default App;
