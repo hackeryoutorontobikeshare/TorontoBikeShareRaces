@@ -49,17 +49,13 @@ class PrevRaces extends Component {
 
         return (
             <div className="wrapper">
-<<<<<<< HEAD
                 <section className="prevRacesComponent">
-=======
-                    <section className="prevRacesComponent">
                     <nav className="clearfix">
                         <ul>
                             <li className="home"><a href="#">Home</a></li>
                             <li className="prevRaces"><a href="#">Previous Races</a></li>
                         </ul>
                     </nav>
->>>>>>> 032933ab24abd9ee3b25861e6f24d2e430a4ab0c
                     <h2>Previous Races</h2>
                     {
                         this.state.saved.map((races) => {
