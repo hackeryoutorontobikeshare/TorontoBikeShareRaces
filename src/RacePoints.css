@@ -67,6 +67,7 @@ ul {
 .viewPoints li .delete {
     padding-left: 10px;
     display: inline-block;
+    cursor: pointer;
 }
 
 .viewPoints li:first-of-type, 

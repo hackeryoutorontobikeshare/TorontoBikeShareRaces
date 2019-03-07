@@ -94,15 +94,16 @@ class RacePoints extends Component {
                         <form className="creatStartEnd">
                             <label className="" htmlFor="startingPoint">Enter starting Point</label>
                             <Select 
+                                defaultValue = "Select Start"
                                 name="startingPoint"
-                                value={this.props.userStart}
+                                value={this.props.value}
                                 onChange={this.props.handleUserStart}
                                 options={this.state.options}
                                 />
                             <label className="" htmlFor="endPoint">Enter Finish Line</label>
                             <Select 
                                 name="endPoint"
-                                value={this.props.userEnd}
+                                value={this.props.value}
                                 onChange={this.props.handleUserEnd}
                                 options={this.state.options}
                                 />
@@ -113,7 +114,7 @@ class RacePoints extends Component {
                             <label className="" htmlFor="checkPoint">Select Check Points Below</label>
                             <Select 
                                 name="selectedCheckpoint"
-                                value={this.state.selectedCheckpoint}
+                                value={this.state.value}
                                 onChange={this.handleCheckPointChange}
                                 options={this.state.options}
                                 />

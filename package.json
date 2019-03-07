@@ -8,6 +8,7 @@
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-scripts": "2.1.5",
+    "react-scroll-to-component": "^1.0.2",
     "react-select": "^2.4.1"
   },
   "scripts": {
