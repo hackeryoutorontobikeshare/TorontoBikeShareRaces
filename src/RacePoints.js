@@ -8,7 +8,8 @@ class RacePoints extends Component {
         super()
         this.state = {    
             stations: [],
-            options: []
+            options: [],
+            testState: "HELLOOOO"
         }
     }
 
@@ -41,8 +42,9 @@ class RacePoints extends Component {
     const {startPoint, endPoint, selectedCheckpoint } = this.state;
       return (
         <section className="RacePoints clearfix">
+            <h2>Race route</h2>
             <div className="addPoints">
-                <h2>Create route</h2>
+                <h2>Add starting & finish points</h2>
                 <ul>
                     <li>
                         <form className="creatStartEnd">
@@ -63,7 +65,9 @@ class RacePoints extends Component {
                                 />
                         </form>
                     </li>
-                    <li>
+                    <li> 
+                        {/* <a href="#" onClick={(event) => { func1(); func2();}}>Test Link</a> */}
+                        <h2>Add race checkpoints</h2>
                         <form className="createCheckPoints" onSubmit={this.props.handleAddCheckPoint}>
                             <label className="" htmlFor="checkPoint">Select Check Points Below</label>
                             <Select 
@@ -81,7 +85,7 @@ class RacePoints extends Component {
             <div className="viewPoints">
                 <h2>Race route</h2>
                 <ul>
-                    <li>Start: {this.props.userStart}</li>
+                    <li>Start: <span>{this.props.userStart}</span></li>
                     {
                         this.props.raceArray.map((checkpoint, i)=>{
                             return (
@@ -91,7 +95,7 @@ class RacePoints extends Component {
                             )
                         })
                     }
-                      <li>Finish: {this.props.userEnd}</li>
+                      <li>Finish: <span>{this.props.userEnd}</span></li>
                 </ul>
             </div>
             <form className="submitRace" onSubmit={this.submitRace}>

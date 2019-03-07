@@ -148,7 +148,6 @@ class App extends Component {
     event.preventDefault();
     let changeArray = this.state.race.raceArray;
     changeArray.push(this.state.race.selectedCheckpoint);
-
     this.setState({
       race:
       {
@@ -159,17 +158,19 @@ class App extends Component {
   }
 
   deleteCheckpoint = (index) => {
-    console.log(index);
-    console.log("CLICKED!!!");
-    let changeArray = this.state.race.raceArray;
-    changeArray.splice(index, 1);
-    this.setState({
-      race:
-      {
-        ...this.state.race,
-        raceArray: changeArray
-      }
-    });
+    let message = `Are you sure you want to delete the ${this.state.race.raceArray[index]} checkpoint`;
+    let result = window.confirm(message);
+    if (result) {
+      let changeArray = this.state.race.raceArray;
+      changeArray.splice(index, 1);
+      this.setState({
+        race:
+        {
+          ...this.state.race,
+          raceArray: changeArray
+        }
+      });
+    }
   }
 
   // handel save button clicked
