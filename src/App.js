@@ -160,7 +160,7 @@ handleHome = (event) => {
             <button>Create Race</button>
           </header>
   
-          <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
+          <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc} handlePrev={this.handlePrevRace}/>
           <RacePoints 
           handleOptionChange={this.handleOptionChange}
           handleUserStart={this.handleStartChange}
@@ -174,6 +174,7 @@ handleHome = (event) => {
           userEnd={this.state.race.endPoint}
           userCheckPoint={this.state.race.selectedCheckpoint}
           raceArray={this.state.race.raceArray}
+          handlePrev={this.handlePrevRace}
           />
          
           <Result 

@@ -83,6 +83,14 @@ class RacePoints extends Component {
     render() {
     const {startPoint, endPoint, selectedCheckpoint } = this.state;
       return (
+          <div className="racePointsComponent">
+              <nav className="clearfix">
+                  <ul>
+                      <li className="home"><a href="#home">Home</a></li>
+                      <li className="prevRaces"><a href="#" onClick={this.props.handlePrev}>Previous Races</a></li>
+                  </ul>
+              </nav>
+          {
         <section className="RacePoints clearfix">
             <div className="addPoints">
                 <h2>Create route</h2>
@@ -141,6 +149,8 @@ class RacePoints extends Component {
                 <button type="submit">Create race</button>
             </form>
         </section>
+              }
+        </div>
       );
     }
 }

@@ -9,9 +9,20 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 
 .RacePoints {
     /* background: #efefef; */
-    height: 100vh;
+    /* height: 100vh;
     padding: 10vh 5%;
     max-width: 1600px;
+    font-family: 'Lato', sans-serif;
+    background: #fdfdfd;
+    background: #336699;
+    color: default; */
+}
+
+.racePointsComponent {
+    /* height: 100vh;
+    padding: 10vh 5%; */
+    /* max-width: 1600px; */
+    padding: 50px 0;
     font-family: 'Lato', sans-serif;
     background: #fdfdfd;
     background: #336699;
@@ -50,6 +61,7 @@ ul {
     /* height: 50vh; */
     background: white;
     padding: 0 10px;
+    margin-top: 50px;
 }
 
 .creatStartEnd select, 
@@ -83,6 +95,10 @@ ul {
 .viewPoints li:last-of-type {
     margin-top: 20px;
 }
+
+/* .viewPoints {
+    margin-top: 50px;
+} */
 
 .submitRace {
     float: left;

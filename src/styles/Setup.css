@@ -19,6 +19,15 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
   overflow: hidden;
 }
 
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+} 
+
 html {
     font-size: 125%;
 }
