@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './styles/NameDesc.css';
 import './styles/Setup.css';
-// import firebase from './firebase.js';
 
 class NameDesc extends Component {
     render() {

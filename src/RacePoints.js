@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from './firebase.js';
 import './RacePoints.css'
 import Select from 'react-select';
+import axios from 'axios';
 
 class RacePoints extends Component {
     constructor (){
@@ -13,6 +14,47 @@ class RacePoints extends Component {
     }
 
     componentDidMount(){
+        this.getStations()
+        .catch(() => {
+            this.getStationsFromFirebase();
+        })
+    }
+
+    //API call
+    getStations = () => {
+        return axios({
+            method: 'GET',
+            url: 'http://api.citybik.es/v2/networks/toronto',
+            dataResponse: 'json'
+        })
+            .then((response) => {
+                const stations = response.data.network.stations;
+                const stationArr = [];
+                stations.forEach((item) => {
+                    stationArr.push(item);
+                })
+                this.setState({
+                    stations: stationArr
+                })
+
+                console.log('AXIO succed')
+                let stationsOptions = stationArr.map((station) => {
+                    return {
+                        label: station.name,
+                        value: station.name
+                    }
+                })
+
+                this.setState({
+                    options: stationsOptions
+                });
+
+            })
+    }
+
+    //PlanB, fetch data from firebase
+    getStationsFromFirebase = () => {
+        console.log('plan B');
         const dbRef = firebase.database().ref();
         dbRef.on('value', res => {
             const data = res.val();
@@ -27,15 +69,16 @@ class RacePoints extends Component {
             let stationsOptions = stationsObj.map((station) => {
                 return {
                     label: station.name,
-                    value: station.name}
+                    value: station.name
+                }
             })
-            
+
             this.setState({
                 options: stationsOptions
             });
         })
     }
-
+    
     
     render() {
     const {startPoint, endPoint, selectedCheckpoint } = this.state;
@@ -48,15 +91,16 @@ class RacePoints extends Component {
                         <form className="creatStartEnd">
                             <label className="" htmlFor="startingPoint">Enter starting Point</label>
                             <Select 
+                                defaultValue = "Select Start"
                                 name="startingPoint"
-                                value={this.props.userStart}
+                                value={this.props.value}
                                 onChange={this.props.handleUserStart}
                                 options={this.state.options}
                                 />
                             <label className="" htmlFor="endPoint">Enter Finish Line</label>
                             <Select 
                                 name="endPoint"
-                                value={this.props.userEnd}
+                                value={this.props.value}
                                 onChange={this.props.handleUserEnd}
                                 options={this.state.options}
                                 />
@@ -67,7 +111,7 @@ class RacePoints extends Component {
                             <label className="" htmlFor="checkPoint">Select Check Points Below</label>
                             <Select 
                                 name="selectedCheckpoint"
-                                value={this.props.userCheckpoint}
+                                value={this.state.value}
                                 onChange={this.props.handleUserCheckPoint}
                                 options={this.state.options}
                                 />

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import firebase from './firebase.js';
 import './styles/Result.css';
 import raceEnd from './raceEnd.png'
 
@@ -12,7 +11,6 @@ class RaceInfo extends Component {
                 <nav className="clearfix">
                     <ul>
                         <li className="home"><a href="#">Home</a></li>
-                        <li className="prevRaces"><a href="#">Previous Races</a></li>
                     </ul>
                 </nav>
             </header>
