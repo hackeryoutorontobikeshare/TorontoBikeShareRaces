@@ -123,7 +123,7 @@ class App extends Component {
       race:
       {
         ...this.state.race,
-        startPoint: event.target.value
+        startPoint: event.label
       }
     });
   }
@@ -134,7 +134,7 @@ class App extends Component {
       race:
       {
         ...this.state.race,
-        endPoint: event.target.value
+        endPoint: event.label
       }
     });
   }
