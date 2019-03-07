@@ -18,15 +18,10 @@ class App extends Component {
       race: {
         startPoint:'',
         endPoint:'',
-        selectedCheckpoint:[]
+        selectedCheckpoint:[],
+        raceArray: []
       },
-      firebaseTest:{
-        name:'Maeesha',
-        description:'Maeesha Race',
-        startPoint: 'Yonge st.',
-        endPoint: 'Bloor st.',
-        selectedCheckpoint: ['Bathurst', 'Spadina', 'Queen']
-      },
+      
       view: true
     }
   }
@@ -117,7 +112,7 @@ class App extends Component {
     })
   }
 
-//updatestate from user select
+//update state from user select
   handleStartChange = (event) => {
     this.setState({
       race:
@@ -141,7 +136,39 @@ class App extends Component {
 
   handleCheckPointChange = (event) => {
     this.setState({
-      race:{selectedCheckpoint: event.target.value}
+      race:
+      {
+        ...this.state.race,
+        selectedCheckpoint: event.label
+      }
+    });
+  }
+
+  addCheckPoint = (event) => {
+    event.preventDefault();
+    let changeArray = this.state.race.raceArray;
+    changeArray.push(this.state.race.selectedCheckpoint);
+
+    this.setState({
+      race:
+      {
+        ...this.state.race,
+        raceArray: changeArray
+      }
+    });
+  }
+
+  deleteCheckpoint = (index) => {
+    console.log(index);
+    console.log("CLICKED!!!");
+    let changeArray = this.state.race.raceArray;
+    changeArray.splice(index, 1);
+    this.setState({
+      race:
+      {
+        ...this.state.race,
+        raceArray: changeArray
+      }
     });
   }
 
@@ -156,7 +183,7 @@ class App extends Component {
       description: this.state.description,
       startPoint: this.state.race.startPoint,
       endPoint: this.state.race.endPoint,
-      selectedCheckpoint: this.state.race.selectedCheckpoint
+      selectedCheckpoint: this.state.race.raceArray
       }
     
       dbRef.push(savedRace);
@@ -197,8 +224,15 @@ handleHome = (event) => {
           handleOptionChange={this.handleOptionChange}
           handleUserStart={this.handleStartChange}
           handleUserEnd={this.handleEndChange}
+          handleUserCheckPoint={this.handleCheckPointChange}
+
+          handleAddCheckPoint={this.addCheckPoint}
+          handleDeleteCheckpoint={this.deleteCheckpoint}
+
           userStart={this.state.race.startPoint}
           userEnd={this.state.race.endPoint}
+          userCheckPoint={this.state.race.selectedCheckpoint}
+          raceArray={this.state.race.raceArray}
           />
          
           <Result 
@@ -206,8 +240,8 @@ handleHome = (event) => {
           description={this.state.description} 
           startP={this.state.race.startPoint} 
           endP={this.state.race.endPoint}
-          // checkP={this.state.checkPoint}
-          // handleSave={this.handleSaveRace}
+          checkP={this.state.race.raceArray}
+          handleSave={this.handleSaveRace}
           handlePrev={this.handlePrevRace}
           />
       </div>

@@ -25,7 +25,13 @@ class RaceInfo extends Component {
                                 <p>Description: {this.props.description}</p>
                                 <div className="racePoints">
                                     <p className="startP"><i class="fas fa-flag-checkered"></i> Starting Point: {this.props.startP}</p>
-                                    <p className="checkP">Check Point: {this.props.checkP}</p>
+                                    <p className="checkP">Check Point: 
+                                        {
+                                            this.props.checkP.map((item)=>{
+                                                return <li>{item}</li>;
+                                            })
+                                        }
+                                    </p>
                                     <p className="endP">
                                     <img src={raceEnd} alt="Race Finish Banner"/>
                                      Ending Point: {this.props.endP}</p>

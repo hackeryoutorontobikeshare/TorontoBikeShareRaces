@@ -7,11 +7,6 @@ class RacePoints extends Component {
     constructor (){
         super()
         this.state = {    
-            // startPoint: "Start point",
-            // endPoint: "End point",
-            selectedCheckpoint: "",
-            raceArray: [],
-            userRace: {},
             stations: [],
             options: []
         }
@@ -20,7 +15,6 @@ class RacePoints extends Component {
     componentDidMount(){
         const dbRef = firebase.database().ref();
         dbRef.on('value', res => {
-            // console.log(res.val());
             const data = res.val();
             const temArr = [];
 
@@ -42,47 +36,7 @@ class RacePoints extends Component {
         })
     }
 
-    handleCheckPointChange = (event) => {
-        this.setState({
-            selectedCheckpoint: event.label
-        });
-    }
-
-    addCheckPoint = (event) => {
-        event.preventDefault();
-        // console.log("check Point added!");
-        let changeArray = this.state.raceArray;
-        changeArray.push(this.state.selectedCheckpoint);
-
-        this.setState({
-            raceArray: changeArray
-        });
-        // console.log(this.state.stationArray);
-    }
-
-    deleteCheckpoint = (index) => {
-        console.log(index);
-        console.log("CLICKED!!!");
-        let changeArray = this.state.raceArray;
-        changeArray.splice(index, 1);
-        this.setState({
-            raceArray: changeArray
-        });
-    }
-
-    submitRace = (event) => {
-        console.log("submit race");
-        event.preventDefault();
-        let userRace = {
-            name: this.props.name,
-            description: this.props.description,
-            start: this.props.userStart,
-            end: this.props.userEnd,
-            checkpoints: this.state.raceArray
-        };
-        console.log(userRace);
-    }
-
+    
     render() {
     const {startPoint, endPoint, selectedCheckpoint } = this.state;
       return (
@@ -109,12 +63,12 @@ class RacePoints extends Component {
                         </form>
                     </li>
                     <li>
-                        <form className="createCheckPoints" onSubmit={this.addCheckPoint}>
+                        <form className="createCheckPoints" onSubmit={this.props.handleAddCheckPoint}>
                             <label className="" htmlFor="checkPoint">Select Check Points Below</label>
                             <Select 
                                 name="selectedCheckpoint"
-                                value={this.state.selectedCheckpoint}
-                                onChange={this.handleCheckPointChange}
+                                value={this.props.userCheckpoint}
+                                onChange={this.props.handleUserCheckPoint}
                                 options={this.state.options}
                                 />
                             <button type="submit">Add check Point</button>
@@ -128,10 +82,10 @@ class RacePoints extends Component {
                 <ul>
                     <li>Start: {this.props.userStart}</li>
                     {
-                        this.state.raceArray.map((checkpoint, i)=>{
+                        this.props.raceArray.map((checkpoint, i)=>{
                             return (
                                 <li key={i}>{checkpoint}
-                                <span className="delete" onClick={() =>this.deleteCheckpoint(i)}><i className="far fa-trash-alt"></i></span>
+                                    <span className="delete" onClick={() => this.props.handleDeleteCheckpoint(i)}><i className="far fa-trash-alt"></i></span>
                                 </li>
                             )
                         })
