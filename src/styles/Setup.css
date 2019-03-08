@@ -49,3 +49,13 @@ p {
 img {
     display: block;
 }
+
+/* app.js buttons */
+
+.logout,
+.login {
+  position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+}

@@ -21,8 +21,6 @@ class PrevRaces extends Component {
     componentDidMount() {
         const itemsRef = firebase.database().ref();
         itemsRef.on('value', (saved) => {
-            console.log(saved.val());
-
             let newState = [];
 
             const data = saved.val();
@@ -36,7 +34,6 @@ class PrevRaces extends Component {
             for (let i = 1; i < newState.length; i++) {
                 savedRaces.push(newState[i]);
             }
-            console.log(savedRaces);
 
             const updateRaces = savedRaces.reverse();
 
@@ -59,6 +56,7 @@ class PrevRaces extends Component {
             return (
                 <div className="wrapper">
                     <section className="prevRacesComponent">
+                        <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
                         <h2>Previous Races</h2>
                             {
                                 this.state.saved.map((races) => {

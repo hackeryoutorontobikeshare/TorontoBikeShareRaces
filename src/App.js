@@ -4,12 +4,12 @@ import RacePoints from './RacePoints.js';
 import NameDesc from './NameDesc.js';
 import Result from './Result.js';
 import PrevRaces from './PrevRaces.js';
-// import Animation from './Animation.js';
 import './styles/Setup.css';
 import './styles/Header.css';
 import scrollToComponent from 'react-scroll-to-component';
 import swal from '@sweetalert/with-react';
 import axios from 'axios';
+import UserPrevRace from './UserPrevRace.js';
 
 class App extends Component {
   constructor() {
@@ -26,7 +26,10 @@ class App extends Component {
       },
     view: true,
     stations: [],
-    options: []
+    options: [],
+      view: true,
+      user: null,
+      authID: ''
     }
   }
 
@@ -174,18 +177,24 @@ class App extends Component {
     });
   }
 
-  // handel save button clicked
+  // handel save button clicked - with both gust login and auth user login
 
   handleSaveRace = (event) => {
     event.preventDefault();
-
-    const dbRef = firebase.database().ref();
     const savedRace = {
       name: this.state.name,
       description: this.state.description,
       startPoint: this.state.race.startPoint,
       endPoint: this.state.race.endPoint,
       selectedCheckpoint: this.state.race.raceArray
+    }
+
+    let dbRef;
+    if(this.state.user){
+      const authID = this.state.authID;
+      dbRef = firebase.database().ref(`authUsers/${authID}`);
+    }else{
+      dbRef = firebase.database().ref();
     }
 
     if (savedRace.name && savedRace.description && savedRace.startPoint && savedRace.endPoint) {
@@ -198,14 +207,14 @@ class App extends Component {
           endPoint: '',
           selectedCheckpoint: [],
           raceArray: []
-        }
+        },
+        view:null
       })
     } else {
       swal('Please make sure you have entered a race name and description, and have selected a station for your "start" and "finish" locations.')
     }
 
   }
-
 
   // handle previous button clicked
   handlePrevRace = (event) => {
@@ -223,6 +232,7 @@ class App extends Component {
     })
   }
 
+  //smooth scroll
   scrollND = () => {
     scrollToComponent(this.NameDesc)
   }
@@ -233,6 +243,31 @@ class App extends Component {
     scrollToComponent(this.Result)
   }
 
+  //user authentication
+  login = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const auth = firebase.auth();
+    auth.signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user.uid)
+        const userID = user.uid
+        this.setState({
+          user: true,
+          authID: userID
+        });
+      });
+  }
+
+  logout = () => {
+    const auth = firebase.auth();
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null
+        });
+      });
+  }
 
   render() {
     if (this.state.view) {
@@ -246,7 +281,17 @@ class App extends Component {
               </ul>
             </nav>
             <h1>Welcome to Toronto Bike Share Races</h1>
-            <button onClick={this.scrollND}>Create Race</button>
+            <button className="createRaceBtn" onClick={this.scrollND}>Create Race</button>
+            {
+              this.state.user ? 
+            <button className="logout" onClick={this.logout}>Log Out</button>
+            : <button className="login" onClick={this.login}>Login</button>
+            }
+            {
+              this.state.user ?
+                <button className="createRaceBtn" onClick={this.scrollND}>Create Race</button>
+                : <button className="createRaceBtn" onClick={this.scrollND}>Create Race As Guest</button>
+            }
           </header>
   
           <NameDesc 
@@ -288,19 +333,25 @@ class App extends Component {
             startP={this.state.race.startPoint}
             endP={this.state.race.endPoint}
             checkP={this.state.race.raceArray}
+            user={this.state.user}
+
             handleSave={this.handleSaveRace}
             handlePrev={this.handlePrevRace}
-
             ref={(component) => { this.Result = component; }}
           />
         </div>
       );
     } else {
-      return <PrevRaces handleBack={this.handleHome} />
+      if (this.state.user) {
+        return <UserPrevRace
+          authID={this.state.authID}
+          handleBack={this.handleHome}
+        />
+      } else {
+        return <PrevRaces handleBack={this.handleHome} />
+      }
     }
   }
 }
-
-
 
 export default App;
