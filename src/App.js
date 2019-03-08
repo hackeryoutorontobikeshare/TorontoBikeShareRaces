@@ -8,10 +8,8 @@ import './styles/Setup.css';
 import './styles/Header.css';
 import scrollToComponent from 'react-scroll-to-component';
 import swal from '@sweetalert/with-react';
+import axios from 'axios';
 import UserPrevRace from './UserPrevRace.js';
-
-const provider = new firebase.auth.GoogleAuthProvider();
-const auth = firebase.auth();
 
 class App extends Component {
   constructor() {
@@ -26,12 +24,74 @@ class App extends Component {
         selectedCheckpoint: [],
         raceArray: []
       },
+    view: true,
+    stations: [],
+    options: [],
       view: true,
       user: null,
       authID: ''
     }
   }
 
+  //API call
+  getStations = () => {
+    return axios({
+        method: 'GET',
+        url: 'http://api.citybik.es/v2/networks/toronto',
+        dataResponse: 'json'
+    })
+        .then((response) => {
+            const stations = response.data.network.stations;
+            const stationArr = [];
+            stations.forEach((item) => {
+                stationArr.push(item);
+            })
+            this.setState({
+                stations: stationArr
+            })
+
+            console.log('AXIO succed')
+            let stationsOptions = stationArr.map((station) => {
+                return {
+                    label: station.name,
+                    value: station.name
+                }
+            })
+
+            this.setState({
+                options: stationsOptions
+            });
+
+        })
+  }
+
+  //PlanB, fetch data from firebase
+  getStationsFromFirebase = () => {
+      console.log('plan B');
+      const dbRef = firebase.database().ref();
+      dbRef.on('value', res => {
+          const data = res.val();
+          const temArr = [];
+
+          for (let key in data) {
+              temArr.push(data[key])
+          }
+
+          const stationsObj = temArr[0];
+
+          let stationsOptions = stationsObj.map((station) => {
+              return {
+                  label: station.name,
+                  value: station.name
+              }
+          })
+
+          this.setState({
+              options: stationsOptions
+          });
+      })
+  }
+  
   //updatestate from user input
   upDateName = (e) => {
     const userName = e.target.value
@@ -117,18 +177,24 @@ class App extends Component {
     });
   }
 
-  // handel save button clicked
+  // handel save button clicked - with both gust login and auth user login
 
   handleSaveRace = (event) => {
     event.preventDefault();
-
-    const dbRef = firebase.database().ref();
     const savedRace = {
       name: this.state.name,
       description: this.state.description,
       startPoint: this.state.race.startPoint,
       endPoint: this.state.race.endPoint,
       selectedCheckpoint: this.state.race.raceArray
+    }
+
+    let dbRef;
+    if(this.state.user){
+      const authID = this.state.authID;
+      dbRef = firebase.database().ref(`authUsers/${authID}`);
+    }else{
+      dbRef = firebase.database().ref();
     }
 
     if (savedRace.name && savedRace.description && savedRace.startPoint && savedRace.endPoint) {
@@ -141,46 +207,14 @@ class App extends Component {
           endPoint: '',
           selectedCheckpoint: [],
           raceArray: []
-        }
+        },
+        view:null
       })
     } else {
       swal('Please make sure you have entered a race name and description, and have selected a station for your "start" and "finish" locations.')
     }
 
   }
-
-  // handle authorize user previous race
-    handleAuthPrevRace = (event) => {
-      event.preventDefault();
-      const authID = this.state.authID
-      const dbRef = firebase.database().ref(`authUsers/${authID}`);
-      const savedRace = {
-        name: this.state.name,
-        description: this.state.description,
-        startPoint: this.state.race.startPoint,
-        endPoint: this.state.race.endPoint,
-        selectedCheckpoint: this.state.race.raceArray
-      }
-
-      if (savedRace.name && savedRace.description && savedRace.startPoint && savedRace.endPoint) {
-        dbRef.push(savedRace);
-        this.setState({
-          name: '',
-          description: "",
-          race: {
-            startPoint: '',
-            endPoint: '',
-            selectedCheckpoint: [],
-            raceArray: []
-          }
-        })
-      } else {
-        swal('Please make sure you have entered a race name and description, and have selected a station for your "start" and "finish" locations.')
-      }
-
-    }
-
-
 
   // handle previous button clicked
   handlePrevRace = (event) => {
@@ -211,19 +245,22 @@ class App extends Component {
 
   //user authentication
   login = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const auth = firebase.auth();
     auth.signInWithPopup(provider)
       .then((result) => {
         const user = result.user;
         console.log(user.uid)
         const userID = user.uid
         this.setState({
-          user : true,
-          authID : userID
+          user: true,
+          authID: userID
         });
       });
   }
 
   logout = () => {
+    const auth = firebase.auth();
     auth.signOut()
       .then(() => {
         this.setState({
@@ -269,6 +306,9 @@ class App extends Component {
           />
 
           <RacePoints
+            options = {this.state.options}
+            getStations = {this.getStations}
+            getStationsFromFirebase = {this.getStationsFromFirebase}
             handleOptionChange={this.handleOptionChange}
             handleUserStart={this.handleStartChange}
             handleUserEnd={this.handleEndChange}
@@ -294,21 +334,19 @@ class App extends Component {
             endP={this.state.race.endPoint}
             checkP={this.state.race.raceArray}
             user={this.state.user}
-            handleSave={this.handleSaveRace}
-            handleUserSave={this.handleAuthPrevRace}
-            handlePrev={this.handlePrevRace}
-            
 
+            handleSave={this.handleSaveRace}
+            handlePrev={this.handlePrevRace}
             ref={(component) => { this.Result = component; }}
           />
         </div>
       );
     } else {
       if (this.state.user) {
-        return <UserPrevRace 
-                authID = {this.state.authID}
-                handleBack={this.handleHome}
-                />
+        return <UserPrevRace
+          authID={this.state.authID}
+          handleBack={this.handleHome}
+        />
       } else {
         return <PrevRaces handleBack={this.handleHome} />
       }

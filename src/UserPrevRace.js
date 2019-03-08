@@ -12,34 +12,17 @@ class UserPrevRace extends Component {
         }
     }
 
-    onPrevRaces = () => {
-        const dbRef = firebase.database().ref();
-
-        dbRef.push();
-    }
-
     componentDidMount() {
         const authID = this.props.authID
         const itemsRef = firebase.database().ref(`authUsers/${authID}`);
         itemsRef.on('value', (saved) => {
-            console.log(saved.val());
-
-            let newState = [];
+            let newRace = [];
 
             const data = saved.val();
-
             for (let key in data) {
-                newState.push(data[key]);
+                newRace.push(data[key]);
             }
-
-            const savedRaces = []
-
-            for (let i = 1; i < newState.length; i++) {
-                savedRaces.push(newState[i]);
-            }
-            console.log(savedRaces);
-
-            const updateRaces = savedRaces.reverse();
+            const updateRaces = newRace.reverse();
 
             this.setState({
                 saved: updateRaces

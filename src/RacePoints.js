@@ -10,77 +10,21 @@ class RacePoints extends Component {
     constructor() {
         super()
         this.state = {
-            stations: [],
-            options: []
+            // stations: [],
+            // options: []
         }
     }
 
+      // ***** UPDATES STARTED HERE ***** //
+
     componentDidMount() {
-        this.getStations()
+        this.props.getStations()
             .catch(() => {
-                this.getStationsFromFirebase();
+                this.props.getStationsFromFirebase();
             })
     }
 
-    //API call
-    getStations = () => {
-        return axios({
-            method: 'GET',
-            url: 'http://api.citybik.es/v2/networks/toronto',
-            dataResponse: 'json'
-        })
-            .then((response) => {
-                const stations = response.data.network.stations;
-                const stationArr = [];
-                stations.forEach((item) => {
-                    stationArr.push(item);
-                })
-                this.setState({
-                    stations: stationArr
-                })
-
-                console.log('AXIO succed')
-                let stationsOptions = stationArr.map((station) => {
-                    return {
-                        label: station.name,
-                        value: station.name
-                    }
-                })
-
-                this.setState({
-                    options: stationsOptions
-                });
-
-            })
-    }
-
-    //PlanB, fetch data from firebase
-    getStationsFromFirebase = () => {
-        console.log('plan B');
-        const dbRef = firebase.database().ref();
-        dbRef.on('value', res => {
-            const data = res.val();
-            const temArr = [];
-
-            for (let key in data) {
-                temArr.push(data[key])
-            }
-
-            const stationsObj = temArr[0];
-
-            let stationsOptions = stationsObj.map((station) => {
-                return {
-                    label: station.name,
-                    value: station.name
-                }
-            })
-
-            this.setState({
-                options: stationsOptions
-            });
-        })
-    }
-
+    // //API call
     randStation = () => {
         console.log(this.state)
     }
@@ -103,14 +47,14 @@ class RacePoints extends Component {
                                     name="startingPoint"
                                     value={this.props.value}
                                     onChange={this.props.handleUserStart}
-                                    options={this.state.options}
+                                    options={this.props.options}
                                 />
                                 <label className="" htmlFor="endPoint">Enter Finish Line</label>
                                 <Select
                                     name="endPoint"
                                     value={this.props.value}
                                     onChange={this.props.handleUserEnd}
-                                    options={this.state.options}
+                                    options={this.props.options}
                                 />
                             </form>
                         </li>
@@ -123,7 +67,7 @@ class RacePoints extends Component {
                                     name="selectedCheckpoint"
                                     value={this.state.value}
                                     onChange={this.props.handleUserCheckPoint}
-                                    options={this.state.options}
+                                    options={this.props.options}
                                 />
                                 <button type="submit">Add check Point</button>
                             </form>
