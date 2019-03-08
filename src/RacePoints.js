@@ -12,7 +12,7 @@ class RacePoints extends Component {
             options: []
         }
     }
-    
+
     componentDidMount() {
         this.getStations()
             .catch(() => {
@@ -80,22 +80,22 @@ class RacePoints extends Component {
     }
 
     render() {
-    const {startPoint, endPoint, selectedCheckpoint } = this.state;
-      return (
-        <section className="RacePoints clearfix">
-            <h2>Race route</h2>
-            <div className="addPoints">
-                <h2>Add starting & finish points</h2>
-                <ul>
-                    <li>
-                        <form className="creatStartEnd">
-                            <label className="" htmlFor="startingPoint">Enter starting Point</label>
-                            <Select 
-                                defaultValue = "Select Start"
-                                name="startingPoint"
-                                value={this.props.value}
-                                onChange={this.props.handleUserStart}
-                                options={this.state.options}
+        const { startPoint, endPoint, selectedCheckpoint } = this.state;
+        return (
+            <section className="RacePoints clearfix">
+                <h2>Race route</h2>
+                <div className="addPoints">
+                    <h2>Add starting & finish points</h2>
+                    <ul>
+                        <li>
+                            <form className="creatStartEnd">
+                                <label className="" htmlFor="startingPoint">Enter starting Point</label>
+                                <Select
+                                    defaultValue="Select Start"
+                                    name="startingPoint"
+                                    value={this.props.value}
+                                    onChange={this.props.handleUserStart}
+                                    options={this.state.options}
                                 />
                                 <label className="" htmlFor="endPoint">Enter Finish Line</label>
                                 <Select
@@ -104,18 +104,18 @@ class RacePoints extends Component {
                                     onChange={this.props.handleUserEnd}
                                     options={this.state.options}
                                 />
-                        </form>
-                    </li>
-                    <li> 
-                        {/* <a href="#" onClick={(event) => { func1(); func2();}}>Test Link</a> */}
-                        <h2>Add race checkpoints</h2>
-                        <form className="createCheckPoints" onSubmit={this.props.handleAddCheckPoint}>
-                            <label className="" htmlFor="checkPoint">Select Check Points Below</label>
-                            <Select 
-                                name="selectedCheckpoint"
-                                value={this.state.value}
-                                onChange={this.props.handleUserCheckPoint}
-                                options={this.state.options}
+                            </form>
+                        </li>
+                        <li>
+                            {/* <a href="#" onClick={(event) => { func1(); func2();}}>Test Link</a> */}
+                            <h2>Add race checkpoints</h2>
+                            <form className="createCheckPoints" onSubmit={this.props.handleAddCheckPoint}>
+                                <label className="" htmlFor="checkPoint">Select Check Points Below</label>
+                                <Select
+                                    name="selectedCheckpoint"
+                                    value={this.state.value}
+                                    onChange={this.props.handleUserCheckPoint}
+                                    options={this.state.options}
                                 />
                                 <button type="submit">Add check Point</button>
                             </form>

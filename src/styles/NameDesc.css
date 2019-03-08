@@ -54,6 +54,7 @@ input {
     color: #336699;
     background: white;
     transition: 0.5s;
+    margin-top: 50px;
 }
 
 .noCaps {

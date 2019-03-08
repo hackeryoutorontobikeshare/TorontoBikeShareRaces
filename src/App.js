@@ -4,6 +4,7 @@ import RacePoints from './RacePoints.js';
 import NameDesc from './NameDesc.js';
 import Result from './Result.js';
 import PrevRaces from './PrevRaces.js';
+// import Animation from './Animation.js';
 import './styles/Setup.css';
 import './styles/Header.css';
 import scrollToComponent from 'react-scroll-to-component';
@@ -186,19 +187,24 @@ class App extends Component {
             <h1>Welcome to Toronto Bike Share Races</h1>
             <button onClick={this.scrollND}>Create Race</button>
           </header>
-
-          <NameDesc
-            takeName={this.upDateName}
-            takeDesc={this.upDateDesc}
-            ref={(component) => { this.NameDesc = component; }}
-            scrollRacePoints={this.scrollRP}
-
+  
+          <NameDesc 
+          takeName={this.upDateName} 
+          takeDesc={this.upDateDesc}
+          
+          name={this.state.name}
+          description={this.state.description} 
+          ref={(component) => { this.NameDesc = component; }}
+          scrollRacePoints={this.scrollRP}
+          handlePrev={this.handlePrevRace}
           />
+
           <RacePoints
             handleOptionChange={this.handleOptionChange}
             handleUserStart={this.handleStartChange}
             handleUserEnd={this.handleEndChange}
             handleUserCheckPoint={this.handleCheckPointChange}
+            handlePrev={this.handlePrevRace}
 
             handleAddCheckPoint={this.addCheckPoint}
             handleDeleteCheckpoint={this.deleteCheckpoint}
