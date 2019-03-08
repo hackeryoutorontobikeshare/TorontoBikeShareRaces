@@ -23,7 +23,8 @@ class App extends Component {
         raceArray: []
       },
 
-      view: true
+      view: true,
+      user: null
     }
   }
 
