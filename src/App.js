@@ -218,11 +218,16 @@ class App extends Component {
               </ul>
             </nav>
             <h1>Welcome to Toronto Bike Share Races</h1>
-            <button onClick={this.scrollND}>Create Race</button>
+            <button className="createRaceBtn" onClick={this.scrollND}>Create Race</button>
             {
               this.state.user ? 
-            <button onClick={this.logout}>Log Out</button> 
-            : <button onClick={this.login}>Login</button>
+            <button className="logout" onClick={this.logout}>Log Out</button>
+            : <button className="login" onClick={this.login}>Login</button>
+            }
+            {
+              this.state.user ?
+                <button className="createRaceBtn" onClick={this.scrollND}>Create Race</button>
+                : <button className="createRaceBtn" onClick={this.scrollND}>Create Race As Guest</button>
             }
           </header>
   
