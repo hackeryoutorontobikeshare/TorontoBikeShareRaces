@@ -22,7 +22,7 @@ class PrevRaces extends Component {
         const itemsRef = firebase.database().ref();
         itemsRef.on('value', (saved) => {
             console.log(saved.val());
-           
+
             let newState = [];
 
             const data = saved.val();

@@ -10,7 +10,8 @@ class RaceInfo extends Component {
             <header>
                 <nav className="clearfix">
                     <ul>
-                        <li className="home"><a href="#">Home</a></li>
+                            <li className="home"><a href="#home">Home</a></li>
+                            <li className="prevRaces"><a href="#" onClick={this.props.handlePrev}>Previous Races</a></li>
                     </ul>
                 </nav>
             </header>
@@ -18,7 +19,7 @@ class RaceInfo extends Component {
                 <div className="wrapper">
                         <div className="raceInfo">
                             <div className="container">
-                                <h2>Your Race Information</h2>
+                                <h2>Your Race Information <i class="fas fa-bicycle"></i></h2>
                                 <h3>Race Name: {this.props.name}</h3>
                                 <p>Description: {this.props.description}</p>
                                 <div className="racePoints">

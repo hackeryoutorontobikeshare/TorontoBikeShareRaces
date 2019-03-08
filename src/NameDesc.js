@@ -6,6 +6,12 @@ class NameDesc extends Component {
     render() {
         return (
             <section className="nameDesc">
+                <nav className="clearfix">
+                    <ul>
+                        <li className="home"><a href="#home">Home</a></li>
+                        <li className="prevRaces" onClick={this.props.handlePrev}><a href="#">Previous Races</a></li>
+                    </ul>
+                </nav>
                 <h2 className="ndTitle">create race name <span className="noCaps">and</span> description</h2>
                 <div className="ndWrapper">
                     <form className="ndForm">
@@ -23,10 +29,12 @@ class NameDesc extends Component {
                         </span>
                     </form>
                 </div>
-                <button className="ndButton" onClick={this.upDateState}>Next</button>
+                <button className="ndButton" onClick={this.props.scrollRacePoints}>Next</button>
             </section>
         );
     }
 }
 
 export default NameDesc;
+
+
