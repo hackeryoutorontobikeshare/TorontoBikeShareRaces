@@ -59,6 +59,13 @@ class UserPrevRace extends Component {
             return (
                 <div className="wrapper">
                     <section className="prevRacesComponent">
+                        <header>
+                            <nav className="clearfix">
+                                <ul>
+                                    <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
+                                </ul>
+                            </nav>
+                        </header>
                         <h2>Here Are Your Previous Races</h2>
                         {
                             this.state.saved.map((races) => {
