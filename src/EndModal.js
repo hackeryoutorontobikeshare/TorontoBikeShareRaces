@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
-class startModal extends Component {
+
+class EndModal extends Component {
     constructor() {
         super()
         this.state = {
             modalIsOpen: false,
             stations: [],
-            filterStart:'',
-            freeBikes:'',
+            filterEnd:'',
+            emptySlot:''
         }
 
     this.openModal = this.openModal.bind(this);
@@ -18,17 +19,17 @@ class startModal extends Component {
 
     openModal() {
         const stations = this.state.stations;
-        const startPoint = this.props.filterStart;
+        const endPoint = this.props.filterEnd;
         
         const bikeArr = stations.filter((station)=>{
-            return station.name === startPoint;
+            return station.name === endPoint;
         });
 
-        const freeBike = bikeArr[0].free_bikes;
+        const empty = bikeArr[0].empty_slots;
         
         this.setState({ 
                 modalIsOpen: true,
-                freeBikes: freeBike
+                emptySlot: empty
             });
     }
 
@@ -66,7 +67,7 @@ class startModal extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.openModal}>{this.props.filterStart}</button>
+                <button onClick={this.openModal}>{this.props.filterEnd}</button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -74,8 +75,8 @@ class startModal extends Component {
                 >
                     <button onClick={this.closeModal}>close</button>
                     <div>
-                        <h2>Real-time availability of bikes</h2>
-                        <p>At this station: {this.props.filterStart} there are {this.state.freeBikes} bikes left</p>
+                        <h2>Real-time availability of empty bike slots</h2>
+                        <p>At this station: {this.props.filterEnd} there are {this.state.emptySlot} slots left</p>
                     </div>
                 </Modal>
             </div>
@@ -86,4 +87,4 @@ class startModal extends Component {
 
 
 
-export default startModal;
+export default EndModal;

@@ -250,7 +250,6 @@ class App extends Component {
     auth.signInWithPopup(provider)
       .then((result) => {
         const user = result.user;
-        console.log(user.uid)
         const userID = user.uid
         this.setState({
           user: true,
