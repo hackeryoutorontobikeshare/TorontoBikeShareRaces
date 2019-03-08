@@ -21,8 +21,6 @@ class PrevRaces extends Component {
     componentDidMount() {
         const itemsRef = firebase.database().ref();
         itemsRef.on('value', (saved) => {
-            console.log(saved.val());
-
             let newState = [];
 
             const data = saved.val();
@@ -36,7 +34,6 @@ class PrevRaces extends Component {
             for (let i = 1; i < newState.length; i++) {
                 savedRaces.push(newState[i]);
             }
-            console.log(savedRaces);
 
             const updateRaces = savedRaces.reverse();
 

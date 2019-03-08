@@ -4,7 +4,6 @@ import './styles/Result.css';
 class Animation extends Component {
 
     render(){
-        console.log('timeout');
         return(
             <div className="bikeAnimation">
                 <i class="fas fa-bicycle"></i>
