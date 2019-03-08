@@ -4,6 +4,7 @@ import RacePoints from './RacePoints.js';
 import NameDesc from './NameDesc.js';
 import Result from './Result.js';
 import PrevRaces from './PrevRaces.js';
+// import Animation from './Animation.js';
 import './styles/Setup.css';
 import './styles/Header.css';
 import swal from '@sweetalert/with-react';
@@ -122,8 +123,10 @@ class App extends Component {
             endPoint: '',
             selectedCheckpoint: [],
             raceArray: []
-          }
+          },
+          view: null
         })
+
       }else{
         swal('Please make sure you have entered a race name and description, and have selected a station for your "start" and "finish" locations.')
       }
@@ -160,7 +163,14 @@ handleHome = (event) => {
             <button>Create Race</button>
           </header>
   
-          <NameDesc takeName={this.upDateName} takeDesc={this.upDateDesc}/>
+          <NameDesc 
+          takeName={this.upDateName} 
+          takeDesc={this.upDateDesc}
+          
+          name={this.state.name}
+          description={this.state.description} 
+          />
+
           <RacePoints 
           handleOptionChange={this.handleOptionChange}
           handleUserStart={this.handleStartChange}
