@@ -8,6 +8,8 @@ import './styles/Setup.css';
 import './styles/Header.css';
 import scrollToComponent from 'react-scroll-to-component';
 import swal from '@sweetalert/with-react';
+import UserPrevRace from './UserPrevRace.js';
+
 const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
@@ -25,7 +27,8 @@ class App extends Component {
         raceArray: []
       },
       view: true,
-      user: null
+      user: null,
+      authID: ''
     }
   }
 
@@ -146,6 +149,38 @@ class App extends Component {
 
   }
 
+  // handle authorize user previous race
+    handleAuthPrevRace = (event) => {
+      event.preventDefault();
+      const authID = this.state.authID
+      const dbRef = firebase.database().ref(`authUsers/${authID}`);
+      const savedRace = {
+        name: this.state.name,
+        description: this.state.description,
+        startPoint: this.state.race.startPoint,
+        endPoint: this.state.race.endPoint,
+        selectedCheckpoint: this.state.race.raceArray
+      }
+
+      if (savedRace.name && savedRace.description && savedRace.startPoint && savedRace.endPoint) {
+        dbRef.push(savedRace);
+        this.setState({
+          name: '',
+          description: "",
+          race: {
+            startPoint: '',
+            endPoint: '',
+            selectedCheckpoint: [],
+            raceArray: []
+          }
+        })
+      } else {
+        swal('Please make sure you have entered a race name and description, and have selected a station for your "start" and "finish" locations.')
+      }
+
+    }
+
+
 
   // handle previous button clicked
   handlePrevRace = (event) => {
@@ -179,8 +214,11 @@ class App extends Component {
     auth.signInWithPopup(provider)
       .then((result) => {
         const user = result.user;
+        console.log(user.uid)
+        const userID = user.uid
         this.setState({
-          user
+          user : true,
+          authID : userID
         });
       });
   }
@@ -250,15 +288,25 @@ class App extends Component {
             startP={this.state.race.startPoint}
             endP={this.state.race.endPoint}
             checkP={this.state.race.raceArray}
+            user={this.state.user}
             handleSave={this.handleSaveRace}
+            handleUserSave={this.handleAuthPrevRace}
             handlePrev={this.handlePrevRace}
+            
 
             ref={(component) => { this.Result = component; }}
           />
         </div>
       );
     } else {
-      return <PrevRaces handleBack={this.handleHome} />
+      if (this.state.user) {
+        return <UserPrevRace 
+                authID = {this.state.authID}
+                handleBack={this.handleHome}
+                />
+      } else {
+        return <PrevRaces handleBack={this.handleHome} />
+      }
     }
   }
 }
