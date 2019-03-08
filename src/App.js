@@ -9,6 +9,7 @@ import './styles/Setup.css';
 import './styles/Header.css';
 import scrollToComponent from 'react-scroll-to-component';
 import swal from '@sweetalert/with-react';
+import axios from 'axios';
 
 class App extends Component {
   constructor() {
@@ -23,11 +24,71 @@ class App extends Component {
         selectedCheckpoint: [],
         raceArray: []
       },
-
-      view: true
+    view: true,
+    stations: [],
+    options: []
     }
   }
 
+  //API call
+  getStations = () => {
+    return axios({
+        method: 'GET',
+        url: 'http://api.citybik.es/v2/networks/toronto',
+        dataResponse: 'json'
+    })
+        .then((response) => {
+            const stations = response.data.network.stations;
+            const stationArr = [];
+            stations.forEach((item) => {
+                stationArr.push(item);
+            })
+            this.setState({
+                stations: stationArr
+            })
+
+            console.log('AXIO succed')
+            let stationsOptions = stationArr.map((station) => {
+                return {
+                    label: station.name,
+                    value: station.name
+                }
+            })
+
+            this.setState({
+                options: stationsOptions
+            });
+
+        })
+  }
+
+  //PlanB, fetch data from firebase
+  getStationsFromFirebase = () => {
+      console.log('plan B');
+      const dbRef = firebase.database().ref();
+      dbRef.on('value', res => {
+          const data = res.val();
+          const temArr = [];
+
+          for (let key in data) {
+              temArr.push(data[key])
+          }
+
+          const stationsObj = temArr[0];
+
+          let stationsOptions = stationsObj.map((station) => {
+              return {
+                  label: station.name,
+                  value: station.name
+              }
+          })
+
+          this.setState({
+              options: stationsOptions
+          });
+      })
+  }
+  
   //updatestate from user input
   upDateName = (e) => {
     const userName = e.target.value
@@ -200,6 +261,9 @@ class App extends Component {
           />
 
           <RacePoints
+            options = {this.state.options}
+            getStations = {this.getStations}
+            getStationsFromFirebase = {this.getStationsFromFirebase}
             handleOptionChange={this.handleOptionChange}
             handleUserStart={this.handleStartChange}
             handleUserEnd={this.handleEndChange}
