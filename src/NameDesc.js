@@ -19,13 +19,13 @@ class NameDesc extends Component {
                             <label htmlFor="name">Name</label>
                         </span>
                         <span className="ndSpan">
-                            <input type="text" id="name" placeholder="Enter name" onChange={this.props.takeName} />
+                            <input type="text" id="name" placeholder="Enter name" value={this.props.name} onChange={this.props.takeName} />
                         </span>
                         <span className="ndSpan">
                             <label htmlFor="desc">Description</label>
                         </span>
                         <span className="ndSpan">
-                            <input type="text" id="desc" placeholder="Enter description" onChange={this.props.takeDesc} />
+                            <input type="text" id="desc" placeholder="Enter description" value={this.props.description} onChange={this.props.takeDesc} />
                         </span>
                     </form>
                 </div>

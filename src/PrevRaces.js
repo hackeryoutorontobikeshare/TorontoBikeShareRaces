@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import firebase from './firebase';
 import './styles/PrevRaces.css';
+import Animation from './Animation.js'
 
 class PrevRaces extends Component {
     constructor() {
         super()
         this.state = {
-            saved: []
+            saved: [],
+            view: null
         }
     }
 
@@ -41,45 +43,50 @@ class PrevRaces extends Component {
             this.setState({
                 saved: updateRaces
             })
-        })
 
+            setTimeout(this.showRaces,1500);
+        })
     };
 
+    showRaces = () =>{
+        this.setState({
+            view: true
+        })
+    }
+
     render() {
-
-        return (
-            <div className="wrapper">
-                <section className="prevRacesComponent">
-                    <nav className="clearfix">
-                        <ul>
-                            <li className="home"><a href="#" onClick={this.props.handleBack}>Home</a></li>
-                        </ul>
-                    </nav>
-                    <h2>Previous Races</h2>
-                    {
-                        this.state.saved.map((races) => {
-                            return (
-                                <div>
-                                    <h3>{races.name}</h3>
-                                    <p>{races.description}</p>
-                                    <p>{races.startPoint}</p>
-                                    <ul>
-                                        {races.selectedCheckpoint ?
-                                            races.selectedCheckpoint.map((checkpoint) => {
+        if (this.state.view){
+            return (
+                <div className="wrapper">
+                    <section className="prevRacesComponent">
+                        <h2>Previous Races</h2>
+                            {
+                                this.state.saved.map((races) => {
+                                return (
+                                        <div>
+                                            <h3>{races.name}</h3>
+                                            <p>{races.description}</p>
+                                            <p>{races.startPoint}</p>
+                                            <ul>
+                                            {races.selectedCheckpoint?
+                                                races.selectedCheckpoint.map((checkpoint) => {
                                                 return <li>{checkpoint}</li>
-                                            })
+                                                })
                                             : null}
-                                    </ul>
-                                    <p>{races.endPoint}</p>
-                                </div>
-                            )
-                        })
-
-                    }
-                </section>
-                <button onClick={this.props.handleBack}>Back to Home</button>
-            </div>
-        )
+                                            </ul>
+                                            <p>{races.endPoint}</p>
+                                        </div>
+                                    )
+                                })
+        
+                            }
+                    </section>
+                    <button onClick={this.props.handleBack}>Back to Home</button>
+                </div>
+            )
+        }else{
+            return <Animation />;
+        }
     }
 }
 

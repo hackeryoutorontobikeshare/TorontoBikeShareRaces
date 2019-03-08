@@ -27,9 +27,11 @@ nav a {
     background-color: #d4faf0;
     color: #000;
     padding: 50px 0;
+    position: relative;
 }
 
-h2, h3 {
+h2,
+h3 {
     font-family: 'Josefin Sans', sans-serif;
 }
 
@@ -49,4 +51,40 @@ h2, h3 {
 .raceInfo img {
     display: inline-block;
     width: 3%;
+}
+
+.bikeAnimation {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(51, 102, 153, 0.5);
+}
+
+.bikeAnimation i {
+    font-size: 200px;
+    color: white;
+    animation: bikeMoving;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+.bikeAnimation p {
+    font-size: 60px;
+    color: white;
+}
+
+@keyframes bikeMoving {
+    0% {
+        transform: translateX(-1000px);
+    }
+    100% {
+        transform: translateX(1000px);
+        display: none;
+    }
 }

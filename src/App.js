@@ -8,6 +8,8 @@ import './styles/Setup.css';
 import './styles/Header.css';
 import scrollToComponent from 'react-scroll-to-component';
 import swal from '@sweetalert/with-react';
+const provider = new firebase.auth.GoogleAuthProvider();
+const auth = firebase.auth();
 
 class App extends Component {
   constructor() {
@@ -22,7 +24,6 @@ class App extends Component {
         selectedCheckpoint: [],
         raceArray: []
       },
-
       view: true,
       user: null
     }
@@ -162,6 +163,7 @@ class App extends Component {
     })
   }
 
+  //smooth scroll
   scrollND = () => {
     scrollToComponent(this.NameDesc)
   }
@@ -172,6 +174,25 @@ class App extends Component {
     scrollToComponent(this.Result)
   }
 
+  //user authentication
+  login = () => {
+    auth.signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        this.setState({
+          user
+        });
+      });
+  }
+
+  logout = () => {
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null
+        });
+      });
+  }
 
   render() {
     if (this.state.view) {
@@ -186,16 +207,24 @@ class App extends Component {
             </nav>
             <h1>Welcome to Toronto Bike Share Races</h1>
             <button onClick={this.scrollND}>Create Race</button>
+            {
+              this.state.user ? 
+            <button onClick={this.logout}>Log Out</button> 
+            : <button onClick={this.login}>Login</button>
+            }
           </header>
-
-          <NameDesc
-            takeName={this.upDateName}
-            takeDesc={this.upDateDesc}
-            ref={(component) => { this.NameDesc = component; }}
-            scrollRacePoints={this.scrollRP}
-            handlePrev={this.handlePrevRace}
-
+  
+          <NameDesc 
+          takeName={this.upDateName} 
+          takeDesc={this.upDateDesc}
+          
+          name={this.state.name}
+          description={this.state.description} 
+          ref={(component) => { this.NameDesc = component; }}
+          scrollRacePoints={this.scrollRP}
+          handlePrev={this.handlePrevRace}
           />
+
           <RacePoints
             handleOptionChange={this.handleOptionChange}
             handleUserStart={this.handleStartChange}
@@ -233,7 +262,5 @@ class App extends Component {
     }
   }
 }
-
-
 
 export default App;
