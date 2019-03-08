@@ -3,6 +3,7 @@ import firebase from './firebase.js';
 import './RacePoints.css'
 import Select from 'react-select';
 import axios from 'axios';
+import RandomRace from './RandomRace';
 
 class RacePoints extends Component {
     constructor() {
@@ -79,6 +80,9 @@ class RacePoints extends Component {
         })
     }
 
+    randStation = () => {
+        console.log(this.state)
+    }
 
 
 
@@ -144,7 +148,10 @@ class RacePoints extends Component {
                 </div>
                 <div className="submitRace">
                     <button onClick={this.props.scrollResults}>Next</button>
+
                 </div>
+                <RandomRace />
+
             </section>
         );
 
