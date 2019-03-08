@@ -79,9 +79,6 @@ class RacePoints extends Component {
         })
     }
 
-
-
-
     render() {
     const {startPoint, endPoint, selectedCheckpoint } = this.state;
       return (
