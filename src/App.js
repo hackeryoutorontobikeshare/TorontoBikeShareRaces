@@ -247,8 +247,13 @@ class App extends Component {
             <button className="createRaceBtn" onClick={this.scrollND}>Create Race</button>
             {
               this.state.user ? 
-            <button className="logout" onClick={this.logout}>Log Out</button> 
+            <button className="logout" onClick={this.logout}>Log Out</button>
             : <button className="login" onClick={this.login}>Login</button>
+            }
+            {
+              this.state.user ?
+                <button className="createRaceBtn" onClick={this.scrollND}>Create Race</button>
+                : <button className="createRaceBtn" onClick={this.scrollND}>Create Race As Guest</button>
             }
           </header>
   
