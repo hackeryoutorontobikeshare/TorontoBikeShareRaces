@@ -59,7 +59,13 @@ class PrevRaces extends Component {
             return (
                 <div className="wrapper">
                     <section className="prevRacesComponent">
-                        <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
+                        <header>
+                            <nav className="clearfix">
+                                <ul>
+                                    <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
+                                </ul>
+                            </nav>
+                        </header>
                         <h2>Previous Races</h2>
                             {
                                 this.state.saved.map((races) => {

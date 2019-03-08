@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import Animation from './Animation.js';
+import './styles/PrevRaces.css';
 
 class UserPrevRace extends Component {
     constructor() {

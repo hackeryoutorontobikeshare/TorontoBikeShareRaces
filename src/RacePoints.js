@@ -4,6 +4,7 @@ import './RacePoints.css'
 import Select from 'react-select';
 import axios from 'axios';
 import RandomRace from './RandomRace';
+import StartModal from './StartModal';
 
 class RacePoints extends Component {
     constructor() {
@@ -133,7 +134,7 @@ class RacePoints extends Component {
                 <div className="viewPoints">
                     <h2>Race route</h2>
                     <ul>
-                        <li>Start: {this.props.userStart}</li>
+                        <li>Start: <StartModal /> {this.props.userStart}</li>
                         {
                             this.props.raceArray.map((checkpoint, i) => {
                                 return (
