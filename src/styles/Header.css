@@ -6,15 +6,6 @@ header.headerContent {
     background-size: cover;
 }
 
-.clearfix:after {
-  visibility: hidden;
-  display: block;
-  font-size: 0;
-  content: " ";
-  clear: both;
-  height: 0;
-} 
-
 .headerContent h1 {
     position: absolute;
     top: 30%;
@@ -43,12 +34,6 @@ header.headerContent {
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-.headerContent button {
-    border: none;
-    background-color: #29d1b0;
-    padding: 10px 20px;
 }
 
 /* app.js buttons */

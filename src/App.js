@@ -272,7 +272,7 @@ class App extends Component {
     if (this.state.view) {
       return (
         <div className="App">
-          <header className="headerContent clearfix">
+          <header className="headerContent">
             <nav className="clearfix">
               <h2 className="logo">Logo here</h2>
               <ul className="clearfix">

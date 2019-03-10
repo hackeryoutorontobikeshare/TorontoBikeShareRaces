@@ -1,54 +1,47 @@
-/* ul {
-    padding: 0;
+.prevRaceTitle {
+    text-align: center;
     margin: 0;
+    padding-top: 80px;
+    font-size: 2rem;
+    color: #336699; 
+    text-shadow: 1px 1px 0 #257e9f,
+                2px 2px 0 #257e9f,
+                3px 3px 0 #d4faf0,
+                4px 4px 0 #d4faf0,
+                5px 5px 0 #29d1b0,
+                6px 6px 0 #29d1b0,
+                7px 7px 0 #29d1b0,
+                8px 8px 0 #29d1b0,
+                9px 9px 0 #29d1b0;
 }
 
-nav ul .home {
+.savedRacesContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.savedRaces {
     float: left;
+    border: 10px solid #d4faf0;
+    outline: 5px solid #33cc99;
+    width: calc((100% / 3) - 100px);
+    padding-left: 35px;
+    min-width: 500px;
+    min-height: 500px;
+    margin: 50px;
+    margin-bottom: 20px;
+    background-color: #fff;
 }
 
-nav li {
-    list-style-type: none;
-}
-
-.prevRacesComponent nav a {
-    text-decoration: none;
-    padding: 10px 20px;
-    background-color: #29d1b0;
-    color: #000;
-} */
-
-ul {
-    padding: 0;
-    margin: 0;
-}
-
-.prevRacesComponent header .logo {
-  float: left;
-  margin: 0;
-}
-
-.prevRacesComponent header nav ul {
-  float: right;
-}
-
-.prevRacesComponent header nav {
-    background-color: #29d1b0;
-    position: fixed;
-    width: 100%;
-    padding-top: 2px;
-    z-index: 10;
-}
-
-.prevRacesComponent header nav li {
-    list-style-type: none;
-    float: left;
-}
-
-
-.prevRacesComponent header nav a {
-    text-decoration: none;
-    padding: 10px 20px;
-    color: #000;
+.savedRaces img {
     display: inline-block;
+    width: 5%;
 }
+
+.prevRacesComponent {
+    background-color:  #fcfcfc;
+}
+
+/* .prevRacesComponent button {
+    text-align: center;
+} */

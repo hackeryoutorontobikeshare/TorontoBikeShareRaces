@@ -121,10 +121,10 @@ font-size: 1rem;
 }
 
 .submitRace button {
-    background: #fdfdfd;
+    /* background: #fdfdfd;
     width: 200px;
     padding: 10px;
-    border: solid #33cc99 5px;
+    border: solid #33cc99 5px; */
 }
 
 .visuallyhidden:not(:focus):not(:active) {
@@ -144,14 +144,14 @@ font-size: 1rem;
     display: block;
     width: 100%;
     margin: 20px 0;
-    padding: 10px;
+    /* padding: 10px;
     background: #336699;  
     color: white;
-    border: 0px;
+    border: 0px; */
 }
 
 .createCheckPoints button:hover {
-    background: #33cc99;
+    /* background: #33cc99; */
 }
 
 .creatStartEnd label:last-of-type {

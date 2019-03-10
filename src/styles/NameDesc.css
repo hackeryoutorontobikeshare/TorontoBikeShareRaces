@@ -60,13 +60,13 @@ input {
 .ndButton {
     margin: 60px auto;
     display: block;
-    width: 200px;
+    /* width: 200px;
     height: 50px;
     border: 5px solid  #336699;
     border-radius: 5%;
     color: #336699;
     background: white;
-    transition: 0.5s;
+    transition: 0.5s; */
     margin-top: 50px;
 }
 
@@ -82,7 +82,7 @@ input {
 
 /* HOVER AND ACTIVE STATES */
 
-.ndButton:focus{
+/* .ndButton:focus{
     color:#33cc99; 
     border: 5px solid #33cc99;
 }
@@ -95,7 +95,7 @@ input {
 .ndButton:active{
     transform:scale(1);
     box-shadow: none;
-}
+} */
 
 input:focus {
     background: rgba(51, 204, 153, .2);

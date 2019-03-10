@@ -49,3 +49,39 @@ p {
 img {
     display: block;
 }
+
+/* button style inspiration from https://codepen.io/thejamespower/pen/OVNYLL */
+
+button {
+  padding: 10px 20px;
+  border: 2px solid #29d1b0;
+  text-align: center;
+  position: relative;
+  overflow:hidden;
+  transition: .5s;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+button::after {
+    position: absolute;
+    transition: .3s;
+    content: '';
+    width: 0;
+    left: 50%;
+    bottom: 0;
+    height: 3px;
+    background-color: #29d1b0;
+    left: 0;
+}
+
+button:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+button:hover {
+  background-color: white;
+  color: #257e9f;
+  box-shadow: 2px 2px 4px #000;
+}
