@@ -54,6 +54,7 @@ ul {
 .logo {
   float: left;
   margin: 0;
+  color: #29d1b0;
 }
 
 nav ul {
@@ -61,7 +62,7 @@ nav ul {
 }
 
 nav {
-    background-color: #29d1b0;
+    background-color: #000;
     position: fixed;
     width: 100%;
     padding-top: 2px;
@@ -77,6 +78,6 @@ nav li {
 nav a {
     text-decoration: none;
     padding: 10px 20px;
-    color: #000;
+    color: #29d1b0;
     display: inline-block;
 }

@@ -3,7 +3,7 @@ import firebase from './firebase';
 import './styles/PrevRaces.css';
 import Animation from './Animation.js'
 import './styles/Setup.css';
-import raceEnd from './raceEnd.png'
+import raceEnd from './raceEnd.png';
 
 class PrevRaces extends Component {
     constructor() {

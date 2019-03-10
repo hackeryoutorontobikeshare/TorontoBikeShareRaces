@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
+import './styles/Modal.css';
 
 class EndModal extends Component {
     constructor() {
@@ -66,18 +67,20 @@ class EndModal extends Component {
 
     render() {
         return (
-            <div className="modal">
+            <div>
                 <button onClick={this.openModal}>{this.props.filterEnd}</button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
+                    className="modal"
+                    overlayClassName="overlay"
                 >
-                    <button onClick={this.closeModal}>close</button>
-                    <div>
+                    <div className="modalContent">
                         <h2>Real-time availability of empty bike slots</h2>
                         <p>At this station: {this.props.filterEnd} there are {this.state.emptySlot} slots left</p>
                     </div>
+                    <button className="closeModal" onClick={this.closeModal}>close</button>
                 </Modal>
             </div>
         )

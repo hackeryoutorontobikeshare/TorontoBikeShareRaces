@@ -61,11 +61,12 @@ button {
   transition: .5s;
   background-color: #fff;
   border-radius: 5px;
+  color: #257e9f;
 }
 
 button::after {
     position: absolute;
-    transition: .3s;
+    transition: .5s;
     content: '';
     width: 0;
     left: 50%;
@@ -75,13 +76,17 @@ button::after {
     left: 0;
 }
 
-button:hover::after {
+button:hover::after,
+button:focus::after,
+button:active::after {
   width: 100%;
   left: 0;
 }
 
-button:hover {
-  background-color: white;
-  color: #257e9f;
+button:hover,
+button:focus,
+button:active {
+  background-color: #000;
+  color: #d4faf0;
   box-shadow: 2px 2px 4px #000;
 }
