@@ -57,8 +57,8 @@ class PrevRaces extends Component {
                 <div className="wrapper">
                     <section className="prevRacesComponent">
                         <header>
-                            <nav className="clearfix">
-                                <ul>
+                            <nav>
+                                <ul className="clearfix">
                                     <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
                                 </ul>
                             </nav>

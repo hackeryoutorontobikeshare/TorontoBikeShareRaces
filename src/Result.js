@@ -8,8 +8,8 @@ class RaceInfo extends Component {
         return (
             <section className="resultComponent">
             <header>
-                <nav className="clearfix">
-                    <ul>
+                <nav>
+                    <ul className="clearfix">
                             <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
                             <li className="prevRaces"><a href="#" onClick={this.props.handlePrev}>Previous Races</a></li>
                     </ul>
@@ -39,7 +39,7 @@ class RaceInfo extends Component {
                                 <p className="laws"><i class="fas fa-exclamation-triangle"></i> Please obey all traffic laws while participating in a race! <i class="fas fa-exclamation-triangle"></i></p>
                             </div>
                         </div>
-                    <button onClick={this.props.handlePrev} className="prevRaces">Previous Races</button>
+                    <button onClick={this.props.handlePrev} className="prevRaces">Show Saved Races</button>
                 </div>
                 }
             </section>

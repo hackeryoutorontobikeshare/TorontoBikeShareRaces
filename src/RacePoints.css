@@ -9,20 +9,34 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 
 .RacePoints {
     /* background: #efefef; */
-    min-height: 100vh;
+    /* min-height: 100vh; */
     padding: 10vh 5%;
-    max-width: 1600px;
+    /* max-width: 1600px; */
     font-family: 'Lato', sans-serif;
-    background: #fdfdfd;
-    background: #336699;
+    background:  #ebedec;
     color: default;
+    background-image: url(./assets/racePointsImage.jpg);
+    background-size: cover;
 }
 
 .RacePoints h2 {    
     font-family: 'Josefin Sans', sans-serif;
     text-align: center;
-    text-transform: capitalize;
-    color: white;
+    text-transform: capitalize; 
+}
+
+.RacePoints .racePointsTitle {
+    font-size: 2rem;
+    color: #336699; 
+    text-shadow: 1px 1px 0 #257e9f,
+                2px 2px 0 #257e9f,
+                3px 3px 0 #d4faf0,
+                4px 4px 0 #d4faf0,
+                5px 5px 0 #29d1b0,
+                6px 6px 0 #29d1b0,
+                7px 7px 0 #29d1b0,
+                8px 8px 0 #29d1b0,
+                9px 9px 0 #29d1b0;
 }
 
 .addPoints h2, .viewPoints h2 {
@@ -51,10 +65,11 @@ ul {
     float: left;
     width: 45%;
     margin: 0 2.5%;
-    border: 1px solid black;
+    border: 10px solid #d4faf0;
+    outline: 5px solid #33cc99;
     /* border-radius: 10px; */
     /* height: 50vh; */
-    background: white;
+    background: rgba(255,255,255,0.8);
     padding: 0 10px;
 }
 

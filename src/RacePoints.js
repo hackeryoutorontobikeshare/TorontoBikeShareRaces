@@ -36,7 +36,7 @@ class RacePoints extends Component {
         const { startPoint, endPoint, selectedCheckpoint } = this.state;
         return (
             <section className="RacePoints clearfix">
-                <h2>Race route</h2>
+                <h2 className="racePointsTitle">Race route</h2>
                 <div className="addPoints">
                     <h2>Add starting & finish points</h2>
                     <ul>
@@ -77,7 +77,7 @@ class RacePoints extends Component {
                 </div> {/*  END OF ADD POINTS */}
 
                 <div className="viewPoints">
-                    <h2>Race route</h2>
+                    <h2>Your Race route</h2>
                     <ul>
                         <li>Start:<StartModal filterStart={this.props.userStart}/></li>
                         {

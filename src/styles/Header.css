@@ -1,7 +1,10 @@
-.headerContent {
+header.headerContent {
     text-align: center;
     min-height: 100vh;
     padding-top: 50px;
+    background-image: url(../assets/bikeHeader.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .clearfix:after {
@@ -15,9 +18,25 @@
 
 .headerContent h1 {
     position: absolute;
-    top: 40%;
+    top: 30%;
     left: 50%;
+    color: #257e9f;
+    font-size: 3rem;
     transform: translate(-50%, -50%);
+    text-shadow: 1px 1px 0 #257e9f,
+                2px 2px 0 #257e9f,
+                3px 3px 0 #d4faf0,
+                4px 4px 0 #d4faf0,
+                5px 5px 0 #29d1b0,
+                6px 6px 0 #29d1b0,
+                7px 7px 0 #29d1b0,
+                8px 8px 0 #29d1b0,
+                9px 9px 0 #29d1b0,
+                10px 10px 0 #29d1b0,
+                11px 11px 0 #29d1b0,
+                12px 12px 0 #29d1b0,
+                13px 13px 0 #29d1b0,
+                14px 14px 0 #29d1b0;
 }
 
 .headerContent .createRaceBtn {
@@ -25,4 +44,20 @@
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.headerContent button {
+    border: none;
+    background-color: #29d1b0;
+    padding: 10px 20px;
+}
+
+/* app.js buttons */
+
+.logout,
+.login {
+  position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
 }

@@ -50,12 +50,26 @@ img {
     display: block;
 }
 
-/* app.js buttons */
+ul {
+    padding: 0;
+    margin: 0;
+}
 
-.logout,
-.login {
-  position: absolute;
-      top: 60%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+nav ul .home {
+    float: left;
+}
+
+nav ul .prevRaces {
+    float: right;
+}
+
+nav li {
+    list-style-type: none;
+}
+
+nav a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #29d1b0;
+    color: #000;
 }

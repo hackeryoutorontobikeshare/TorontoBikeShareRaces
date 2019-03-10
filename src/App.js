@@ -273,8 +273,8 @@ class App extends Component {
       return (
         <div className="App">
           <header className="headerContent">
-            <nav className="clearfix">
-              <ul>
+            <nav>
+              <ul className="clearfix">
                 <li className="home"><a href="#">Home</a></li>
                 <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>
               </ul>

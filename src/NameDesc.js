@@ -6,8 +6,8 @@ class NameDesc extends Component {
     render() {
         return (
             <section className="nameDesc">
-                <nav className="clearfix">
-                    <ul>
+                <nav>
+                    <ul className="clearfix">
                         <li className="home"><a href="#home">Home</a></li>
                         <li className="prevRaces" onClick={this.props.handlePrev}><a href="#">Previous Races</a></li>
                     </ul>
