@@ -1,7 +1,6 @@
 header.headerContent {
     text-align: center;
     min-height: 100vh;
-    padding-top: 50px;
     background-image: url(../assets/bikeHeader.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -60,4 +59,39 @@ header.headerContent {
       top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+.logo {
+  float: left;
+  margin: 0;
+}
+
+nav ul {
+  float: right;
+}
+
+nav {
+    background-color: #29d1b0;
+    position: fixed;
+    width: 100%;
+    padding-top: 2px;
+    z-index: 10;
+}
+
+nav li {
+    list-style-type: none;
+    float: left;
+}
+
+
+nav a {
+    text-decoration: none;
+    padding: 10px 20px;
+    color: #000;
+    display: inline-block;
 }

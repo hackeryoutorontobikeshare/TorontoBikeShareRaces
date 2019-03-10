@@ -43,12 +43,11 @@ class UserPrevRace extends Component {
             return (
                 <div className="wrapper">
                     <section className="prevRacesComponent">
-                        <header>
-                            <nav className="clearfix">
-                                <ul>
-                                    <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
-                                </ul>
-                            </nav>
+                        <header className="clearfix">
+                            <h2 className="logo">Logo here</h2>
+                            <ul className="clearfix">
+                                <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
+                            </ul>
                         </header>
                         <h2>Here Are Your Previous Races</h2>
                         {

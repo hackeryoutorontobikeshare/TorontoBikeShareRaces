@@ -66,7 +66,7 @@ class EndModal extends Component {
 
     render() {
         return (
-            <div>
+            <div className="modal">
                 <button onClick={this.openModal}>{this.props.filterEnd}</button>
                 <Modal
                     isOpen={this.state.modalIsOpen}

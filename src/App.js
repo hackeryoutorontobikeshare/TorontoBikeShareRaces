@@ -272,8 +272,9 @@ class App extends Component {
     if (this.state.view) {
       return (
         <div className="App">
-          <header className="headerContent">
-            <nav>
+          <header className="headerContent clearfix">
+            <nav className="clearfix">
+              <h2 className="logo">Logo here</h2>
               <ul className="clearfix">
                 <li className="home"><a href="#">Home</a></li>
                 <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>
