@@ -4,6 +4,7 @@ header.headerContent {
     background-image: url(../assets/bikeHeader.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: 0 -70px;
 }
 
 .headerContent h1 {
@@ -62,10 +63,10 @@ nav ul {
 }
 
 nav {
-    background-color: #000;
+    background-color: rgba(0,0,0,0.9);
     position: fixed;
     width: 100%;
-    padding-top: 2px;
+    padding: 10px;
     z-index: 10;
 }
 
@@ -77,7 +78,31 @@ nav li {
 
 nav a {
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     color: #29d1b0;
     display: inline-block;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    font-size: 1.2rem;
+}
+
+nav a:hover,
+nav a:focus,
+nav a:active {
+  border-top: 1px solid#29d1b0;
+  border-bottom: 1px solid#29d1b0;
+}
+
+.logo img {
+  width: 9%;
+  display: inline-block;
+}
+
+h2.logo {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+span.t {
+  font-size: 2rem;
 }

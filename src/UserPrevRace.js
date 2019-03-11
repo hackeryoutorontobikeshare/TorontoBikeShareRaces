@@ -3,6 +3,7 @@ import firebase from './firebase.js';
 import Animation from './Animation.js';
 import './styles/PrevRaces.css';
 import raceEnd from './raceEnd.png';
+import logo from './logo.png';
 
 class UserPrevRace extends Component {
     constructor() {
@@ -46,7 +47,7 @@ class UserPrevRace extends Component {
                     <section className="prevRacesComponent">
                         <header>
                             <nav className="clearfix">
-                                <h2 className="logo">Logo here</h2>
+                                <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
                                 <ul>
                                     <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
                                     <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>

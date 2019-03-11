@@ -17,6 +17,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
     color: default;
     background-image: url(./assets/racePointsImage.jpg);
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .RacePoints h2 {    
