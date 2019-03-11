@@ -88,20 +88,13 @@ class RandomRace extends Component {
 
     randomRace = () => {
         let startPoint = this.state.nearestStn.name;
-        let checkOneRand;
-        let checkTwoRand;
-        let checkThreeRand;
-        let checkOne;
-        let checkTwo;
-        let checkThree;
-        let finish;
-        finish = this.state.nearestHundred[99].name;
-        checkOneRand = Math.floor(Math.random() * 33);
-        checkTwoRand = Math.floor(Math.random() * 33) + 33;
-        checkOne = this.state.nearestHundred[checkOneRand].name;
-        checkTwo = this.state.nearestHundred[checkTwoRand].name;
-        checkThreeRand = Math.floor(Math.random() * 33) + 65;
-        checkThree = this.state.nearestHundred[checkThreeRand].name;
+        let finish = this.state.nearestHundred[99].name;
+        let checkOneRand = Math.floor(Math.random() * 33);
+        let checkTwoRand = Math.floor(Math.random() * 33) + 33;
+        let checkThreeRand = Math.floor(Math.random() * 33) + 65;
+        let checkOne = this.state.nearestHundred[checkOneRand].name;
+        let checkTwo = this.state.nearestHundred[checkTwoRand].name;
+        let checkThree = this.state.nearestHundred[checkThreeRand].name;
         if (checkOne !== "") {
             this.setState({
                 checkOne: checkOne,
@@ -119,7 +112,7 @@ class RandomRace extends Component {
         return (
             <div>
                 {this.state.hasCoords ? (<div><button onClick={this.getStationCoords}>Find nearest station</button> <h2>Your nearest station is: {this.state.nearestStn}</h2><button onClick={this.randomRace}>Random Race</button>
-                    <h2>Your random race is:</h2><ul><li>Starting Point: {this.state.nearestStn.name}</li><li>Checkpoint One: {this.state.checkOne}</li><li>Checkpoint Two: {this.state.checkTwo}</li><li>Checkpoint Three: {this.state.checkThree}</li><li>Finish: {this.state.finish}</li></ul></div>) : (<div></div>)}
+                    <h2>Your random race is:</h2><ul><li>Starting Point: {this.state.nearestStn}</li><li>Checkpoint One: {this.state.checkOne}</li><li>Checkpoint Two: {this.state.checkTwo}</li><li>Checkpoint Three: {this.state.checkThree}</li><li>Finish: {this.state.finish}</li></ul></div>) : (<div></div>)}
             </div>
         )
     }
