@@ -25,74 +25,77 @@ class App extends Component {
         selectedCheckpoint: [],
         raceArray: []
       },
-    view: true,
-    stations: [],
-    options: [],
+      view: true,
+      stations: [],
+      options: [],
       view: true,
       user: null,
-      authID: ''
+      authID: '',
+      longitude: "",
+      latitude: "",
+      hasCoords: false
     }
   }
 
   //API call
   getStations = () => {
     return axios({
-        method: 'GET',
-        url: 'http://api.citybik.es/v2/networks/toronto',
-        dataResponse: 'json'
+      method: 'GET',
+      url: 'http://api.citybik.es/v2/networks/toronto',
+      dataResponse: 'json'
     })
-        .then((response) => {
-            const stations = response.data.network.stations;
-            const stationArr = [];
-            stations.forEach((item) => {
-                stationArr.push(item);
-            })
-            this.setState({
-                stations: stationArr
-            })
-
-            console.log('AXIO succed')
-            let stationsOptions = stationArr.map((station) => {
-                return {
-                    label: station.name,
-                    value: station.name
-                }
-            })
-
-            this.setState({
-                options: stationsOptions
-            });
-
+      .then((response) => {
+        const stations = response.data.network.stations;
+        const stationArr = [];
+        stations.forEach((item) => {
+          stationArr.push(item);
         })
+        this.setState({
+          stations: stationArr
+        })
+
+        console.log('AXIO succed')
+        let stationsOptions = stationArr.map((station) => {
+          return {
+            label: station.name,
+            value: station.name
+          }
+        })
+
+        this.setState({
+          options: stationsOptions
+        });
+
+      })
   }
 
   //PlanB, fetch data from firebase
   getStationsFromFirebase = () => {
-      console.log('plan B');
-      const dbRef = firebase.database().ref();
-      dbRef.on('value', res => {
-          const data = res.val();
-          const temArr = [];
+    console.log('plan B');
+    const dbRef = firebase.database().ref();
+    dbRef.on('value', res => {
+      const data = res.val();
+      const temArr = [];
 
-          for (let key in data) {
-              temArr.push(data[key])
-          }
+      for (let key in data) {
+        temArr.push(data[key])
+      }
 
-          const stationsObj = temArr[0];
+      const stationsObj = temArr[0];
 
-          let stationsOptions = stationsObj.map((station) => {
-              return {
-                  label: station.name,
-                  value: station.name
-              }
-          })
-
-          this.setState({
-              options: stationsOptions
-          });
+      let stationsOptions = stationsObj.map((station) => {
+        return {
+          label: station.name,
+          value: station.name
+        }
       })
+
+      this.setState({
+        options: stationsOptions
+      });
+    })
   }
-  
+
   //updatestate from user input
   upDateName = (e) => {
     const userName = e.target.value
@@ -161,21 +164,21 @@ class App extends Component {
       buttons: true,
       dangerMode: true,
     })
-    .then((willDelete) => {
-      if (willDelete) {
-        let changeArray = this.state.race.raceArray;
-        changeArray.splice(index, 1);
-        this.setState({
-          race:
-          {
-            ...this.state.race,
-            raceArray: changeArray
-          }
-        });
-      } else {
-        swal("Your checkpoint is safe!");
-      }
-    });
+      .then((willDelete) => {
+        if (willDelete) {
+          let changeArray = this.state.race.raceArray;
+          changeArray.splice(index, 1);
+          this.setState({
+            race:
+            {
+              ...this.state.race,
+              raceArray: changeArray
+            }
+          });
+        } else {
+          swal("Your checkpoint is safe!");
+        }
+      });
   }
 
   // handel save button clicked - with both gust login and auth user login
@@ -191,10 +194,10 @@ class App extends Component {
     }
 
     let dbRef;
-    if(this.state.user){
+    if (this.state.user) {
       const authID = this.state.authID;
       dbRef = firebase.database().ref(`authUsers/${authID}`);
-    }else{
+    } else {
       dbRef = firebase.database().ref();
     }
 
@@ -209,7 +212,7 @@ class App extends Component {
           selectedCheckpoint: [],
           raceArray: []
         },
-        view:null
+        view: null
       })
     } else {
       swal('Please make sure you have entered a race name and description, and have selected a station for your "start" and "finish" locations.')
@@ -232,6 +235,25 @@ class App extends Component {
       view: true
     })
   }
+
+  // GET COORDINATES
+  getLocation = () => {
+    navigator.geolocation.getCurrentPosition((location) => {
+      if (location.coords) {
+        let lat = location.coords.latitude;
+        let long = location.coords.longitude;
+        console.log(lat, long)
+        this.setState({
+          longitude: long,
+          latitude: lat,
+          hasCoords: true
+        }, () => {
+          console.log(this.state, "this is the state - Gus")
+        })
+      }
+    })
+  }
+
 
   //smooth scroll
   scrollND = () => {
@@ -269,7 +291,12 @@ class App extends Component {
       });
   }
 
+  // componentDidMount() {
+  //   this.
+  // }
+
   render() {
+    this.getLocation();
     if (this.state.view) {
       return (
         <div className="App">
@@ -284,9 +311,9 @@ class App extends Component {
             <h1>Welcome to Toronto Bike Share Races</h1>
             <button className="createRaceBtn" onClick={this.scrollND}>Create Race</button>
             {
-              this.state.user ? 
-            <button className="logout" onClick={this.logout}>Log Out</button>
-            : <button className="login" onClick={this.login}>Login</button>
+              this.state.user ?
+                <button className="logout" onClick={this.logout}>Log Out</button>
+                : <button className="login" onClick={this.login}>Login</button>
             }
             {
               this.state.user ?
@@ -294,22 +321,22 @@ class App extends Component {
                 : <button className="createRaceBtn" onClick={this.scrollND}>Create Race As Guest</button>
             }
           </header>
-  
-          <NameDesc 
-          takeName={this.upDateName} 
-          takeDesc={this.upDateDesc}
-          
-          name={this.state.name}
-          description={this.state.description} 
-          ref={(component) => { this.NameDesc = component; }}
-          scrollRacePoints={this.scrollRP}
-          handlePrev={this.handlePrevRace}
+
+          <NameDesc
+            takeName={this.upDateName}
+            takeDesc={this.upDateDesc}
+
+            name={this.state.name}
+            description={this.state.description}
+            ref={(component) => { this.NameDesc = component; }}
+            scrollRacePoints={this.scrollRP}
+            handlePrev={this.handlePrevRace}
           />
 
           <RacePoints
-            options = {this.state.options}
-            getStations = {this.getStations}
-            getStationsFromFirebase = {this.getStationsFromFirebase}
+            options={this.state.options}
+            getStations={this.getStations}
+            getStationsFromFirebase={this.getStationsFromFirebase}
             handleOptionChange={this.handleOptionChange}
             handleUserStart={this.handleStartChange}
             handleUserEnd={this.handleEndChange}

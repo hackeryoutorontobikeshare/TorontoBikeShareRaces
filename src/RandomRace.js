@@ -19,10 +19,9 @@ class RandomRace extends Component {
         }
     }
 
-    componentDidMount() {
-        this.getLocation()
-        // this.getStationCoords()
-    }
+    // componentDidMount() {
+    //     this.getLocation()
+    // }
 
     //API call
     getStationCoords = () => {
@@ -69,22 +68,22 @@ class RandomRace extends Component {
 
 
 
-    getLocation = () => {
-        navigator.geolocation.getCurrentPosition((location) => {
-            if (location.coords) {
-                let lat = location.coords.latitude;
-                let long = location.coords.longitude;
-                console.log(lat, long)
-                this.setState({
-                    longitude: long,
-                    latitude: lat,
-                    hasCoords: true
-                }, () => {
-                    console.log(this.state, "this is the state")
-                })
-            }
-        })
-    }
+    // getLocation = () => {
+    //     navigator.geolocation.getCurrentPosition((location) => {
+    //         if (location.coords) {
+    //             let lat = location.coords.latitude;
+    //             let long = location.coords.longitude;
+    //             console.log(lat, long)
+    //             this.setState({
+    //                 longitude: long,
+    //                 latitude: lat,
+    //                 hasCoords: true
+    //             }, () => {
+    //                 console.log(this.state, "this is the state")
+    //             })
+    //         }
+    //     })
+    // }
 
     randomRace = () => {
         let startPoint = this.state.nearestStn.name;
