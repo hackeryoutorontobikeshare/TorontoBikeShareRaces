@@ -75,7 +75,7 @@ class RandomRace extends Component {
     render() {
         return (
             <div>
-                {this.state.hasCoords ? (<button onClick={this.getStationCoords}>This is the location button</button>) : (<div></div>)}
+                {this.state.hasCoords ? (<button onClick={this.getStationCoords}>Find nearest station</button>) : (<div></div>)}
             </div>
         )
     }
