@@ -11,6 +11,7 @@ import swal from '@sweetalert/with-react';
 import axios from 'axios';
 import UserPrevRace from './UserPrevRace.js';
 import logo from './logo.png';
+import RandomRace from './RandomRace.js';
 
 class App extends Component {
   constructor() {
@@ -30,9 +31,18 @@ class App extends Component {
     view: true,
     stations: [],
     options: [],
-      view: true,
-      user: null,
-      authID: ''
+    view: true,
+    user: null,
+    authID: '',
+    longitude: '',
+    latitude: '',
+    hasCoords: false,
+    nearestStn: "",
+    nearestHundred: [],
+    checkOne: '',
+    checkTwo: '',
+    checkThree: '',
+    finish: '',
     }
   }
 
@@ -261,6 +271,90 @@ class App extends Component {
     scrollToComponent(this.Result)
   }
 
+  // Random Race functions
+  getLocation = () => {
+    console.log("getLocation RAAANNN");
+    navigator.geolocation.getCurrentPosition((location) => {
+        if (location.coords) {
+            let lat = location.coords.latitude;
+            let long = location.coords.longitude;
+            console.log(lat, long)
+            this.setState({
+                longitude: long,
+                latitude: lat,
+                hasCoords: true
+            }, () => {
+                console.log(this.state, "this is the state")
+            })
+        }
+    })
+  }
+
+
+  //API call
+  getStationCoords = () => {
+    return axios({
+        method: 'GET',
+        url: 'http://api.citybik.es/v2/networks/toronto',
+        dataResponse: 'json'
+    })
+        .then((response) => {
+            console.log(response.data.network.stations, "this is the response data stations");
+            const stations = response.data.network.stations;
+            const stationCoordsArr = [];
+            const totalDist = [];
+            stations.forEach((station) => {
+                // console.log(this.state.latitude);
+
+                let latDist = Math.abs(station.latitude - this.state.latitude);
+                let lngDist = Math.abs(station.longitude - this.state.longitude);
+                let totDist = latDist + lngDist;
+                let stn = {
+                    name: station.name,
+                    totalDist: totDist
+                }
+
+                totalDist.push(stn)
+            })
+            totalDist.sort(function (a, b) {
+                return a.totalDist - b.totalDist
+            })
+            console.log(totalDist, "this is the totalDist array");
+            let nearStn = totalDist[0].name;
+            let nearestHund = totalDist.splice(1, 100);
+            console.log(nearestHund, "this is the nearest hundred");
+            console.log(nearStn, "this is the nearest station");
+            this.setState({
+                nearestStn: nearStn,
+                nearestHundred: nearestHund,
+            })
+            console.log(this.state, "this is the current state - Gus")
+
+        })
+  }
+
+  randomRace = () => {
+    let startPoint = this.state.nearestStn.name;
+    let finish = this.state.nearestHundred[99].name;
+    let checkOneRand = Math.floor(Math.random() * 33);
+    let checkTwoRand = Math.floor(Math.random() * 33) + 33;
+    let checkThreeRand = Math.floor(Math.random() * 33) + 65;
+    let checkOne = this.state.nearestHundred[checkOneRand].name;
+    let checkTwo = this.state.nearestHundred[checkTwoRand].name;
+    let checkThree = this.state.nearestHundred[checkThreeRand].name;
+    if (checkOne !== "") {
+        this.setState({
+            checkOne: checkOne,
+            checkTwo: checkTwo,
+            checkThree: checkThree,
+            finish: finish,
+        }, () => {
+            console.log(this.state, "this is thd state with race points")
+        })
+    }
+  }
+
+
   //user authentication
   login = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -344,6 +438,21 @@ class App extends Component {
             scrollResults={this.scrollRes}
             ref={(component) => { this.RacePoints = component; }}
           />
+
+          <RandomRace 
+            getLocation = {this.getLocation}
+            longitude = {this.state.longitude}
+            latitude = {this.state.latitude}
+            hasCoords = {this.state.hasCoords}
+            nearestStn = {this.state.nearestStn}
+            nearestHundred = {this.state.nearestHundred}
+            checkOne = {this.state.checkOne}
+            checkTwo = {this.state.checkTwo}
+            checkThree = {this.state.checkThree}
+            finish = {this.state.finish}
+            randomRace = {this.randomRace}
+            getStationCoords = {this.getStationCoords}
+            />
 
           <Result
             name={this.state.name}

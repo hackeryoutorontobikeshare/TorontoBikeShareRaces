@@ -97,7 +97,7 @@ class RacePoints extends Component {
                     <button onClick={this.props.scrollResults}>Next</button>
 
                 </div>
-                <RandomRace />
+                {/* <RandomRace /> */}
 
             </section>
         );
