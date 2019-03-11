@@ -273,7 +273,7 @@ class App extends Component {
 
   // Random Race functions
   getLocation = () => {
-    console.log("getLocation RAAANNN");
+    // console.log("getLocation RAAANNN");
     navigator.geolocation.getCurrentPosition((location) => {
         if (location.coords) {
             let lat = location.coords.latitude;
