@@ -55,8 +55,9 @@ class RandomRace extends Component {
                 console.log(nearStn, "this is the nearest station");
                 this.setState({
                     nearestStn: nearStn,
-                    nearestHundred: []
+                    nearestHundred: nearestHund,
                 })
+                console.log(this.state, "this is the current state - Gus")
 
             })
     }
@@ -81,21 +82,34 @@ class RandomRace extends Component {
         })
     }
 
-    // randomRace = () => {
-    //     let startPoint = this.state.nearestStn;
-    //     let checkOne;
-    //     let checkTwo;
-    //     let checkThree;
-    //     let finish;
-    //     checkOne = Math.floor(Math.random() * (totalDist.length - 257));
-    //     console.log(checkOne);
-    // }
+    randomRace = () => {
+        let startPoint = this.state.nearestStn;
+        let checkOneRand;
+        let checkTwoRand;
+        let checkThreeRand;
+        let checkOne;
+        let checkTwo;
+        let checkThree;
+        let finish;
+        finish = this.state.nearestHundred[99];
+        checkOneRand = Math.floor(Math.random() * 33);
+        console.log(checkOneRand, "this is checkOne");
+        checkTwoRand = Math.floor(Math.random() * 33) + 33;
+        checkOne = this.state.nearestHundred[checkOneRand];
+        console.log(checkOne, "this is checkone station");
+        checkTwo = this.state.nearestHundred[checkTwoRand];
+        console.log(checkTwo, "this is checktwo station");
+        console.log(finish, "this is the finish line");
+        checkThreeRand = Math.floor(Math.random() * 33) + 65;
+        checkThree = this.state.nearestHundred[checkThreeRand];
+        console.log(checkThree, "this is checkpoint three");
+    }
 
 
     render() {
         return (
             <div>
-                {this.state.hasCoords ? (<div><button onClick={this.getStationCoords}>Find nearest station</button> <h2>Your nearest station is: {this.state.nearestStn}</h2><button> Random Race</button></div>) : (<div></div>)}
+                {this.state.hasCoords ? (<div><button onClick={this.getStationCoords}>Find nearest station</button> <h2>Your nearest station is: {this.state.nearestStn}</h2><button onClick={this.randomRace}> Random Race</button></div>) : (<div></div>)}
             </div>
         )
     }
