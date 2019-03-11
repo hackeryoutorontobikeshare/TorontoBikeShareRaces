@@ -110,7 +110,7 @@ class RandomRace extends Component {
     render() {
         return (
             <div>
-                {this.state.hasCoords ? (<div><button onClick={this.getStationCoords}>Find nearest station</button> <h2>Your nearest station is: {this.state.nearestStn}</h2><button onClick={this.randomRace}>Random Race</button>
+                {this.props.hasCoords ? (<div><button onClick={this.getStationCoords}>Find nearest station</button> <h2>Your nearest station is: {this.state.nearestStn}</h2><button onClick={this.randomRace}>Random Race</button>
                     <h2>Your random race is:</h2><ul><li>Starting Point: {this.state.nearestStn}</li><li>Checkpoint One: {this.state.checkOne}</li><li>Checkpoint Two: {this.state.checkTwo}</li><li>Checkpoint Three: {this.state.checkThree}</li><li>Finish: {this.state.finish}</li></ul></div>) : (<div></div>)}
             </div>
         )
