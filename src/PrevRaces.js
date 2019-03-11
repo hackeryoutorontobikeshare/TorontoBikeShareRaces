@@ -57,7 +57,6 @@ class PrevRaces extends Component {
     render() {
         if (this.state.view){
             return (
-                <div className="wrapper">
                     <section className="prevRacesComponent">
                         <header>
                             <nav className="clearfix">
@@ -92,7 +91,6 @@ class PrevRaces extends Component {
                             }
                         </div>
                     </section>
-                </div>
             )
         }else{
             return <Animation />;
