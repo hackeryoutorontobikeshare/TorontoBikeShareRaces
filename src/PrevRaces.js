@@ -11,14 +11,9 @@ class PrevRaces extends Component {
         super()
         this.state = {
             saved: [],
+            races:[],
             view: null
         }
-    }
-
-    onPrevRaces = () => {
-        const dbRef = firebase.database().ref();
-
-        dbRef.push();
     }
 
     componentDidMount() {
@@ -34,14 +29,15 @@ class PrevRaces extends Component {
 
             const savedRaces = []
 
-            for (let i = 1; i < newState.length; i++) {
+            for (let i = 1; i < newState.length-1; i++) {
                 savedRaces.push(newState[i]);
             }
 
             const updateRaces = savedRaces.reverse();
 
             this.setState({
-                saved: updateRaces
+                saved: updateRaces,
+                races: updateRaces
             })
 
             setTimeout(this.showRaces,1500);
@@ -51,6 +47,37 @@ class PrevRaces extends Component {
     showRaces = () =>{
         this.setState({
             view: true
+        })
+    }
+
+    sortByNums = () =>{
+        const races = this.state.saved;
+        console.log(races);
+        const noCheckpoint = [];
+        const hasCheckpoint = [];
+        
+        races.forEach((race)=>{
+            if(race.selectedCheckpoint){
+                hasCheckpoint.push(race);
+            } else {
+                noCheckpoint.push(race);
+            }
+        })
+
+        const sortRaces = hasCheckpoint.sort((raceA, raceB) => {
+            return raceB.selectedCheckpoint.length - raceA.selectedCheckpoint.length;
+        })
+        
+        console.log(sortRaces);
+        const newSortedRaces = hasCheckpoint.concat(noCheckpoint);
+        this.setState({
+            saved: newSortedRaces
+        })
+    }
+
+    sortByTime = () => {
+        this.setState({
+            saved: this.state.races
         })
     }
 
@@ -69,11 +96,14 @@ class PrevRaces extends Component {
                             </nav>
                         </header>
                         <h2 className="prevRaceTitle">Previous Races <i class="fas fa-bicycle"></i></h2>
+                        <button onClick={this.sortByNums}>Sort By Checkpoints</button>
+                        <button onClick={this.sortByTime}>Sort By Created Time</button>
                         <div className="savedRacesContainer clearfix">
                             {
                                 this.state.saved.map((races) => {
                                 return (
                                         <div className="savedRaces">
+                                            <p>Created at: {races.timeCreated}</p>
                                             <h3>Race Name: {races.name}</h3>
                                             <p>Description: {races.description}</p>
                                             <p><i class="fas fa-flag-checkered"></i> Startpoint: {races.startPoint}</p>

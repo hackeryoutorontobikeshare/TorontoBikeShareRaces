@@ -10,6 +10,7 @@ class UserPrevRace extends Component {
         super()
         this.state = {
             saved: [],
+            races: [],
             view: null
         }
     }
@@ -27,7 +28,8 @@ class UserPrevRace extends Component {
             const updateRaces = newRace.reverse();
 
             this.setState({
-                saved: updateRaces
+                saved: updateRaces,
+                races: updateRaces
             })
 
             setTimeout(this.showRaces, 1500);
@@ -38,7 +40,39 @@ class UserPrevRace extends Component {
         this.setState({
             view: true
         })
+    };
+
+    sortByNums = () => {
+        const races = this.state.saved;
+        console.log(races);
+        const noCheckpoint = [];
+        const hasCheckpoint = [];
+
+        races.forEach((race) => {
+            if (race.selectedCheckpoint) {
+                hasCheckpoint.push(race);
+            } else {
+                noCheckpoint.push(race);
+            }
+        })
+
+        const sortRaces = hasCheckpoint.sort((raceA, raceB) => {
+            return raceB.selectedCheckpoint.length - raceA.selectedCheckpoint.length;
+        })
+
+        console.log(sortRaces);
+        const newSortedRaces = hasCheckpoint.concat(noCheckpoint);
+        this.setState({
+            saved: newSortedRaces
+        })
     }
+
+    sortByTime = () => {
+        this.setState({
+            saved: this.state.races
+        })
+    }
+
 
     render() {
         if (this.state.view) {
@@ -55,11 +89,14 @@ class UserPrevRace extends Component {
                             </nav>
                         </header>
                         <h2 className="prevRaceTitle">Here Are Your Previous Races <i class="fas fa-bicycle"></i></h2>
+                        <button onClick={this.sortByNums}>Sort By Checkpoints</button>
+                        <button onClick={this.sortByTime}>Sort By Created Time</button>
                         <div className="savedRacesContainer clearfix">
                             {
                                 this.state.saved.map((races) => {
                                     return (
                                         <div className="savedRaces">
+                                            <p>Created at: {races.timeCreated}</p>
                                             <h3>Race Name: {races.name}</h3>
                                             <p>Description: {races.description}</p>
                                             <p><i class="fas fa-flag-checkered"></i> Startpoint: {races.startPoint}</p>
