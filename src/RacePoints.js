@@ -69,8 +69,9 @@ class RacePoints extends Component {
                                     value={this.state.value}
                                     onChange={this.props.handleUserCheckPoint}
                                     options={this.props.options}
+                                    isMulti
                                 />
-                                <button type="submit">Add check Point</button>
+                                <button type="submit">Add Selected Check Points</button>
                             </form>
                         </li>
                     </ul>
