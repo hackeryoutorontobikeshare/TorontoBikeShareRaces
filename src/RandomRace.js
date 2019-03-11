@@ -10,7 +10,8 @@ class RandomRace extends Component {
             longitude: 0,
             latitude: 0,
             hasCoords: false,
-            nearestStn: ""
+            nearestStn: "",
+            nearestHundred: []
         }
     }
 
@@ -47,11 +48,14 @@ class RandomRace extends Component {
                 totalDist.sort(function (a, b) {
                     return a.totalDist - b.totalDist
                 })
-                console.log(totalDist)
+                console.log(totalDist, "this is the totalDist array");
                 let nearStn = totalDist[0].name;
+                let nearestHund = totalDist.splice(1, 100);
+                console.log(nearestHund, "this is the nearest hundred");
                 console.log(nearStn, "this is the nearest station");
                 this.setState({
-                    nearestStn: nearStn
+                    nearestStn: nearStn,
+                    nearestHundred: []
                 })
 
             })
@@ -77,11 +81,21 @@ class RandomRace extends Component {
         })
     }
 
+    // randomRace = () => {
+    //     let startPoint = this.state.nearestStn;
+    //     let checkOne;
+    //     let checkTwo;
+    //     let checkThree;
+    //     let finish;
+    //     checkOne = Math.floor(Math.random() * (totalDist.length - 257));
+    //     console.log(checkOne);
+    // }
+
 
     render() {
         return (
             <div>
-                {this.state.hasCoords ? (<div><button onClick={this.getStationCoords}>Find nearest station</button> <h2>Your nearest station is: {this.state.nearestStn}</h2></div>) : (<div></div>)}
+                {this.state.hasCoords ? (<div><button onClick={this.getStationCoords}>Find nearest station</button> <h2>Your nearest station is: {this.state.nearestStn}</h2><button> Random Race</button></div>) : (<div></div>)}
             </div>
         )
     }
