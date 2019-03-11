@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import firebase from './firebase';
 import './styles/PrevRaces.css';
 import Animation from './Animation.js'
+import './styles/Setup.css';
+import raceEnd from './raceEnd.png';
+import logo from './logo.png';
 
 class PrevRaces extends Component {
     constructor() {
@@ -56,15 +59,24 @@ class PrevRaces extends Component {
             return (
                 <div className="wrapper">
                     <section className="prevRacesComponent">
-                        <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
-                        <h2>Previous Races</h2>
+                        <header>
+                            <nav className="clearfix">
+                                <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
+                                <ul>
+                                    <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
+                                    <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>
+                                </ul>
+                            </nav>
+                        </header>
+                        <h2 className="prevRaceTitle">Previous Races <i class="fas fa-bicycle"></i></h2>
+                        <div className="savedRacesContainer clearfix">
                             {
                                 this.state.saved.map((races) => {
                                 return (
-                                        <div>
-                                            <h3>{races.name}</h3>
-                                            <p>{races.description}</p>
-                                            <p>{races.startPoint}</p>
+                                        <div className="savedRaces">
+                                            <h3>Race Name: {races.name}</h3>
+                                            <p>Description: {races.description}</p>
+                                            <p><i class="fas fa-flag-checkered"></i> Startpoint: {races.startPoint}</p>
                                             <ul>
                                             {races.selectedCheckpoint?
                                                 races.selectedCheckpoint.map((checkpoint) => {
@@ -72,14 +84,14 @@ class PrevRaces extends Component {
                                                 })
                                             : null}
                                             </ul>
-                                            <p>{races.endPoint}</p>
+                                            <p><img src={raceEnd} alt="Race Finish Banner" /> Endpoint: {races.endPoint}</p>
                                         </div>
                                     )
                                 })
         
                             }
+                        </div>
                     </section>
-                    <button onClick={this.props.handleBack}>Back to Home</button>
                 </div>
             )
         }else{

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import firebase from './firebase.js';
+// import firebase from './firebase.js';
 import './RacePoints.css'
 import Select from 'react-select';
-import axios from 'axios';
+// import axios from 'axios';
 import RandomRace from './RandomRace';
+import StartModal from './StartModal';
+import EndModal from './EndModal';
 
 class RacePoints extends Component {
     constructor() {
@@ -34,7 +36,7 @@ class RacePoints extends Component {
         const { startPoint, endPoint, selectedCheckpoint } = this.state;
         return (
             <section className="RacePoints clearfix">
-                <h2>Race route</h2>
+                <h2 className="racePointsTitle">Race route</h2>
                 <div className="addPoints">
                     <h2>Add starting & finish points</h2>
                     <ul>
@@ -75,9 +77,9 @@ class RacePoints extends Component {
                 </div> {/*  END OF ADD POINTS */}
 
                 <div className="viewPoints">
-                    <h2>Race route</h2>
+                    <h2>Your Race route</h2>
                     <ul>
-                        <li>Start: {this.props.userStart}</li>
+                        <li>Start:<StartModal filterStart={this.props.userStart}/></li>
                         {
                             this.props.raceArray.map((checkpoint, i) => {
                                 return (
@@ -87,7 +89,7 @@ class RacePoints extends Component {
                                 )
                             })
                         }
-                        <li>Finish: {this.props.userEnd}</li>
+                        <li>Finish: <EndModal filterEnd={this.props.userEnd} /></li>
                     </ul>
                 </div>
                 <div className="submitRace">

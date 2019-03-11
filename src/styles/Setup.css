@@ -50,12 +50,43 @@ img {
     display: block;
 }
 
-/* app.js buttons */
+/* button style inspiration from https://codepen.io/thejamespower/pen/OVNYLL */
 
-.logout,
-.login {
-  position: absolute;
-      top: 60%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+button {
+  padding: 10px 20px;
+  border: 2px solid #29d1b0;
+  text-align: center;
+  position: relative;
+  overflow:hidden;
+  transition: .5s;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #257e9f;
+}
+
+button::after {
+    position: absolute;
+    transition: .5s;
+    content: '';
+    width: 0;
+    left: 50%;
+    bottom: 0;
+    height: 3px;
+    background-color: #29d1b0;
+    left: 0;
+}
+
+button:hover::after,
+button:focus::after,
+button:active::after {
+  width: 100%;
+  left: 0;
+}
+
+button:hover,
+button:focus,
+button:active {
+  background-color: #000;
+  color: #d4faf0;
+  box-shadow: 2px 2px 4px #000;
 }

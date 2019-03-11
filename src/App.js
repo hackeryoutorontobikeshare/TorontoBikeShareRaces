@@ -10,6 +10,7 @@ import scrollToComponent from 'react-scroll-to-component';
 import swal from '@sweetalert/with-react';
 import axios from 'axios';
 import UserPrevRace from './UserPrevRace.js';
+import logo from './logo.png';
 
 class App extends Component {
   constructor() {
@@ -250,7 +251,6 @@ class App extends Component {
     auth.signInWithPopup(provider)
       .then((result) => {
         const user = result.user;
-        console.log(user.uid)
         const userID = user.uid
         this.setState({
           user: true,
@@ -275,7 +275,8 @@ class App extends Component {
         <div className="App">
           <header className="headerContent">
             <nav className="clearfix">
-              <ul>
+              <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
+              <ul className="clearfix">
                 <li className="home"><a href="#">Home</a></li>
                 <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>
               </ul>
