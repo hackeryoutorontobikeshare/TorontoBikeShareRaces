@@ -24,7 +24,8 @@ class App extends Component {
         endPoint: '',
         selectedCheckpoint: [],
         raceArray: [],
-        newRaceArray: []
+        newRaceArray: [],
+        timeCreated: ''
       },
     view: true,
     stations: [],
@@ -187,12 +188,22 @@ class App extends Component {
 
   handleSaveRace = (event) => {
     event.preventDefault();
+    let currentDate = new Date();
+    let year = currentDate.getFullYear();
+    let month = currentDate.getMonth() + 1;
+    let day = currentDate.getDate();
+    let hour = currentDate.getHours();
+    let minute = currentDate.getMinutes();
+
+    let timeCreated = `${month}-${day}-${year} ${hour}:${minute}`;
+    
     const savedRace = {
       name: this.state.name,
       description: this.state.description,
       startPoint: this.state.race.startPoint,
       endPoint: this.state.race.endPoint,
-      selectedCheckpoint: this.state.race.raceArray
+      selectedCheckpoint: this.state.race.raceArray,
+      timeCreated: timeCreated
     }
 
     let dbRef;
@@ -212,7 +223,8 @@ class App extends Component {
           startPoint: '',
           endPoint: '',
           selectedCheckpoint: [],
-          raceArray: []
+          raceArray: [],
+          timeCreated:''
         },
         view:null
       })
