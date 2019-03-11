@@ -23,7 +23,8 @@ class App extends Component {
         startPoint: '',
         endPoint: '',
         selectedCheckpoint: [],
-        raceArray: []
+        raceArray: [],
+        newRaceArray: []
       },
     view: true,
     stations: [],
@@ -131,19 +132,23 @@ class App extends Component {
   }
 
   handleCheckPointChange = (event) => {
+    console.log(event);
     this.setState({
       race:
       {
         ...this.state.race,
-        selectedCheckpoint: event.label
+        newRaceArray: event,
       }
     });
   }
 
   addCheckPoint = (event) => {
     event.preventDefault();
-    let changeArray = this.state.race.raceArray;
-    changeArray.push(this.state.race.selectedCheckpoint);
+    let changeArray = [];
+    this.state.race.newRaceArray.forEach((checkpoint)=>{
+      changeArray.push(checkpoint.label);
+    });
+    console.log(changeArray);
     this.setState({
       race:
       {
