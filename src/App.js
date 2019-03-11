@@ -274,6 +274,8 @@ class App extends Component {
       return (
         <div className="App">
           <header className="headerContent">
+          <input className="hamMenu" type="checkbox" id="hamMenu" />
+          <label className="hamMenu" htmlFor="hamMenu"></label>
             <nav className="clearfix">
               <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
               <ul className="clearfix">
