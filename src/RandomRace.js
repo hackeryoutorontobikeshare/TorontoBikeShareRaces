@@ -11,7 +11,11 @@ class RandomRace extends Component {
             latitude: 0,
             hasCoords: false,
             nearestStn: "",
-            nearestHundred: []
+            nearestHundred: [],
+            checkOne: "",
+            checkTwo: "",
+            checkThree: "",
+            finish: "",
         }
     }
 
@@ -83,7 +87,7 @@ class RandomRace extends Component {
     }
 
     randomRace = () => {
-        let startPoint = this.state.nearestStn;
+        let startPoint = this.state.nearestStn.name;
         let checkOneRand;
         let checkTwoRand;
         let checkThreeRand;
@@ -91,25 +95,31 @@ class RandomRace extends Component {
         let checkTwo;
         let checkThree;
         let finish;
-        finish = this.state.nearestHundred[99];
+        finish = this.state.nearestHundred[99].name;
         checkOneRand = Math.floor(Math.random() * 33);
-        console.log(checkOneRand, "this is checkOne");
         checkTwoRand = Math.floor(Math.random() * 33) + 33;
-        checkOne = this.state.nearestHundred[checkOneRand];
-        console.log(checkOne, "this is checkone station");
-        checkTwo = this.state.nearestHundred[checkTwoRand];
-        console.log(checkTwo, "this is checktwo station");
-        console.log(finish, "this is the finish line");
+        checkOne = this.state.nearestHundred[checkOneRand].name;
+        checkTwo = this.state.nearestHundred[checkTwoRand].name;
         checkThreeRand = Math.floor(Math.random() * 33) + 65;
-        checkThree = this.state.nearestHundred[checkThreeRand];
-        console.log(checkThree, "this is checkpoint three");
+        checkThree = this.state.nearestHundred[checkThreeRand].name;
+        if (checkOne !== "") {
+            this.setState({
+                checkOne: checkOne,
+                checkTwo: checkTwo,
+                checkThree: checkThree,
+                finish: finish,
+            }, () => {
+                console.log(this.state, "this is thd state with race points")
+            })
+        }
     }
 
 
     render() {
         return (
             <div>
-                {this.state.hasCoords ? (<div><button onClick={this.getStationCoords}>Find nearest station</button> <h2>Your nearest station is: {this.state.nearestStn}</h2><button onClick={this.randomRace}> Random Race</button></div>) : (<div></div>)}
+                {this.state.hasCoords ? (<div><button onClick={this.getStationCoords}>Find nearest station</button> <h2>Your nearest station is: {this.state.nearestStn}</h2><button onClick={this.randomRace}>Random Race</button>
+                    <h2>Your random race is:</h2><ul><li>Starting Point: {this.state.nearestStn.name}</li><li>Checkpoint One: {this.state.checkOne}</li><li>Checkpoint Two: {this.state.checkTwo}</li><li>Checkpoint Three: {this.state.checkThree}</li><li>Finish: {this.state.finish}</li></ul></div>) : (<div></div>)}
             </div>
         )
     }
