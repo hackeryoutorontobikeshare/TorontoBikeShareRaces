@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "94ddbb114bef9cff9a90",
+    "revision": "dec785de8f761189cc05",
     "url": "/TorontoBikeShareRaces/static/css/main.f83f4adc.chunk.css"
   },
   {
-    "revision": "94ddbb114bef9cff9a90",
-    "url": "/TorontoBikeShareRaces/static/js/main.94ddbb11.chunk.js"
+    "revision": "dec785de8f761189cc05",
+    "url": "/TorontoBikeShareRaces/static/js/main.dec785de.chunk.js"
   },
   {
     "revision": "21547bbbdf70a75fa6e8",
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/TorontoBikeShareRaces/static/media/bixiCity.c6c00cab.jpg"
   },
   {
-    "revision": "8a7b61ac6c380526ceafe1e0426dd4ec",
+    "revision": "e44f7051f46422d72ace72269786396e",
     "url": "/TorontoBikeShareRaces/index.html"
   }
 ];
