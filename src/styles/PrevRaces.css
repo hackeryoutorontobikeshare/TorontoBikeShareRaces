@@ -25,6 +25,10 @@
     background-color: #fff;
 }
 
+.savedRaces:last-child {
+    margin-bottom: 0;
+}
+
 .savedRaces img {
     display: inline-block;
     width: 5%;
@@ -37,6 +41,11 @@
 .sortButton {
     margin: 2% auto;
     display: block;
+}
+
+.prevRacesComponent .headerContent {
+    background-image: none;
+    min-height: 0vh;
 }
 
 
@@ -52,5 +61,10 @@
         float: none;
         width: 80%;
         margin: 50px auto;
+        text-align: center;
     }
+}
+
+@media screen and (max-width: 550px) {
+    
 }
