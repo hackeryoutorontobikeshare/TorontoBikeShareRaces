@@ -1,4 +1,5 @@
 {
+    "homepage": "https://hackeryoutorontobikeshare.github.io/TorontoBikeShareRaces/",
     "name": "toronto-bike-share-races",
     "version": "0.1.0",
     "private": true,
@@ -6,6 +7,7 @@
         "@sweetalert/with-react": "^0.1.1",
         "axios": "^0.18.0",
         "firebase": "^5.8.5",
+        "gh-pages": "^2.0.1",
         "react": "^16.8.3",
         "react-dom": "^16.8.3",
         "react-modal": "^3.8.1",
@@ -15,6 +17,8 @@
         "sweetalert": "^2.1.2"
     },
     "scripts": {
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
