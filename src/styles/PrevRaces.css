@@ -34,19 +34,23 @@
     background-color: #fcfcfc;
 }
 
-.prevRacesComponent .headerContent {
-    background-image: none;
-    min-height: 0vh;
+.sortButton {
+    margin: 2% auto;
+    display: block;
 }
+
+
+/* .prevRacesComponent button {
+    text-align: center;
+} */
 
 
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 1250px) {
-.savedRaces {
-    float: none;
-    width: 80%;
-    margin: 50px auto;
+    .savedRaces {
+        float: none;
+        width: 80%;
+        margin: 50px auto;
+    }
 }
-}
-
