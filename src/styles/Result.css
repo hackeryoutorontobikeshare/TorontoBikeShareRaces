@@ -80,3 +80,11 @@ h3 {
         display: none;
     }
 }
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 570px) {
+  .resultComponent {
+      font-size: 0.9rem;
+  }
+ }
