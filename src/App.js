@@ -241,6 +241,10 @@ class App extends Component {
       swal('Please make sure you have entered a race name and description, and have selected a station for your "start" and "finish" locations.')
     }
 
+    this.setState({
+      randomRaceCreated: false
+    });
+
   }
 
   // handle previous button clicked
@@ -499,24 +503,10 @@ class App extends Component {
         return <UserPrevRace
           authID={this.state.authID}
           handleBack={this.handleHome}
-          // checkStart={this.startTimer}
-          // checkMiddle={this.checkTimer}
-          // checkEnd={this.endTimer}
-
-          // startTime={this.timeTrack.startTime}
-          // checkTime={this.timeTrack.endTime}
-          // endTime={this.timeTrack.checkTime}
         />
       } else {
         return <PrevRaces 
           handleBack={this.handleHome} 
-          // checkStart={this.startTimer}
-          // checkMiddle={this.checkTimer}
-          // checkEnd={this.endTimer}
-
-          // startTime={this.timeTrack.startTime}
-          // checkTime={this.timeTrack.checkTime}
-          // endTime={this.timeTrack.endTime}
           />
       }
     }
