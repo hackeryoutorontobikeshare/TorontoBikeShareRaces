@@ -1,7 +1,8 @@
 header.headerContent {
     text-align: center;
     min-height: 100vh;
-    background-image: url(../assets/bikeHeader.jpg);
+    background-image: url(../assets/bixiCity.jpg);
+    /* background-image: url(../assets/bikeHeader.jpg); */
     background-repeat: no-repeat;
     background-size: cover;
 }
