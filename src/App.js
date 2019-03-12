@@ -27,11 +27,9 @@ class App extends Component {
         timeCreated: ''
       },
     view: true,
-    stations: [],
     options: [],
-      view: true,
-      user: null,
-      authID: ''
+    user: null,
+    authID: ''
     }
   }
 
@@ -359,9 +357,25 @@ class App extends Component {
         return <UserPrevRace
           authID={this.state.authID}
           handleBack={this.handleHome}
+          // checkStart={this.startTimer}
+          // checkMiddle={this.checkTimer}
+          // checkEnd={this.endTimer}
+
+          // startTime={this.timeTrack.startTime}
+          // checkTime={this.timeTrack.endTime}
+          // endTime={this.timeTrack.checkTime}
         />
       } else {
-        return <PrevRaces handleBack={this.handleHome} />
+        return <PrevRaces 
+          handleBack={this.handleHome} 
+          // checkStart={this.startTimer}
+          // checkMiddle={this.checkTimer}
+          // checkEnd={this.endTimer}
+
+          // startTime={this.timeTrack.startTime}
+          // checkTime={this.timeTrack.checkTime}
+          // endTime={this.timeTrack.endTime}
+          />
       }
     }
   }
