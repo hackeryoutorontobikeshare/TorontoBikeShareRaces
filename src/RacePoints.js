@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-// import firebase from './firebase.js';
 import './RacePoints.css'
 import Select from 'react-select';
-// import axios from 'axios';
-import RandomRace from './RandomRace';
 import StartModal from './StartModal';
 import EndModal from './EndModal';
 
@@ -11,12 +8,8 @@ class RacePoints extends Component {
     constructor() {
         super()
         this.state = {
-            // stations: [],
-            // options: []
         }
     }
-
-      // ***** UPDATES STARTED HERE ***** //
 
     componentDidMount() {
         this.props.getStations()
@@ -25,24 +18,32 @@ class RacePoints extends Component {
             })
     }
 
-    // //API call
-    randStation = () => {
-        console.log(this.state)
-    }
-
-
-
     render() {
         const { startPoint, endPoint, selectedCheckpoint } = this.state;
         return (
             <section className="RacePoints clearfix">
                 <h2 className="racePointsTitle">Race route</h2>
+                {this.props.hasCoords ? (
+                    <div className="findLocation">
+                        <div>
+                                <button onClick={this.props.getStationCoords}>Find Nearest Station</button> 
+                            {(this.props.nearestStn !== "") ? (
+                                <div>
+                                    <p>
+                                        Your nearest station is: <span>{this.props.nearestStn}</span>
+                                    </p>
+                                    <button onClick={this.props.randomRace}>Automatically Create Race</button>
+                                </div>
+                            ) : (<div></div>)}
+                            </div>
+                    </div>
+                        ) : (<div></div>)}
                 <div className="addPoints">
-                    <h2>Add starting & finish points</h2>
+                    <h2> {this.props.randomRaceCreated ? (<span>Edit</span>) : (<span>Add</span>)} starting & finish points</h2>
                     <ul>
                         <li>
                             <form className="creatStartEnd">
-                                <label className="" htmlFor="startingPoint">Enter starting Point</label>
+                                <label className="" htmlFor="startingPoint">{this.props.randomRaceCreated ? (<span>Edit</span>) : (<span>Enter</span>)} Starting Point</label>
                                 <Select
                                     defaultValue="Select Start"
                                     name="startingPoint"
@@ -50,7 +51,7 @@ class RacePoints extends Component {
                                     onChange={this.props.handleUserStart}
                                     options={this.props.options}
                                 />
-                                <label className="" htmlFor="endPoint">Enter Finish Line</label>
+                                <label className="" htmlFor="endPoint">{this.props.randomRaceCreated ? (<span>Edit</span>) : (<span>Enter</span>)} Finish Line</label>
                                 <Select
                                     name="endPoint"
                                     value={this.props.value}
@@ -60,8 +61,7 @@ class RacePoints extends Component {
                             </form>
                         </li>
                         <li>
-                            {/* <a href="#" onClick={(event) => { func1(); func2();}}>Test Link</a> */}
-                            <h2>Add race checkpoints</h2>
+                            <h2>{this.props.randomRaceCreated ? (<span>Edit</span>) : (<span>Add</span>)} race checkpoints</h2>
                             <form className="createCheckPoints" onSubmit={this.props.handleAddCheckPoint}>
                                 <label className="" htmlFor="checkPoint">Select Check Points Below</label>
                                 <Select
@@ -71,7 +71,7 @@ class RacePoints extends Component {
                                     options={this.props.options}
                                     isMulti
                                 />
-                                <button type="submit">Add Selected Check Points</button>
+                                <button type="submit">{this.props.randomRaceCreated ? (<span>Edit</span>) : (<span>Add</span>)} Selected Check Points</button>
                             </form>
                         </li>
                     </ul>
@@ -97,12 +97,10 @@ class RacePoints extends Component {
                     <button onClick={this.props.scrollResults}>Next</button>
 
                 </div>
-                {/* <RandomRace /> */}
 
             </section>
         );
 
     }
 }
-// onSubmit={this.submitRace}
 export default RacePoints;

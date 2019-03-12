@@ -28,7 +28,7 @@ class RaceInfo extends Component {
                                      Ending Point: {this.props.endP}</p>
                                     <button onClick={this.props.handleSave} className="save">Save Race</button>
                                 </div>
-                                <p className="laws"><i class="fas fa-exclamation-triangle"></i> Please obey all traffic laws while participating in a race! <i class="fas fa-exclamation-triangle"></i></p>
+                                <p className="laws"><i className="fas fa-exclamation-triangle"></i> Please obey all traffic laws while participating in a race! <i className="fas fa-exclamation-triangle"></i></p>
                             </div>
                         </div>
                     <button onClick={this.props.handlePrev} className="prevRaces">Show Saved Races</button>

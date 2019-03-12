@@ -8,10 +8,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:600|Lato:300');
 
 .RacePoints {
-    /* background: #efefef; */
-    /* min-height: 100vh; */
     padding: 10vh 5%;
-    /* max-width: 1600px; */
     font-family: 'Lato', sans-serif;
     background:  #ebedec;
     color: default;
@@ -20,14 +17,22 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
     background-attachment: fixed;
 }
 
+.RacePoints p {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.RacePoints p span {
+    font-weight: bold;
+}
+
+
 .RacePoints h2 {    
     font-family: 'Josefin Sans', sans-serif;
     text-align: center;
     text-transform: capitalize; 
     padding: 10px 0;
-    /* margin: 0 2.5%; */
     background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 10%, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 70%, rgba(255,255,255,0) 90%, rgba(0,0,0,0) 100%);
-    /* background: white; */
 }
 
 .RacePoints .racePointsTitle {
@@ -49,7 +54,6 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
     text-align: center;
     text-transform: capitalize;
     color: #336699;
-    /* color: white; */
 }
 
 ul {
@@ -72,11 +76,24 @@ ul {
     margin: 0 2.5%;
     border: 10px solid #d4faf0;
     outline: 5px solid #33cc99;
-    /* border-radius: 10px; */
-    /* height: 50vh; */
     background: rgba(255,255,255,0.8);
     padding: 0 10px;
 }
+
+.findLocation {
+    float: left;
+    width: 95%;
+    margin: 0 2.5% 40px 2.5%;
+    border: 10px solid #d4faf0;
+    outline: 5px solid #33cc99;
+    background: rgba(255,255,255,0.8);
+    padding: 10px;
+}
+
+.findLocation button {
+    width: 100%;
+}
+
 
 .creatStartEnd select, 
 .creatStartEnd label,
@@ -125,12 +142,12 @@ font-size: 1rem;
     text-align: center;
 }
 
-.submitRace button {
+/* .submitRace button {
     /* background: #fdfdfd;
     width: 200px;
     padding: 10px;
-    border: solid #33cc99 5px; */
-}
+    border: solid #33cc99 5px;
+} */
 
 .visuallyhidden:not(:focus):not(:active) {
     position: absolute;
@@ -149,15 +166,11 @@ font-size: 1rem;
     display: block;
     width: 100%;
     margin: 20px 0;
-    /* padding: 10px;
-    background: #336699;  
-    color: white;
-    border: 0px; */
 }
 
-.createCheckPoints button:hover {
-    /* background: #33cc99; */
-}
+/* .createCheckPoints button:hover {
+    background: #33cc99; 
+} */
 
 .creatStartEnd label:last-of-type {
     margin-top: 20px;

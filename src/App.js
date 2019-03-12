@@ -11,7 +11,7 @@ import swal from '@sweetalert/with-react';
 import axios from 'axios';
 import UserPrevRace from './UserPrevRace.js';
 import logo from './logo.png';
-import RandomRace from './RandomRace.js';
+// import RandomRace from './RandomRace.js';
 
 class App extends Component {
   constructor() {
@@ -39,18 +39,19 @@ class App extends Component {
     hasCoords: false,
     nearestStn: "",
     nearestHundred: [],
-    checkOne: '',
-    checkTwo: '',
-    checkThree: '',
-    finish: '',
+    randomRaceCreated: false
     }
+  }
+
+  componentDidMount() {
+    this.getLocation()
   }
 
   //API call
   getStations = () => {
     return axios({
         method: 'GET',
-        url: 'http://api.citybik.es/v2/networks/toronto',
+        url: 'https://api.citybik.es/v2/networks/toronto',
         dataResponse: 'json'
     })
         .then((response) => {
@@ -334,20 +335,31 @@ class App extends Component {
   }
 
   randomRace = () => {
-    let startPoint = this.state.nearestStn.name;
+    let startPoint = this.state.nearestStn;
+    console.log(startPoint);
     let finish = this.state.nearestHundred[99].name;
-    let checkOneRand = Math.floor(Math.random() * 33);
-    let checkTwoRand = Math.floor(Math.random() * 33) + 33;
-    let checkThreeRand = Math.floor(Math.random() * 33) + 65;
+    let checkOneRand = Math.floor(Math.random() * 20);
+    let checkTwoRand = Math.floor(Math.random() * 20) + 20;
+    let checkThreeRand = Math.floor(Math.random() * 20) + 40;
+    let checkFourRand = Math.floor(Math.random() * 20) + 60;
+    let checkFiveRand = Math.floor(Math.random() * 20) + 79;
     let checkOne = this.state.nearestHundred[checkOneRand].name;
-    let checkTwo = this.state.nearestHundred[checkTwoRand].name;
-    let checkThree = this.state.nearestHundred[checkThreeRand].name;
+    let raceArray = [];
+    raceArray.push(this.state.nearestHundred[checkOneRand].name);
+    raceArray.push(this.state.nearestHundred[checkTwoRand].name);
+    raceArray.push(this.state.nearestHundred[checkThreeRand].name);
+    raceArray.push(this.state.nearestHundred[checkFourRand].name);
+    raceArray.push(this.state.nearestHundred[checkFiveRand].name);
     if (checkOne !== "") {
         this.setState({
-            checkOne: checkOne,
-            checkTwo: checkTwo,
-            checkThree: checkThree,
-            finish: finish,
+            randomRaceCreated: true,
+            race:
+            {
+              ...this.state.race,
+              raceArray: raceArray,
+              startPoint: startPoint,
+              endPoint: finish
+            }
         }, () => {
             console.log(this.state, "this is thd state with race points")
         })
@@ -437,9 +449,7 @@ class App extends Component {
 
             scrollResults={this.scrollRes}
             ref={(component) => { this.RacePoints = component; }}
-          />
 
-          <RandomRace 
             getLocation = {this.getLocation}
             longitude = {this.state.longitude}
             latitude = {this.state.latitude}
@@ -452,7 +462,8 @@ class App extends Component {
             finish = {this.state.finish}
             randomRace = {this.randomRace}
             getStationCoords = {this.getStationCoords}
-            />
+            randomRaceCreated = {this.state.randomRaceCreated}
+          />
 
           <Result
             name={this.state.name}
