@@ -4,7 +4,10 @@ header.headerContent {
     background-image: url(../assets/bikeHeader.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 0 -70px;
+}
+
+.hamburgerMenu {
+    display: none;
 }
 
 .headerContent h1 {
@@ -58,11 +61,11 @@ ul {
   color: #29d1b0;
 }
 
-nav ul {
+.headerNav ul {
   float: right;
 }
 
-nav {
+.headerNav {
     background-color: rgba(0,0,0,0.9);
     position: fixed;
     width: 100%;
@@ -70,13 +73,13 @@ nav {
     z-index: 10;
 }
 
-nav li {
+.headerNav li {
     list-style-type: none;
     float: left;
 }
 
 
-nav a {
+.headerNav a {
     text-decoration: none;
     padding: 5px 10px;
     color: #29d1b0;
@@ -86,9 +89,9 @@ nav a {
     font-size: 1.2rem;
 }
 
-nav a:hover,
-nav a:focus,
-nav a:active {
+.headerNav a:hover,
+.headerNav a:focus,
+.headerNav a:active {
   border-top: 1px solid#29d1b0;
   border-bottom: 1px solid#29d1b0;
 }
@@ -130,10 +133,78 @@ span.t {
   }
 }
 
-@media screen and (max-width: 705px) {
-nav a {
-  font-size: 0.9rem;
+@media screen and (max-width: 750px) {
+.headerNav {
+  display: none;
 }
+
+.hamburgerMenu a:hover,
+.hamburgerMenu a:focus,
+.hamburgerMenu a:active {
+  border-top: 1px solid#29d1b0;
+  border-bottom: 1px solid#29d1b0;
+}
+
+.hamburgerMenu a {
+    text-decoration: none;
+    padding: 5px 10px;
+    color: #29d1b0;
+    display: inline-block;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    font-size: 1.2rem;
+    margin-top: 50px;
+}
+
+.headerContent i {
+  color: white;
+  z-index: 30;
+}
+
+.hamburgerMenu {
+  display: block;
+  z-index: 30;
+  background-color: rgba(0,0,0,0.9);
+    position: fixed;
+    width: 100%;
+    padding: 10px 30px;
+}
+input[type="checkbox"] {
+            display: none;
+}
+.hamburgerList {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #000;
+z-index: 40;
+}
+
+.hamburgerClose {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+}
+
+.fa-bars {
+  text-align: left;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+#toggleOpen:checked~.hamburgerList {
+        transform: translateX(0);
+    }
+    #toggleOpen~.hamburgerList {
+        transform: translateX(1000px);
+}
+
+}
+
+@media screen and (max-width: 705px) {
 
 h2.logo {
   font-size: 0.9rem;

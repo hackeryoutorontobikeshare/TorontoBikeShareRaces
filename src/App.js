@@ -274,15 +274,30 @@ class App extends Component {
       return (
         <div className="App">
           <header className="headerContent">
-          <input className="hamMenu" type="checkbox" id="hamMenu" />
-          <label className="hamMenu" htmlFor="hamMenu"></label>
-            <nav className="clearfix">
+            <nav className="headerNav clearfix">
               <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
-              <ul className="clearfix">
+              <ul className="headerList clearfix">
                 <li className="home"><a href="#">Home</a></li>
                 <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>
               </ul>
             </nav>
+            <div className="hamburgerMenu">
+            <nav className="hamNav">
+                <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
+                <input className="hamburgerOpen" id="toggleOpen" type="checkbox" name="toggle" />
+                  <label htmlFor="toggleOpen">
+            
+                    <i class="fa fa-bars"></i>
+                  </label>
+                  <ul className="hamburgerList">
+                    <label htmlFor="toggleOpen" class="hamburgerClose">
+                      <i class="fas fa-times"></i>
+                    </label>
+                  <li className="home"><a href="#">Home</a></li>
+                  <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>
+                  </ul>
+            </nav>    
+            </div>
             <h1>Welcome to Toronto Bike Share Races</h1>
             <button className="createRaceBtn" onClick={this.scrollND}>Create Race</button>
             {
