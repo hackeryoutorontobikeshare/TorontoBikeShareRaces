@@ -42,6 +42,12 @@
     background-color:  #fcfcfc;
 }
 
+.prevRacesComponent .headerContent {
+    background-image: none;
+    min-height: 0vh;
+}
+
+
 /* MEDIA QUERIES */
 
 @media screen and (max-width: 1250px) {
