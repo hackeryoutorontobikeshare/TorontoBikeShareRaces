@@ -4,6 +4,7 @@ import Animation from './Animation.js';
 import './styles/PrevRaces.css';
 import raceEnd from './raceEnd.png';
 import logo from './logo.png';
+import swal from '@sweetalert/with-react';
 
 class UserPrevRace extends Component {
     constructor() {
@@ -11,7 +12,9 @@ class UserPrevRace extends Component {
         this.state = {
             saved: [],
             races: [],
-            view: null
+            view: null,
+            timeTrack: {},
+            currentTrack: {}
         }
     }
 
@@ -20,16 +23,32 @@ class UserPrevRace extends Component {
         const itemsRef = firebase.database().ref(`authUsers/${authID}`);
         itemsRef.on('value', (saved) => {
             let newRace = [];
+            let newTime = [];
 
             const data = saved.val();
             for (let key in data) {
-                newRace.push(data[key]);
+                newRace.push(
+                    {key:key,
+                    ...data[key]
+                    }
+                    );
+
+                newTime.push(
+                    {
+                        key: key,
+                        startTime: '',
+                        checkTime: [],
+                        endTime: '',
+                        length: '' 
+                    }
+                )
             }
             const updateRaces = newRace.reverse();
 
             this.setState({
                 saved: updateRaces,
-                races: updateRaces
+                races: updateRaces,
+                timeTrack: newTime
             })
 
             setTimeout(this.showRaces, 1500);
@@ -44,7 +63,6 @@ class UserPrevRace extends Component {
 
     sortByNums = () => {
         const races = this.state.saved;
-        console.log(races);
         const noCheckpoint = [];
         const hasCheckpoint = [];
 
@@ -56,11 +74,10 @@ class UserPrevRace extends Component {
             }
         })
 
-        const sortRaces = hasCheckpoint.sort((raceA, raceB) => {
+        hasCheckpoint.sort((raceA, raceB) => {
             return raceB.selectedCheckpoint.length - raceA.selectedCheckpoint.length;
         })
 
-        console.log(sortRaces);
         const newSortedRaces = hasCheckpoint.concat(noCheckpoint);
         this.setState({
             saved: newSortedRaces
@@ -77,20 +94,35 @@ class UserPrevRace extends Component {
     render() {
         if (this.state.view) {
             return (
-                <div className="wrapper">
                     <section className="prevRacesComponent">
-                        <header>
-                            <nav className="clearfix">
-                                <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
-                                <ul>
+                    <header className="headerContent">
+                            <nav className="headerNav clearfix">
+                            <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
+                                <ul className="headerList clearfix">
                                     <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
                                     <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>
                                 </ul>
                             </nav>
+                            <div className="hamburgerMenu">
+                                <nav className="hamNav">
+                                    <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
+                                    <input className="hamburgerOpen" id="toggleOpen" type="checkbox" name="toggle" />
+                                        <label htmlFor="toggleOpen">
+                                        <i class="fa fa-bars"></i>
+                                        </label>
+                                        <ul className="hamburgerList">
+                                        <label htmlFor="toggleOpen" class="hamburgerClose">
+                                            <i class="fas fa-times"></i>
+                                        </label>
+                                            <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
+                                            <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>
+                                        </ul>
+                                </nav>    
+                            </div>
                         </header>
                         <h2 className="prevRaceTitle">Here Are Your Previous Races <i class="fas fa-bicycle"></i></h2>
-                        <button onClick={this.sortByNums}>Sort By Checkpoints</button>
-                        <button onClick={this.sortByTime}>Sort By Created Time</button>
+                        <button className="sortButton" onClick={this.sortByNums}>Sort By Checkpoints</button>
+                        <button className="sortButton" onClick={this.sortByTime}>Sort By Created Time</button>
                         <div className="savedRacesContainer clearfix">
                             {
                                 this.state.saved.map((races) => {
@@ -115,7 +147,6 @@ class UserPrevRace extends Component {
                             }
                         </div>
                     </section>
-                </div>
             )
         } else {
             return <Animation />;

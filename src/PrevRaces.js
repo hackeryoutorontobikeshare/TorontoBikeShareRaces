@@ -84,20 +84,36 @@ class PrevRaces extends Component {
     render() {
         if (this.state.view){
             return (
-                <div className="wrapper">
                     <section className="prevRacesComponent">
-                        <header>
-                            <nav className="clearfix">
-                                <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
-                                <ul>
+                        <header className="headerContent">
+                            <nav className="headerNav clearfix">
+                            <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
+                                <ul className="headerList clearfix">
                                     <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
                                     <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>
                                 </ul>
                             </nav>
+                            <div className="hamburgerMenu">
+                                <nav className="hamNav">
+                                    <h2 className="logo"><span className="t">T</span><img src={logo} alt="Toronto bike share logo." /> Bike Share Races</h2>
+                                    <input className="hamburgerOpen" id="toggleOpen" type="checkbox" name="toggle" />
+                                        <label htmlFor="toggleOpen">
+                                
+                                        <i class="fa fa-bars"></i>
+                                        </label>
+                                        <ul className="hamburgerList">
+                                        <label htmlFor="toggleOpen" class="hamburgerClose">
+                                            <i class="fas fa-times"></i>
+                                        </label>
+                                            <li className="home"><a onClick={this.props.handleBack} href="#">Home</a></li>
+                                            <li className="prevRaces" onClick={this.handlePrevRace}><a href="#">Previous Races</a></li>
+                                        </ul>
+                                </nav>    
+                            </div>
                         </header>
                         <h2 className="prevRaceTitle">Previous Races <i class="fas fa-bicycle"></i></h2>
-                        <button onClick={this.sortByNums}>Sort By Checkpoints</button>
-                        <button onClick={this.sortByTime}>Sort By Created Time</button>
+                        <button className="sortButton" onClick={this.sortByNums}>Sort By Checkpoints</button>
+                        <button className="sortButton" onClick={this.sortByTime}>Sort By Created Time</button>
                         <div className="savedRacesContainer clearfix">
                             {
                                 this.state.saved.map((races) => {
@@ -122,7 +138,6 @@ class PrevRaces extends Component {
                             }
                         </div>
                     </section>
-                </div>
             )
         }else{
             return <Animation />;

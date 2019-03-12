@@ -67,7 +67,9 @@ h3 {
 }
 
 .bikeAnimation p {
-    font-size: 60px;
+    font-size: 3rem;
+    text-align: center;
+    max-width: 500px;
     color: white;
 }
 
@@ -80,3 +82,11 @@ h3 {
         display: none;
     }
 }
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 570px) {
+  .resultComponent {
+      font-size: 0.9rem;
+  }
+ }
