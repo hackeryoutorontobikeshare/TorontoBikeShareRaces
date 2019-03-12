@@ -11,6 +11,7 @@ blue: #336699 */
     /* height: 100vh; */
     background:  #fcfcfc;
     padding-top: 60px;
+    padding-bottom: 60px;
 }
 
 .ndTitle {
@@ -58,15 +59,8 @@ input {
 }
 
 .ndButton {
-    margin: 60px auto;
+    margin: 0 auto;
     display: block;
-    /* width: 200px;
-    height: 50px;
-    border: 5px solid  #336699;
-    border-radius: 5%;
-    color: #336699;
-    background: white;
-    transition: 0.5s; */
     margin-top: 50px;
 }
 
@@ -78,32 +72,12 @@ input {
     margin: 10px 0;
 }
 
-/* END OF BUTTONS AND INPUTS */
-
-/* HOVER AND ACTIVE STATES */
-
-/* .ndButton:focus{
-    color:#33cc99; 
-    border: 5px solid #33cc99;
-}
-
-.ndButton:hover{
-    transform:scale(1.05);
-    box-shadow: 2px 2px 4px black;
-}
-
-.ndButton:active{
-    transform:scale(1);
-    box-shadow: none;
-} */
-
 input:focus {
     background: rgba(51, 204, 153, .2);
     border: 2px solid #33cc99;
     color: #336699;
 }
 
-/* END OF HOVER AND ACTIVE STATES */
 
 /* MEDIA QUERIES */
 
