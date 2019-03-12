@@ -112,8 +112,8 @@ class PrevRaces extends Component {
                             </div>
                         </header>
                         <h2 className="prevRaceTitle">Previous Races <i class="fas fa-bicycle"></i></h2>
-                        <button onClick={this.sortByNums}>Sort By Checkpoints</button>
-                        <button onClick={this.sortByTime}>Sort By Created Time</button>
+                        <button className="sortButton" onClick={this.sortByNums}>Sort By Checkpoints</button>
+                        <button className="sortButton" onClick={this.sortByTime}>Sort By Created Time</button>
                         <div className="savedRacesContainer clearfix">
                             {
                                 this.state.saved.map((races) => {
