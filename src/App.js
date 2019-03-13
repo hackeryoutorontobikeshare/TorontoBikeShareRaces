@@ -298,7 +298,7 @@ class App extends Component {
   getStationCoords = () => {
     return axios({
         method: 'GET',
-        url: 'http://api.citybik.es/v2/networks/toronto',
+        url: 'https://api.citybik.es/v2/networks/toronto',
         dataResponse: 'json'
     })
         .then((response) => {
