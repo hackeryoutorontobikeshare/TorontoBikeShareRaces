@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/TorontoBikeShareRaces/precache-manifest.ee6a316b9141ad7b9720c57155886fd6.js"
+  "/TorontoBikeShareRaces/precache-manifest.561837a13a920b8f9ec2afa66896f0d0.js"
 );
 
 workbox.clientsClaim();
